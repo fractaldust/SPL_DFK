@@ -38,7 +38,7 @@ user = joint[, list("user_nr.obs" = .N,
                      "user_dob"   = user_dob), 
              by = "user_id"]
 
-# # user_activity
+# user_activity
 user$user_activity = user$user_nr.obs
 
 # user_age
