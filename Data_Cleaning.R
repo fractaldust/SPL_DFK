@@ -178,7 +178,7 @@ item.final <- unique(item.final)
 dim(item.final) # should be 2759 - correct
 
 rm(shoes, clothes, unsized, type, type.matrix, new.item,
-  id.clothes, id.shoes, c, tag)
+   id.clothes, id.shoes, c, tag)
 
 #----------------------------------------------------------------------------------
 # Insert new information in data set
