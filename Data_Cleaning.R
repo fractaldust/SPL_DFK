@@ -177,8 +177,7 @@ item.final <- item[, list("item_id"         = item_id,
 item.final <- unique(item.final)
 dim(item.final) # should be 2759 - correct
 
-rm(shoes, clothes, unsized, type, type.matrix, new.item,
-   id.clothes, id.shoes, c, tag)
+rm(shoes, clothes, unsized, type, type.matrix, new.item,id.clothes, id.shoes, c, tag)
 
 #----------------------------------------------------------------------------------
 # Insert new information in data set
@@ -263,3 +262,4 @@ rm(c, tag, double)
 # write file of complete data set
 #----------------------------------------------------------------------------------
 #write.csv(joint, file="./data/joint.csv")
+
