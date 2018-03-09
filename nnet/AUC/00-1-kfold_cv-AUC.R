@@ -1,13 +1,9 @@
 #----------------------------------------------------------------------------------
 # performs k-fold cross validation
 #----------------------------------------------------------------------------------
-# input   : tr.v (training set where tau-category == v (v in 1:6))
+# input   : tr (training set where tau-category == v (v in 1:6))
 # output  : measure (AUC, loss, which tau) of the combined cross validation 
 #----------------------------------------------------------------------------------
-
-
-
-# THE ONE WITH ONLY LOSS INSTEAD OF AUC
 
 library(caret)
 library(nnet)
@@ -16,9 +12,9 @@ library(doParallel)
 library(microbenchmark)
 
 # k-fold cross validation
-k <- k              # is choosen in parent script
-sample.idx <- sample(nrow(tr.v))
-train.rnd  <- tr.v[sample.idx,] # randomised tr.v (same rows but random order)
+k <- k              # is chosen in parent script
+sample.idx <- sample(nrow(tr))
+train.rnd  <- tr[sample.idx,] # randomised tr (same rows but random order)
 folds <- cut(1:nrow(train.rnd), breaks = k, labels = FALSE)
 
 # introduce parallel computing 
@@ -42,38 +38,20 @@ timing.par <- system.time(
               cv.train <- cv.train[order(cv.train$order_item_id),]
               cv.val   <- train.rnd[idx.val,]
               cv.val   <- cv.val[order(cv.val$order_item_id),]
-              # order_item_id <- train.rnd$order_item_id[idx.val]
-              # order_item_id <- order_item_id[order(order_item_id)] # these ids get predicted
               # train nnet and make prediction
               neunet <- nnet(return~. -order_item_id - tau, data = cv.train,
                                 trace = FALSE, maxit = 1000,
                                 size = parameters$size[n], decay = parameters$decay[n])
               yhat.val <- predict(neunet, newdata = cv.val, type = "raw")
-              # 
-              # table(cv.val$order_item_id == order_item_id) # check if predicted ids are in vector 
-              #                                              # vector is used for indexing real_price
-              # calculate measures (AUC and loss)
-              auc  <- auc(cv.val$return, as.vector(yhat.val))[[1]]
-              loss <- helper.loss(tau_candidates = tau_candidates, 
-                                  truevals       = cv.val$return, 
-                                  predictedvals  = yhat.val, 
-                                  itemprice      = real_price$item_price[cv.val$order_item_id])
-              res.par <- list()
-              #res.par[["auc"]]      <- auc
-              res.par[["loss"]]     <- max(loss)
-              #res.par[["yhat.val"]] <- cbind(cv.val$order_item_id, yhat.val)
-              res <- list("auc" = max(loss), 
+              
+              aucs <- ModelMetrics::auc(cv.val$return, as.vector(yhat.val))
+              res <- list("auc" = aucs, 
                           "idx" = n)
-              loss
-              #res.par
               res
             }
 )
 
 # stop parallel computing
 stopCluster(cl)
-
-# combine cross validations
-measure <- helper.evaluate(results.par, tau_candidates)
 
 rm(folds, nrOfCores, train.rnd, timing.par, cl)

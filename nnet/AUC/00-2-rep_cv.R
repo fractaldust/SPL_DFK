@@ -16,6 +16,6 @@ for (t in 1:m){
   tr <- known[idx.train,  ] # training set
   ts <- known[-idx.train, ] # test set
   
-  source(file="./nnet/00-1-kfold_cv.R")
+  source(file="./nnet/AUC/00-1-kfold_cv.R")
   cv.list[[t]] <- results.par
 }
