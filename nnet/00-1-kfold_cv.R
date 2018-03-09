@@ -4,11 +4,6 @@
 # input   : tr.v (training set where tau-category == v (v in 1:6))
 # output  : measure (AUC, loss, which tau) of the combined cross validation 
 #----------------------------------------------------------------------------------
-
-
-
-# THE ONE WITH ONLY LOSS INSTEAD OF AUC
-
 library(caret)
 library(nnet)
 library(pROC)
