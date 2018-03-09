@@ -1,20 +1,25 @@
 #----------------------------------------------------------------------------------
 # performs k-fold cross validation
 #----------------------------------------------------------------------------------
-# input   : tr (training set where tau-category == v (v in 1:6))
+# input   : tr.v (training set where tau-category == v (v in 1:6))
 # output  : measure (AUC, loss, which tau) of the combined cross validation 
 #----------------------------------------------------------------------------------
+
+
+
+# THE ONE WITH ONLY LOSS INSTEAD OF AUC
 
 library(caret)
 library(nnet)
 library(pROC)
 library(doParallel)
 library(microbenchmark)
+library(data.table)
 
 # k-fold cross validation
-k <- k              # is chosen in parent script
-sample.idx <- sample(nrow(tr))
-train.rnd  <- tr[sample.idx,] # randomised tr (same rows but random order)
+k <- k              # is choosen in parent script
+sample.idx <- sample(nrow(tr.v))
+train.rnd  <- tr.v[sample.idx,] # randomised tr.v (same rows but random order)
 folds <- cut(1:nrow(train.rnd), breaks = k, labels = FALSE)
 
 # introduce parallel computing 
@@ -26,10 +31,11 @@ message(paste("\n Registered number of cores:\n",getDoParWorkers(),"\n"))
 
 timing.par <- system.time(
   # loop for different nnet settings
-  results.par <- foreach(n = 1:nrow(parameters), .combine = cbind, .packages = c("caret", "nnet", "pROC")) %:%
+  results.par <- foreach(n = 1:nrow(parameters), .combine = cbind, 
+                         .packages = c("caret", "nnet", "pROC", "data.table")) %:%
     # loop for cross validation
     foreach(i = 1:k, 
-            .packages = c("caret","nnet", "pROC")) %dopar%{
+            .packages = c("caret","nnet", "pROC", "data.table")) %dopar%{
               gc()
               set.seed(1234)
               # Split data into training and validation
@@ -43,15 +49,26 @@ timing.par <- system.time(
                                 trace = FALSE, maxit = 1000,
                                 size = parameters$size[n], decay = parameters$decay[n])
               yhat.val <- predict(neunet, newdata = cv.val, type = "raw")
-              
-              aucs <- ModelMetrics::auc(cv.val$return, as.vector(yhat.val))
-              res <- list("auc" = aucs, 
-                          "idx" = n)
+
+              auc  <- auc(cv.val$return, as.vector(yhat.val))[[1]]
+              loss <- helper.loss(tau_candidates = tau_candidates, 
+                                  truevals       = cv.val$return, 
+                                  predictedvals  = yhat.val, 
+                                  itemprice      = real_price$item_price[cv.val$order_item_id])
+              sse  <- helper.sse(truevals        = cv.val$return, 
+                                 predictedvals   = yhat.val)
+              res  <- list("loss"        = max(loss), 
+                           "auc"         = auc,
+                           "sse"         = min(sse), 
+                           "parameters"  = data.table("size"  = parameters$size[n],
+                                                      "decay" = parameters$decay[n]))
               res
             }
 )
-
 # stop parallel computing
 stopCluster(cl)
+
+# combine cross validations
+# measure <- helper.evaluate(results.par, tau_candidates)
 
 rm(folds, nrOfCores, train.rnd, timing.par, cl)
