@@ -27,6 +27,7 @@ parameters <- expand.grid("nrounds" = c(20, 100, 200),
                          "gamma" = 0,
                          "colsample_bytree" = 0.8, 
                          "min_child_weight" = 1)
+
 tau_candidates <- 0.002*125:425 # to calculate optimal loss
 
 #----------------------------------------------------------------------------------
@@ -39,6 +40,8 @@ source(file = "./xgboost/00-3-xgboost_DataPrep.R")
 known   <- known.n       # output of additional data preparation
 unknown <- unknown.n     # 
 
+known   <- data.frame(known)
+unknown <- data.frame(unknown)
 # perform repeatet cross validation 
 source(file="./xgboost/00-2-rep_cv.R")
 cv.list.f <- cv.list     # store result of repeated cross validation 
@@ -56,6 +59,8 @@ unknown.n$user_retrate <- NULL     #
 known   <- known.n                 # output of additional data preparation
 unknown <- unknown.n               #
 
+known   <- data.frame(known)
+unknown <- data.frame(unknown)
 # perform repeatet cross validation
 source(file="./xgboost/00-2-rep_cv.R")
 cv.list.u <- cv.list               # store result of repeated cross validation
@@ -73,6 +78,8 @@ unknown.n$item_retrate <- NULL     #
 known   <- known.n                 # output of additional data preparation
 unknown <- unknown.n               #
 
+known   <- data.frame(known)
+unknown <- data.frame(unknown)
 # perform repeatet cross validation
 source(file="./xgboost/00-2-rep_cv.R")
 cv.list.i <- cv.list               # store result of repeated cross validation
@@ -92,6 +99,8 @@ unknown.n$user_retrate <- NULL     #
 known   <- known.n                 # output of additional data preparation
 unknown <- unknown.n               #
 
+known   <- data.frame(known)
+unknown <- data.frame(unknown)
 # perform repeatet cross validation
 source(file="./xgboost/00-2-rep_cv.R")
 cv.list.iu <- cv.list              # store result of repeated cross validation

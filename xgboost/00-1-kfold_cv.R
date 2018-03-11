@@ -74,4 +74,4 @@ for (n in 1:nrow(parameters)){
 # combine cross validations
 # measure <- helper.evaluate(results.par, tau_candidates)
 
-rm(k, sample.idx, train.rnd, folds, vec)
+rm(sample.idx, train.rnd, folds, vec)
