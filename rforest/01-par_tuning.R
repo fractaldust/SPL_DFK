@@ -19,8 +19,8 @@ source(file = "helperfunctions.R")
 # settings for tuning and cross validation 
 m <- 6 # repeated Cross Validation (same algorithm but different random split)
 k <- 3 # 3-fold cross validation
-parameters <- expand.grid("size" = seq(from = 3, to = 15, by = 2),
-                          "decay" = c(0.01, 0.1, 0.5, 0.8, 1))
+parameters <- expand.grid("ntree" = c(200, 300, 400, 500, 600, 700),
+                          "mtry"  = c(2, 3, 4, 5))
 tau_candidates <- 0.002*125:425 # to calculate optimal loss
 
 #----------------------------------------------------------------------------------
@@ -36,30 +36,24 @@ tau_candidates <- 0.002*125:425 # to calculate optimal loss
 #----------------------------------------------------------------------------------
 known   <- known.f
 unknown <- unknown.f
-# additional data preparation for nnet
-source(file = "./nnet/00-3-nnet_DataPrep.R") 
-known   <- known.n       # output of additional data preparation
-unknown <- unknown.n     # 
 
 # perform repeatet cross validation 
-source(file="./nnet/00-2-rep_cv.R")
+source(file="./rforest/00-2-rep_cv.R")
 cv.list.f <- cv.list     # store result of repeated cross validation 
+# save(cv.list, results.par, measure.list, nnet.sizes, tau_candidates, known.n, 
+#      file = "./data/rforest-tuning-f.RData")
+
 
 #----------------------------------------------------------------------------------
 # .u       : model without user_retrate, n = 92.409
 #----------------------------------------------------------------------------------
 known   <- rbind(known.f, known.u) # can also use .f for training, variables are pure
-unknown <- unknown.u               #
-# additional data preparation for nnet
-source(file = "./nnet/00-3-nnet_DataPrep.R")
-known.n$user_retrate   <- NULL     # remove user_retrate (uncertain categories)
-unknown.n$user_retrate <- NULL     #
-                                   #
-known   <- known.n                 # output of additional data preparation
-unknown <- unknown.n               #
+unknown <- unknown.u
+known$user_retrate   <- NULL     # remove user_retrate (uncertain categories)
+unknown$user_retrate <- NULL     #
 
 # perform repeatet cross validation
-source(file="./nnet/00-2-rep_cv.R")
+source(file="./rforest/00-2-rep_cv.R")
 cv.list.u <- cv.list               # store result of repeated cross validation
 
 #----------------------------------------------------------------------------------
@@ -67,16 +61,11 @@ cv.list.u <- cv.list               # store result of repeated cross validation
 #----------------------------------------------------------------------------------
 known   <- rbind(known.f, known.i) # can also use .f for training, variables are pure
 unknown <- unknown.i               #
-# additional data preparation for nnet
-source(file = "./nnet/00-3-nnet_DataPrep.R")
-known.n$item_retrate   <- NULL     # remove user_retrate (uncertain categories)
-unknown.n$item_retrate <- NULL     #
-                                   #
-known   <- known.n                 # output of additional data preparation
-unknown <- unknown.n               #
+known$item_retrate   <- NULL     # remove user_retrate (uncertain categories)
+unknown$item_retrate <- NULL     #
 
 # perform repeatet cross validation
-source(file="./nnet/00-2-rep_cv.R")
+source(file="./rforest/00-2-rep_cv.R")
 cv.list.i <- cv.list               # store result of repeated cross validation
 
 #----------------------------------------------------------------------------------
@@ -84,20 +73,14 @@ cv.list.i <- cv.list               # store result of repeated cross validation
 #----------------------------------------------------------------------------------
 known   <- rbind(known.f, known.i, known.u, known.iu)
 unknown <- unknown.i
-# additional data preparation for nnet
-source(file = "./nnet/00-3-nnet_DataPrep.R")
-known.n$item_retrate   <- NULL     # remove user_retrate (uncertain categories)
-known.n$user_retrate   <- NULL     #
-unknown.n$item_retrate <- NULL     #
-unknown.n$user_retrate <- NULL     #
-                                   #
-known   <- known1:1000*0.001.n                 # output of additional data preparation
-unknown <- unknown.n               #
+known$item_retrate   <- NULL     # remove user_retrate (uncertain categories)
+known$user_retrate   <- NULL     #
+unknown$item_retrate <- NULL     #
+unknown$user_retrate <- NULL     #
 
 # perform repeatet cross validation
-source(file="./nnet/00-2-rep_cv.R")
+source(file="./rforest/00-2-rep_cv.R")
 cv.list.iu <- cv.list              # store result of repeated cross validation
 
 save(cv.list.f, cv.list.u, cv.list.iu, cv.list.i,
-     file = "./data/cv_lists-nnet-tuning.RData")
-
+     file = "./data/cv_lists-rf-tuning.RData")

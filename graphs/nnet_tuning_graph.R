@@ -1,11 +1,18 @@
 # plot tuning performance
 library(ggplot2)
 library(gridExtra)
-load(file = "./data/nnet-tuning-u.RData")
-k <- dim(nnet.sizes)[1]
+
+load(file = "./data/cv_lists-nnet-tuning.RData")
+parameters <- expand.grid("size" = seq(from = 3, to = 15, by = 2),
+                          "decay" = c(0.01, 0.1, 0.5, 0.8, 1))
+cv.list <- cv.list.f
+source(file = "evaluatecvlist.R")
+
+k <- dim(parameters)[1]
+x <- 1:length(tau[[1]]$loss$mean)
 
 # loss
-df <- data.frame(measure.list)/10000
+df <- data.frame(tau)/10000
 blank.x <- theme(axis.title.x = element_blank())
 caption.b <- labs(y= "loss [10.000]")
 caption  <- labs(x = "parameter index", 
@@ -13,27 +20,27 @@ caption  <- labs(x = "parameter index",
 text     <- annotate(geom = "text", x=Inf, y=-Inf,hjust = 1, vjust = 0, 
                      color = "red", size  = 4,
                      label = "tau_c = 1")
-g1 <- ggplot(df, aes(x=1:k, y=tau_c....1.loss)) + geom_point()  + caption.b + text + theme_bw() + blank.x
+g1 <- ggplot(df, aes(x=x, y=loss.mean)) + geom_point()  + caption.b + text + theme_bw() + blank.x
 text     <- annotate(geom = "text", x=Inf, y=-Inf,hjust = 1, vjust = 0, 
                      color = "red", size  = 4,
                      label = "tau_c = 2")
-g2 <- ggplot(df, aes(x=1:k, y=tau_c....2.loss)) + geom_point() + caption.b + text + theme_bw() + blank.x
+g2 <- ggplot(df, aes(x=x, y=loss.mean.1)) + geom_point() + caption.b + text + theme_bw() + blank.x
 text     <- annotate(geom = "text", x=Inf, y=-Inf,hjust = 1, vjust = 0, 
                      color = "red", size  = 4,
                      label = "tau_c = 3")
-g3 <- ggplot(df, aes(x=1:k, y=tau_c....3.loss)) + geom_point() + caption.b + text + theme_bw() + blank.x
+g3 <- ggplot(df, aes(x=x, y=loss.mean.2)) + geom_point() + caption.b + text + theme_bw() + blank.x
 text     <- annotate(geom = "text", x=Inf, y=-Inf,hjust = 1, vjust = 0, 
                      color = "red", size  = 4,
                      label = "tau_c = 4")
-g4 <- ggplot(df, aes(x=1:k, y=tau_c....4.loss)) + geom_point() + caption.b + text + theme_bw() + blank.x
+g4 <- ggplot(df, aes(x=x, y=loss.mean.3)) + geom_point() + caption.b + text + theme_bw() + blank.x
 text     <- annotate(geom = "text", x=Inf, y=-Inf,hjust = 1, vjust = 0, 
                      color = "red", size  = 4,
                      label = "tau_c = 5")
-g5 <- ggplot(df, aes(x=1:k, y=tau_c....5.loss)) + geom_point() + caption + text + theme_bw()
+g5 <- ggplot(df, aes(x=x, y=loss.mean.4)) + geom_point() + caption + text + theme_bw()
 text     <- annotate(geom = "text", x=Inf, y=-Inf,hjust = 1, vjust = 0, 
                      color = "red", size  = 4,
                      label = "tau_c = 6")
-g6 <- ggplot(df, aes(x=1:k, y=tau_c....6.loss)) + geom_point() + caption + text + theme_bw()
+g6 <- ggplot(df, aes(x=x, y=loss.mean.5)) + geom_point() + caption + text + theme_bw()
 
 plot <- grid.arrange(g1, g2 , g3, g4, g5, g6, nrow = 3, ncol = 2)
 plot
@@ -72,32 +79,25 @@ dev.off()
 # plot(su1)
 
 # loss
-su
 su <- (df[,3]*(-1))/max(df[,3]*(-1))
 for (i in 2:6){
-  i  <- (i*3)
+  i  <- (i*6)-3
+  print(i)
   su <- su + (df[,i]*(-1))/max(df[,i]*(-1))
 }
 su2 <- su/6 * (-1)
 su2 <- data.frame(su2)
 caption  <- labs(x = "parameter index", 
                  y = "normed loss")
-plot <- ggplot(su2, aes(x=1:k, y=su2)) + geom_point() + caption + theme_bw()
+plot <- ggplot(su2, aes(x=x, y=su2)) + geom_point() + caption + theme_bw()
+plot 
 
 width <- 1
 hight <- 1/2
-b <- 11
-ggsave(file="./graphs/plots/normed_sum.png",  plot,
+b     <- 11
+ggsave(file="./graphs/plots/nnet-normed_sum.png",  plot,
        width = b*width, height = b*hight, dpi = 150, units = "cm", device='png')
 plot
 dev.off()
 
-plot(su2)
-nnet.sizes[which.max(su2),]
-# 
-# plot(su2 + su1)
-# which.max(su2[15:35] + su1[15:35])
-# plot(su1,type="o",col="red")
-# par(new=TRUE)
-# plot(su2,type="o",col="green")
-
+parameters[which.max(su2[[1]]),]

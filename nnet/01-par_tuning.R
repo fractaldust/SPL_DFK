@@ -1,10 +1,9 @@
-# setwd("~/Documents/Projects/OneMoment/bads-ws1718-group07/submission")
 #----------------------------------------------------------------------------------
 # parameter tuning and cross validation
 #----------------------------------------------------------------------------------
 # runs m repeated (different seed) k-fold cross validations for different 
-# tuning parameters nnet.sizes
-# extract best settings by maximising negative loss function (helper.loss)
+# tuning parameters
+# extract best settings by maximising negative loss function
 #----------------------------------------------------------------------------------
 
 library(caret)
@@ -45,46 +44,40 @@ unknown <- unknown.n     #
 # perform repeatet cross validation 
 source(file="./nnet/00-2-rep_cv.R")
 cv.list.f <- cv.list     # store result of repeated cross validation 
-save(cv.list, results.par, measure.list, nnet.sizes, tau_candidates, known.n, 
-     file = "./data/nnet-tuning-f.RData")
 
 #----------------------------------------------------------------------------------
 # .u       : model without user_retrate, n = 92.409
 #----------------------------------------------------------------------------------
 known   <- rbind(known.f, known.u) # can also use .f for training, variables are pure
-unknown <- unknown.u               # 
+unknown <- unknown.u               #
 # additional data preparation for nnet
 source(file = "./nnet/00-3-nnet_DataPrep.R")
 known.n$user_retrate   <- NULL     # remove user_retrate (uncertain categories)
-unknown.n$user_retrate <- NULL     # 
-                                   # 
+unknown.n$user_retrate <- NULL     #
+                                   #
 known   <- known.n                 # output of additional data preparation
-unknown <- unknown.n               # 
+unknown <- unknown.n               #
 
-# perform repeatet cross validation 
+# perform repeatet cross validation
 source(file="./nnet/00-2-rep_cv.R")
-cv.list.u <- cv.list               # store result of repeated cross validation 
-save(cv.list, results.par, measure.list, nnet.sizes, tau_candidates, known.n, 
-     file = "./data/nnet-tuning-u.RData")
+cv.list.u <- cv.list               # store result of repeated cross validation
 
 #----------------------------------------------------------------------------------
 # .i       : model without user_retrate, n = 27.123
 #----------------------------------------------------------------------------------
 known   <- rbind(known.f, known.i) # can also use .f for training, variables are pure
-unknown <- unknown.i               # 
+unknown <- unknown.i               #
 # additional data preparation for nnet
 source(file = "./nnet/00-3-nnet_DataPrep.R")
 known.n$item_retrate   <- NULL     # remove user_retrate (uncertain categories)
 unknown.n$item_retrate <- NULL     #
-                                   # 
+                                   #
 known   <- known.n                 # output of additional data preparation
-unknown <- unknown.n               # 
+unknown <- unknown.n               #
 
-# perform repeatet cross validation 
+# perform repeatet cross validation
 source(file="./nnet/00-2-rep_cv.R")
 cv.list.i <- cv.list               # store result of repeated cross validation
-save(cv.list, results.par, measure.list, nnet.sizes, tau_candidates, known.n, 
-     file = "./data/nnet-tuning-i.RData")
 
 #----------------------------------------------------------------------------------
 # .iu      : model without user_retrate AND item_retrate, n = 100.000
@@ -97,15 +90,14 @@ known.n$item_retrate   <- NULL     # remove user_retrate (uncertain categories)
 known.n$user_retrate   <- NULL     #
 unknown.n$item_retrate <- NULL     #
 unknown.n$user_retrate <- NULL     #
-                                   # 
-known   <- known.n                 # output of additional data preparation
+                                   #
+known   <- known1:1000*0.001.n                 # output of additional data preparation
 unknown <- unknown.n               #
 
-# perform repeatet cross validation 
+# perform repeatet cross validation
 source(file="./nnet/00-2-rep_cv.R")
 cv.list.iu <- cv.list              # store result of repeated cross validation
-save(cv.list, results.par, measure.list, nnet.sizes, tau_candidates, known.n, 
-     file = "./data/nnet-tuning-iu.RData")
 
 save(cv.list.f, cv.list.u, cv.list.iu, cv.list.i,
      file = "./data/cv_lists-nnet-tuning.RData")
+
