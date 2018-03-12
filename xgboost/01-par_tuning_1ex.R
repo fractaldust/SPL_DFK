@@ -21,9 +21,9 @@ m <- 6 # repeated Cross Validation (same algorithm but different random split)
 k <- 3 # 3-fold cross validation
 
 # Set tuning parameters
-parameters <- expand.grid("nrounds" = c(20, 100, 200),
+parameters <- expand.grid("nrounds" = c(50, 100, 150),
                          "max_depth" = c(2, 4), 
-                         "eta" = c(0.01, 0.05, 0.1, 0.15),
+                         "eta" = c(0.01, 0.1, 0.15),
                          "gamma" = 0,
                          "colsample_bytree" = 0.8, 
                          "min_child_weight" = 1)
