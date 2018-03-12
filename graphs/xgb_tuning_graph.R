@@ -1,9 +1,14 @@
 # plot tuning performance
 library(ggplot2)
 library(gridExtra)
-load(file = "./data/cv_lists-rf-tuning-01.RData")
-parameters <- expand.grid("ntree" = c(200, 300, 400, 500, 600, 700),
-                          "mtry"  = c(2, 3, 4, 5))
+
+load(file = "./data/cv_lists-xgb-tuning.RData")
+parameters <- expand.grid("nrounds" = c(50, 100, 150),
+                          "max_depth" = c(2, 4), 
+                          "eta" = c(0.01, 0.1, 0.15),
+                          "gamma" = 0,
+                          "colsample_bytree" = 0.8, 
+                          "min_child_weight" = 1)
 cv.list <- cv.list.iu
 source(file = "evaluatecvlist.R")
 
@@ -15,27 +20,27 @@ blank.x <- theme(axis.title.x = element_blank())
 caption.b <- labs(y= "loss [10.000]")
 caption  <- labs(x = "parameter index", 
                  y = "loss [10.000]")
-text     <- annotate(geom = "text", x=Inf, y=Inf,hjust = 1, vjust = 1, 
+text     <- annotate(geom = "text", x=Inf, y=-Inf,hjust = 1, vjust = 0, 
                      color = "red", size  = 4,
                      label = "tau_c = 1")
 g1 <- ggplot(df, aes(x=x, y=loss.mean)) + geom_point()  + caption.b + text + theme_bw() + blank.x
-text     <- annotate(geom = "text", x=Inf, y=Inf,hjust = 1, vjust = 1, 
+text     <- annotate(geom = "text", x=Inf, y=-Inf,hjust = 1, vjust = 0, 
                      color = "red", size  = 4,
                      label = "tau_c = 2")
 g2 <- ggplot(df, aes(x=x, y=loss.mean.1)) + geom_point() + caption.b + text + theme_bw() + blank.x
-text     <- annotate(geom = "text", x=Inf, y=Inf,hjust = 1, vjust = 1, 
+text     <- annotate(geom = "text", x=Inf, y=-Inf,hjust = 1, vjust = 0, 
                      color = "red", size  = 4,
                      label = "tau_c = 3")
 g3 <- ggplot(df, aes(x=x, y=loss.mean.2)) + geom_point() + caption.b + text + theme_bw() + blank.x
-text     <- annotate(geom = "text", x=Inf, y=Inf,hjust = 1, vjust = 1, 
+text     <- annotate(geom = "text", x=Inf, y=-Inf,hjust = 1, vjust = 0, 
                      color = "red", size  = 4,
                      label = "tau_c = 4")
 g4 <- ggplot(df, aes(x=x, y=loss.mean.3)) + geom_point() + caption.b + text + theme_bw() + blank.x
-text     <- annotate(geom = "text", x=Inf, y=Inf,hjust = 1, vjust = 1, 
+text     <- annotate(geom = "text", x=Inf, y=-Inf,hjust = 1, vjust = 0, 
                      color = "red", size  = 4,
                      label = "tau_c = 5")
 g5 <- ggplot(df, aes(x=x, y=loss.mean.4)) + geom_point() + caption + text + theme_bw()
-text     <- annotate(geom = "text", x=Inf, y=Inf,hjust = 1, vjust = 1, 
+text     <- annotate(geom = "text", x=Inf, y=-Inf,hjust = 1, vjust = 0, 
                      color = "red", size  = 4,
                      label = "tau_c = 6")
 g6 <- ggplot(df, aes(x=x, y=loss.mean.5)) + geom_point() + caption + text + theme_bw()
@@ -46,12 +51,11 @@ plot
 width <- 2
 hight <- 1
 b <- 11
-ggsave(file="./graphs/plots/rf_tuning.png",  plot,
+ggsave(file="./graphs/plots/xgb_tuning.png",  plot,
        width = b*width, height = b*hight, dpi = 150, units = "cm", device='png')
 plot
 dev.off()
 
-#-----------------------
 # loss
 su <- (df[,3]*(-1))/max(df[,3]*(-1))
 for (i in 2:6){
@@ -68,9 +72,10 @@ plot
 
 width <- 1
 hight <- 1/2
-b <- 11
-ggsave(file="./graphs/plots/rf-normed_sum.png",  plot,
+b     <- 11
+ggsave(file="./graphs/plots/xgb-normed_sum.png",  plot,
        width = b*width, height = b*hight, dpi = 150, units = "cm", device='png')
+plot
 dev.off()
 
 parameters[which.max(su2[[1]]),]

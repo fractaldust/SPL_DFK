@@ -5,10 +5,10 @@ library(gridExtra)
 load(file = "./data/cv_lists-nnet-tuning.RData")
 parameters <- expand.grid("size" = seq(from = 3, to = 15, by = 2),
                           "decay" = c(0.01, 0.1, 0.5, 0.8, 1))
-cv.list <- cv.list.f
+cv.list <- cv.list.iu
 source(file = "evaluatecvlist.R")
 
-k <- dim(parameters)[1]
+
 x <- 1:length(tau[[1]]$loss$mean)
 
 # loss
@@ -52,31 +52,6 @@ ggsave(file="./graphs/plots/nnet_tuning.png",  plot,
        width = b*width, height = b*hight, dpi = 150, units = "cm", device='png')
 plot
 dev.off()
-
-#-----------------
-# 
-# # auc
-# df <- data.frame(measure.list)
-# g1 <- ggplot(df, aes(x=1:k, y=tau_c....1.auc)) + geom_point() 
-# g2 <- ggplot(df, aes(x=1:k, y=tau_c....2.auc)) + geom_point() 
-# g3 <- ggplot(df, aes(x=1:k, y=tau_c....3.auc)) + geom_point() 
-# g4 <- ggplot(df, aes(x=1:k, y=tau_c....4.auc)) + geom_point() 
-# g5 <- ggplot(df, aes(x=1:k, y=tau_c....5.auc)) + geom_point() 
-# g6 <- ggplot(df, aes(x=1:k, y=tau_c....6.auc)) + geom_point() 
-# 
-# plot <- grid.arrange(g1, g2 , g3, g4, g5, g6, nrow = 3, ncol = 2)
-# plot
-# 
-# # auc
-# su <- df[,1]/max(df[,1])
-# su
-# for (i in 2:6){
-#   i  <- (i*3)-2
-#   su <- su + df[,i]/max(df[,i])
-#   print(su)
-# }
-# su1 <- su/6
-# plot(su1)
 
 # loss
 su <- (df[,3]*(-1))/max(df[,3]*(-1))

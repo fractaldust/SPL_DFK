@@ -3,6 +3,7 @@ loss    <- auc
 sse     <- auc
 measure <- list()
 tau     <- list()
+k <- 3
 rm(m,v,n,k)
 for(m in 1:length(cv.list)){
   run.m <- cv.list[[m]]
