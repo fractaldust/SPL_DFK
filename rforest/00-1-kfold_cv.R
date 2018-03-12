@@ -4,16 +4,13 @@
 # input   : tr.v (training set where tau-category == v (v in 1:6))
 # output  : measure (AUC, loss, which tau) of the combined cross validation 
 #----------------------------------------------------------------------------------
-
-
-
-# THE ONE WITH ONLY LOSS INSTEAD OF AUC
-
 library(caret)
 library(nnet)
 library(pROC)
 library(doParallel)
 library(microbenchmark)
+library(data.table)
+library(randomForest)
 
 # k-fold cross validation
 k <- k              # is choosen in parent script
@@ -30,10 +27,11 @@ message(paste("\n Registered number of cores:\n",getDoParWorkers(),"\n"))
 
 timing.par <- system.time(
   # loop for different nnet settings
-  results.par <- foreach(n = 1:nrow(parameters), .combine = cbind, .packages = c("caret", "nnet", "pROC")) %:%
+  results.par <- foreach(n = 1:nrow(parameters), .combine = cbind, 
+                         .packages = c("caret", "nnet", "pROC", "data.table", "randomForest")) %:%
     # loop for cross validation
     foreach(i = 1:k, 
-            .packages = c("caret","nnet", "pROC")) %dopar%{
+            .packages = c("caret","nnet", "pROC", "data.table", "randomForest")) %dopar%{
               gc()
               set.seed(1234)
               # Split data into training and validation
@@ -42,38 +40,30 @@ timing.par <- system.time(
               cv.train <- cv.train[order(cv.train$order_item_id),]
               cv.val   <- train.rnd[idx.val,]
               cv.val   <- cv.val[order(cv.val$order_item_id),]
-              # order_item_id <- train.rnd$order_item_id[idx.val]
-              # order_item_id <- order_item_id[order(order_item_id)] # these ids get predicted
-              # train nnet and make prediction
-              neunet <- nnet(return~. -order_item_id - tau, data = cv.train,
-                                trace = FALSE, maxit = 1000,
-                                size = parameters$size[n], decay = parameters$decay[n])
-              yhat.val <- predict(neunet, newdata = cv.val, type = "raw")
-              # 
-              # table(cv.val$order_item_id == order_item_id) # check if predicted ids are in vector 
-              #                                              # vector is used for indexing real_price
-              # calculate measures (AUC and loss)
+              # train forest and make prediction 
+              rf       <- randomForest(as.factor(return) ~. -order_item_id - tau, data = cv.train, 
+                                 ntree = parameters$ntree[n], mtry = parameters$mtry[n])
+              yhat.val <- predict(rf, newdata = cv.val, type = "prob")[,2]
+              
               auc  <- auc(cv.val$return, as.vector(yhat.val))[[1]]
               loss <- helper.loss(tau_candidates = tau_candidates, 
                                   truevals       = cv.val$return, 
                                   predictedvals  = yhat.val, 
                                   itemprice      = real_price$item_price[cv.val$order_item_id])
-              res.par <- list()
-              #res.par[["auc"]]      <- auc
-              res.par[["loss"]]     <- max(loss)
-              #res.par[["yhat.val"]] <- cbind(cv.val$order_item_id, yhat.val)
-              res <- list("auc" = max(loss), 
-                          "idx" = n)
-              loss
-              #res.par
+              sse  <- helper.sse(truevals        = cv.val$return, 
+                                 predictedvals   = yhat.val)
+              res  <- list("loss"        = max(loss), 
+                           "auc"         = auc,
+                           "sse"         = min(sse), 
+                           "parameters"  = data.table("ntree" = parameters$ntree[n],
+                                                      "mtry"  = parameters$mtry[n]))
               res
             }
 )
-
 # stop parallel computing
 stopCluster(cl)
 
 # combine cross validations
-measure <- helper.evaluate(results.par, tau_candidates)
+# measure <- helper.evaluate(results.par, tau_candidates)
 
 rm(folds, nrOfCores, train.rnd, timing.par, cl)
