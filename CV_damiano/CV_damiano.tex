@@ -1,0 +1,97 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage{amsthm}
+\usepackage{amsmath,amssymb,amsfonts,amsthm}    	% Typical maths resource packages
+\usepackage{graphicx}                          							 % Packages to allow inclusion of graphics
+\usepackage{hyperref}                           							% For creating hyperlinks in cross references
+\usepackage{booktabs}
+\usepackage[authoryear]{natbib}                						 % literature reference style
+\usepackage[bf]{caption2}
+\usepackage{lscape}
+\usepackage[hang,flushmargin]{footmisc} 
+\usepackage{float}
+%\usepackage[german]{babel}
+% -------------------------------
+% --- some layout definitions ---
+% -------------------------------
+
+% define topline
+\usepackage[automark]{scrpage2}
+\pagestyle{scrheadings}
+\automark{section}
+\clearscrheadings
+\ohead{\headmark}
+\cfoot{\thepage}
+
+%-----------------FRANZISKA
+\usepackage{subfigure} 		%für Bilder nebeneinander
+\usepackage{wrapfig}		%textumflossene Bilder
+\usepackage{graphicx} 		%um \includegraphics[width=0.9\textwidth]{Bild_Name.jpg} verwenden zu können
+\setlength{\parindent}{0pt} % damit nach Absatz nicht eingrückt wird
+\usepackage{setspace}
+\captionsetup{margin=15pt, font={small,stretch=1}, singlelinecheck=false}
+			
+							
+% define citation style
+\bibliographystyle{ecta} %bibliography style of Econometrica
+
+% define page size, margin size
+\setlength{\headheight}{1.1\baselineskip}
+\voffset=-3cm
+\hoffset=-3cm
+\textheight24cm
+\textwidth16.5cm
+\topmargin2.5cm
+\oddsidemargin3.5cm
+\evensidemargin2.5cm
+
+% define line line spacing = 1.5 or =2
+\renewcommand{\baselinestretch}{1.5} %doublespacing
+
+% define second level for `itemizing'
+\renewcommand{\labelitemii}{-}
+
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\begin{document}
+
+\section{Cross Validation}
+
+Let's assume to be in one of the following situations: 
+\begin{itemize}
+\item the prediction algorithm of choice has a variety of parameters that need to be tuned, which means optimised in order to improve accuracy (or any other measure of goodness)
+\item performances of a group of completely different models need to be assessed and ranked for selection purposes
+\end{itemize}
+Cross validation is a widely (if not the most) used class of methods to assign to each different model an estimate of their "goodness". A great asset of cross validation is that it offers the flexibility to choose the most appropriate measure of goodness, depending on the situation. Such measures can be the very intuitive accuracy, the ever popular AUC or, as in this paper's case study, a customised function depending on a loss matrix (in this case Table \ref{loss matrix konstantin}).\\
+The class of C.V. methods contains, among others:
+\begin{itemize}
+\item K-fold cross validation
+\item leave-one-out cross validation (limit case of K-fold for $K:= \# \{ training \enskip set\}$)
+\item stratified K-fold C.V.
+\item N-repeated stratified K-fold C.V.
+\item Monte Carlo C.V.
+\item Generalised CV
+\end{itemize}
+The method that was chosen for this study is a 6-repeated  stratified 3-fold C.V.
+
+\subsection{N-repeated stratified K-fold C.V.}
+
+Suppose a training set $T$ is given so that every $(v_{i}, y_{i}) \in T$ is of the form $(v_{1,i}, .., v_{u,i}, y_{1,i}, .., y_{v,i})$ where $u$ is the number of explanatory variables, $v$ is the number of outcomes.
+
+\begin{definition}
+A subset $T_{k} \subset T$ is called a stratified K-fold of $T$ if 
+\begin{enumerate}
+\item their cardinalities follow relation $$ \# T_{k} = \Big\lfloor \frac{\#T}{K} \Big\rfloor $$
+\item is picked randomly from the family of subsets of $T$ such that $$ \mathbb{E}_{T_{k}} [y] = \mathbb{E}_{T} [y]$$
+\end{enumerate}
+\end{definition}
+
+First of all $\forall k \in 1, ..,K$ a stratified K-fold $T_{k}$ of $T$ is taken. A model prediction will be called $ \hat{M}(\cdot,\theta)$ for simplicity and in order to stress its dependence from the parameter $\theta$ to be tuned.
+Note that $\hat{M}(\cdot,\theta)$ could be interpreted as a total different model prediction $\hat{M}_{\theta}$ as well.\\
+The second step consists in training the model on $T \setminus T_{k} \enskip \forall \theta_{i} \in \Theta $ the parameter candidates set (from now on we use the simplified notation $ \hat{M}_{k}(\cdot,\theta):=\hat{M}_{T \setminus T_{k}}(\cdot,\theta)$ ).
+Finally $\forall (v_{j},y_{j} \in T_{k} $  $$ L(\hat{M}_{k}(v_{j},\theta_{i}),y_{j})$$ is calculated and the results summarised in the following way (C.f. \cite{A BIAS CORRECTION FOR THE MINIMUM ERROR RATE IN CROSS-VALIDATION By Ryan J. Tibshirani1 and Robert Tibshirani2 Stanford University and Stanford University} ) $$ CV(\theta):= \frac{1}{\#T} \sum_{k=1}^{K} \sum_{j \in C_{k}} L(\hat{M}_{k}(v_{j},\theta),y_{j})$$
+For minimisation and maximisation reasons the multiplication by $\frac{1}{\# T}$ is irrelevant so it can be omitted.
+
+\end{document}
+
+
