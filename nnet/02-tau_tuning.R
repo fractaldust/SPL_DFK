@@ -37,8 +37,8 @@ tau_candidates <- 0.002*125:425
 known   <- known.f
 unknown <- unknown.f
 # tuned parameter from par_tuning.R
-parameters <- expand.grid("size" = seq(from = 5, to = 5, by = 1),
-                          "decay" = c(1))
+parameters <- expand.grid("size" = seq(from = 3, to = 3, by = 1),
+                          "decay" = c(0.8))
 # additional data preparation for nnet
 source(file = "./nnet/00-3-nnet_DataPrep.R")
 known   <- known.n       # output of additional data preparation
@@ -47,8 +47,6 @@ unknown <- unknown.n     #
 # perform repeatet cross validation 
 source(file="./nnet/00-2-rep_cv.R")
 cv.list.f <- cv.list     # store result of repeated cross validation 
-save(cv.list, results.par, measure.list, parameters, tau_candidates, known.n, 
-     file = "./data/tau-tuning-f.RData")
 
 #----------------------------------------------------------------------------------
 # .u       : model without user_retrate, n = 92.409
@@ -57,7 +55,7 @@ known   <- rbind(known.f, known.u) # can also use .f for training, variables are
 unknown <- unknown.u   
 # tuned parameter from par_tuning.R
 parameters <- expand.grid("size" = seq(from = 9, to = 9, by = 1),
-                          "decay" = c(0.8))
+                          "decay" = c(1))
 # additional data preparation for nnet
 source(file = "./nnet/00-3-nnet_DataPrep.R")
 known.n$user_retrate   <- NULL     # remove user_retrate (uncertain categories)
@@ -68,10 +66,7 @@ unknown <- unknown.n               #
 
 # perform repeatet cross validation 
 source(file="./nnet/00-2-rep_cv.R")
-cv.list.u <- cv.list               # store result of repeated cross validation 
-save(cv.list, results.par, measure.list, parameters, tau_candidates, known.n, 
-     file = "./data/tau-tuning-u.RData")
-
+cv.list.u <- cv.list               # store result of repeated cross validation
 
 #----------------------------------------------------------------------------------
 # .i       : model without user_retrate, n = 27.123
@@ -79,8 +74,8 @@ save(cv.list, results.par, measure.list, parameters, tau_candidates, known.n,
 known   <- rbind(known.f, known.i) # can also use .f for training, variables are pure
 unknown <- unknown.i               # 
 # tuned parameter from par_tuning.R
-parameters <- expand.grid("size" = seq(from = 13, to = 13, by = 1),
-                          "decay" = c(0.5))
+parameters <- expand.grid("size" = seq(from = 5, to = 5, by = 1),
+                          "decay" = c(0.8))
 # additional data preparation for nnet
 source(file = "./nnet/00-3-nnet_DataPrep.R")
 known.n$item_retrate   <- NULL     # remove user_retrate (uncertain categories)
@@ -92,15 +87,13 @@ unknown <- unknown.n               #
 # perform repeatet cross validation 
 source(file="./nnet/00-2-rep_cv.R")
 cv.list.i <- cv.list               # store result of repeated cross validation
-save(cv.list, results.par, measure.list, parameters, tau_candidates, known.n, 
-     file = "./data/tau-tuning-i.RData")
 
 #----------------------------------------------------------------------------------
 # .iu      : model without user_retrate AND item_retrate, n = 100.000
 #----------------------------------------------------------------------------------
 known   <- rbind(known.f, known.i, known.u, known.iu)
 unknown <- unknown.iu
-parameters <- expand.grid("size" = seq(from = 11, to = 11, by = 1),
+parameters <- expand.grid("size" = seq(from = 7, to = 7, by = 1),
                           "decay" = c(0.5))
 # additional data preparation for nnet
 source(file = "./nnet/00-3-nnet_DataPrep.R")
@@ -115,8 +108,6 @@ unknown <- unknown.n               #
 # perform repeatet cross validation 
 source(file="./nnet/00-2-rep_cv.R")
 cv.list.iu <- cv.list              # store result of repeated cross validation
-save(cv.list, results.par, measure.list, parameters, tau_candidates, known.n, 
-     file = "./data/tau-tuning-iu.RData")
 
 save(cv.list.f, cv.list.u, cv.list.iu, cv.list.i,
      file = "./data/cv_lists-tau-tuning.RData")
