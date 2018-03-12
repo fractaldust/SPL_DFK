@@ -18,8 +18,10 @@ for (t in 1:m){
     # call script for each tau-class
     tr.v <- tr[tr$tau==v,]
     print(paste("tau =", v, "rep = ", t))
-    source(file="./nnet/00-1-kfold_cv.R")
+    source(file="./xgboost/00-1-kfold_cv.R")
     tau_c[[paste("tau_c ==", v)]] <- results.par
   }
   cv.list[[t]] <- tau_c
 }
+
+rm(tau_c)

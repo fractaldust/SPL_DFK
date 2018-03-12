@@ -20,7 +20,7 @@ split <- function(newcol, concol, c, tag=c[-1]){
 
 
 # function calculates loss
-helper.loss <- function(truevals, predictedvals, itemprice){
+helper.calcloss <- function(truevals, predictedvals, itemprice){
   # function that given a string of true values and one of the predicted ones, gives us the loss value
   # truevals      : string of known values e.g. known$return
   # predictedvals : column of predictions to be evalued e.g. rf.1$predicted (must have same length as truevals)
@@ -35,6 +35,36 @@ helper.loss <- function(truevals, predictedvals, itemprice){
     else if (p[i]==  1 ){temploss <- temploss + losstwo[i]}
   }
   return(temploss)
+}
+
+helper.loss <- function(tau_candidates, truevals, predictedvals, itemprice){
+  loss <- 1:length(tau_candidates)
+  for (s in loss) {
+    # translate prob.prediction to 1/0 prediction due to tau_candidate
+    cv_yhat_dt_zerone          <- 1:length(cv.val$return)
+    cv_yhat_dt_zerone[predictedvals >= tau_candidates[s]] <- 1
+    cv_yhat_dt_zerone[predictedvals <  tau_candidates[s]] <- 0
+    # calculate loss
+    loss[s] <- helper.calcloss(truevals      = truevals,
+                               predictedvals = cv_yhat_dt_zerone,
+                               itemprice     = itemprice)
+  }
+  return(loss)
+}
+
+helper.sse  <- function(truevals, predictedvals){
+  thresh <- 1:1000*0.001
+  sse <- 1:length(thresh)
+  for (s in 1:length(thresh)) {
+    # translate prob.prediction to 1/0 prediction due to tau_candidate
+    cv_yhat_dt_zerone          <- 1:length(cv.val$return)
+    cv_yhat_dt_zerone[predictedvals >= thresh[s]] <- 1
+    cv_yhat_dt_zerone[predictedvals <  thresh[s]] <- 0
+    err <- (truevals - cv_yhat_dt_zerone)**2
+    # calculate loss
+    sse[s] <- sum(err)
+  }
+  return(sse)
 }
 
 # for nnet tuning
@@ -52,21 +82,20 @@ helper.evaluate <- function(results.par, tau_candidates){
   #                : "tau"    : this tau makes optimal split
   #                : "loss"   : minimal loss 
   auc      <- 1:length(results.par) # to store auc for every cv + tuning iteration
-  best_tau <- 1:length(results.par) # to store max(tau_value) for every cv + tuning iteration 
   loss     <- 1:length(results.par) # to store max(tau_measure)
   
   for (i in 1:length(results.par)) {
-    auc[i]      <- results.par[[i]][[1]]
-    best_tau[i] <- tau_candidates[which.max(results.par[[i]][[2]])]
-    loss[i]  <- max(results.par[[i]][[2]])
+    auc[i]      <- results.par[[i]]$auc
+    loss[i]     <- results.par[[i]]$loss
   }
-  
   # combine the cross validations again (100 = 20 * 5 --> 20)
   measure <- list()
-  for (i in 1:nrow(nnet.sizes)){
-    measure[["auc"]][[i]]  <- mean(auc[(i*k-k+1):(i*k)])
-    measure[["tau"]][[i]]  <- mean(best_tau[(i*k-k+1):(i*k)])
-    measure[["loss"]][[i]] <- mean(loss[(i*k-k+1):(i*k)])
+  for (i in 1:nrow(parameters)){
+    auc.i  <- auc[(i*k-k+1):(i*k)]
+    loss.i <- loss[(i*k-k+1):(i*k)]
+    measure[["auc"]][[i]]  <- mean(auc.i)
+    measure[["loss"]][[i]] <- mean(loss.i)
+    measure[["pars"]][[i]] <- results.par[[(i*k-k+1)]]$parameters
   }
   return(measure)
 }

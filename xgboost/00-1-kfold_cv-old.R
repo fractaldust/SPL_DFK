@@ -5,11 +5,11 @@
 # output  : measure (AUC, loss, which tau) of the combined cross validation 
 #----------------------------------------------------------------------------------
 library(caret)
-library(nnet)
 library(pROC)
 library(doParallel)
 library(microbenchmark)
 library(data.table)
+library(mlr)
 
 # k-fold cross validation
 k <- k              # is choosen in parent script
@@ -27,10 +27,10 @@ message(paste("\n Registered number of cores:\n",getDoParWorkers(),"\n"))
 timing.par <- system.time(
   # loop for different nnet settings
   results.par <- foreach(n = 1:nrow(parameters), .combine = cbind, 
-                         .packages = c("caret", "nnet", "pROC", "data.table")) %:%
+                         .packages = c("caret", "pROC", "data.table", "mlr")) %:%
     # loop for cross validation
     foreach(i = 1:k, 
-            .packages = c("caret","nnet", "pROC", "data.table")) %dopar%{
+            .packages = c("caret", "pROC", "data.table", "mlr")) %dopar%{
               gc()
               set.seed(1234)
               # Split data into training and validation
@@ -39,12 +39,27 @@ timing.par <- system.time(
               cv.train <- cv.train[order(cv.train$order_item_id),]
               cv.val   <- train.rnd[idx.val,]
               cv.val   <- cv.val[order(cv.val$order_item_id),]
-              # train nnet and make prediction
-              neunet <- nnet(return~. -order_item_id - tau, data = cv.train,
-                                trace = FALSE, maxit = 1000,
-                                size = parameters$size[n], decay = parameters$decay[n])
-              yhat.val <- predict(neunet, newdata = cv.val, type = "raw")
+              cv.train$return <- as.factor(cv.train$return)
+              task <- makeClassifTask(data = cv.train, target = "return", positive = "1")
+              
+              
+              xgb.learner <- makeLearner("classif.xgboost", predict.type = "prob", 
+                                         par.vals = list("verbose" = 1)) 
 
+              #set tuning parameters
+              par.vals <- list("nrounds"   = parameters$nrounds[n], 
+                               "max_depth" = parameters$max_depth[n], 
+                               "eta"       = parameters$eta[n], 
+                               "gamma"     = parameters$gamma[n], 
+                               "colsample_bytree" = parameters$colsample_bytree[n], 
+                               "min_child_weight" = parameters$min_child_weight[n])
+              
+              xgb.learner <- setHyperPars(xgb.learner, par.vals = par.vals, "verbose" = 0)
+              # train xgboost and make prediction 
+              xgb <- mlr::train(xgb.learner, task = task)
+              yhat <- predict(xgb, newdata = cv.val)
+              yhat.val <- yhat[2]$data$prob.1
+              
               auc  <- auc(cv.val$return, as.vector(yhat.val))[[1]]
               loss <- helper.loss(tau_candidates = tau_candidates, 
                                   truevals       = cv.val$return, 
@@ -55,11 +70,12 @@ timing.par <- system.time(
               res  <- list("loss"        = max(loss), 
                            "auc"         = auc,
                            "sse"         = min(sse), 
-                           "parameters"  = data.table("size"  = parameters$size[n],
-                                                      "decay" = parameters$decay[n]))
+                           "parameters"  = parameters[n,])
               res
             }
 )
+
+#----------------------
 # stop parallel computing
 stopCluster(cl)
 
@@ -67,3 +83,4 @@ stopCluster(cl)
 # measure <- helper.evaluate(results.par, tau_candidates)
 
 rm(folds, nrOfCores, train.rnd, timing.par, cl)
+

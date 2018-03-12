@@ -1,0 +1,140 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage{amsthm}
+\usepackage{amsmath,amssymb,amsfonts,amsthm}    	% Typical maths resource packages
+\usepackage{graphicx}                          							 % Packages to allow inclusion of graphics
+\usepackage{hyperref}                           							% For creating hyperlinks in cross references
+\usepackage{booktabs}
+\usepackage[authoryear]{natbib}                						 % literature reference style
+\usepackage[bf]{caption2}
+\usepackage{lscape}
+\usepackage[hang,flushmargin]{footmisc} 
+\usepackage{float}
+%\usepackage[german]{babel}
+% -------------------------------
+% --- some layout definitions ---
+% -------------------------------
+
+% define topline
+\usepackage[automark]{scrpage2}
+\pagestyle{scrheadings}
+\automark{section}
+\clearscrheadings
+\ohead{\headmark}
+\cfoot{\thepage}
+
+%-----------------FRANZISKA
+\usepackage{subfigure} 		%für Bilder nebeneinander
+\usepackage{wrapfig}		%textumflossene Bilder
+\usepackage{graphicx} 		%um \includegraphics[width=0.9\textwidth]{Bild_Name.jpg} verwenden zu können
+\setlength{\parindent}{0pt} % damit nach Absatz nicht eingrückt wird
+\usepackage{setspace}
+\captionsetup{margin=15pt, font={small,stretch=1}, singlelinecheck=false}
+			
+							
+% define citation style
+\bibliographystyle{ecta} %bibliography style of Econometrica
+
+% define page size, margin size
+\setlength{\headheight}{1.1\baselineskip}
+\voffset=-3cm
+\hoffset=-3cm
+\textheight24cm
+\textwidth16.5cm
+\topmargin2.5cm
+\oddsidemargin3.5cm
+\evensidemargin2.5cm
+
+% define line line spacing = 1.5 or =2
+\renewcommand{\baselinestretch}{1.5} %doublespacing
+
+% define second level for `itemizing'
+\renewcommand{\labelitemii}{-}
+
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\begin{document}
+
+\section{Nnet}
+
+Neural networks were first developed in the middle of the twentieth century, had great importance for a few decades and then overshadowed by other algorithms such as support vector machines in thelater decades of the last century until they were discovered to be great in performance when paired with backpropagation especially for unsupervised learning.
+The idea behind this category of algorithms is that most real life problems are highly non linear, and therefore standard models such as linear regression will not be suited for approximation of reality.
+\begin{figure}
+  \begin{minipage}[c]{0.65\textwidth}
+    \includegraphics[width=\textwidth]{pictures/nnet_1.png}
+  \end{minipage}\hfill
+  \begin{minipage}[c]{0.35\textwidth}
+    \caption{An example of neural network structure map. In this particular case there are three input variables, two hidden layers consisting of four and three neurons respectively and two output variables.
+    Note that in standard nnet package there is only one hidden layer. Source \cite{nature}}
+    \label{Figure::Nnet_1}
+  \end{minipage}
+\end{figure}
+The way this class of algorithms work is calculating numerous weighted linear combinations of the input variables and applying a non linear function to it.
+This procedure is repeated multiple times depending on the design of the network, each of these basic operation is called a neuron.
+The group of neurons on a same level is called hidden layer, there can be multiple hidden layers each performed taking the outputs of the previous one.
+Neural networks not only depends on the number of neurons for each hidden layer, number of layers and definition of input variables for each neuron. In fact they are defined also by which nonlinear function is applied in each neuron: the traditionally used are sigmoid functions such as hyperbolic tangent and logistic function $$f_{1}(t):=\tanh(t) \quad f_{2}(t):= \frac{1}{1+ e^{-t}} $$The reason for the application of such functions for each elementary step is an attempt to linearise the boundary of highly nonlinear sets. 
+Backpropagation is one of the milestones of the development of neural networks and plays a fundamental role especially for deep networks, which consist of multiple hidden layers.
+This process aims to find out the most appropriate weights $w_{i,j}$ for the construction of each neuron in the net (see Figure \ref{Figure::Nnet_1}).
+To start with an objective function, generally the loss function, is differentiated and used as in Figure \ref{Figure::Nnet_2} together with the chain rule to find partial derivatives of the error function with respect to the weights $w_{i,j}$ for each stage and using gradient descent method with learning rate $\eta$ to define new weights $$\hat{w}_{i,j}:=w_{i,j}- \eta \frac{\partial E}{\partial w_{i,j}}$$
+One might think that local minima might be a problem, luckily \textit{"Regardless of the initial conditions, the system nearly always reaches solutions of very similar quality. Recent theoretical and empirical results strongly suggest that local minima are not a serious issue in general."} (C.f. \cite{nature}).
+Once the weights and structure of the network are determined it is a mere substitution that will produce the results for each different input.
+\begin{figure}
+  \begin{minipage}[c]{0.65\textwidth}
+    \includegraphics[width=\textwidth]{pictures/nnet_2.png}
+  \end{minipage}\hfill
+  \begin{minipage}[c]{0.35\textwidth}
+    \caption{Diagram on how the backpropagation procedure is carried out. Starting from the error $y_{l}-t_{l}$, the chain rule of derivatives is used to explicit a variation in the error as function of variations in the input variables. Note that the error is taken as the differentiation of a cost function: in this case $\frac{1}{2} (y_{l}-t_{l})^{2}$}.
+    \label{Figure::Nnet_2}
+  \end{minipage}
+\end{figure}
+
+\section{Random Forest}
+
+\begin{definition}
+A tree-structured classifier $h_{\theta_{k} }(\textbf{x})$ is a generalised step function $h_{\theta_{k} }: \textbf{X} \rightarrow F \subset \mathbb{R}$ where $\textbf{X}$ is the data set and $F$ is a finite cardinality set. This function has constant values on a partition of the data set consisting of hyper-rectangles.
+\end{definition}
+Note that $\theta_{k}$ indicates how to create such a partition by determining 
+\begin{itemize}
+\item predictors to split on
+\item values of the splits
+\item depth of the tree
+\end{itemize}
+
+The concept of generalization error for a random forest was first introduced in \cite{breiman2001random}.
+
+\begin{definition}
+A random forest is a classifier consisting of a collection of tree-structured classifiers $\{h( \textbf{x},  \theta_{k} ) \mid k \in  \overline{n} \}$ where the $\theta_{k}$ are i.i.d. random vectors and each tree casts a unit vote for the most popular class at input $\textbf{x}$.
+\end{definition}
+
+Since the results we are going to prove hold for any type of ensemble, not only of tree-structured classifiers, $h( \textbf{x},  \theta_{k} )$ can be replace with a generic classifier $h _{k}( \textbf{x} )$ and viceversa.
+\begin{definition}
+Given $\{h_{k} ( \textbf{x}) \mid k \in  \overline{K} \}$, the training set drawn
+at random from the distribution $\textbf{X}$ and its realisation $Y$ (through $h(\cdot)$), define the margin function as $$mg(\textbf{X},Y)= \sum_{k=1}^{K} \frac{I(h_{k}(\textbf{X})=Y) }{K} - \max_{j \neq Y}  \sum_{k=1}^{K}\frac{I(h_{k}(\textbf{X})=j) }{K} $$
+where $I (\cdot)$ is the indicator function. 
+\end{definition}
+The margin measures the extent to which the average number of votes at $\textbf{X}, Y$ for the right class exceeds the average vote for any other class. The larger the margin, the more confidence in the classification. \\
+The generalization error is given by
+$$\mathbb{P}(mg(\textbf{X}, Y)<0)$$
+where the probability is over the $(\textbf{X}, Y)$ space.
+For a large number of trees, it follows from the
+Strong Law of Large Numbers and the tree structure that:
+\begin{theorem}
+As the number of trees $K$ increases, almost surely the generalization error
+converges to
+$$\mathbb{P}_{\textbf{X}, Y}(\mathbb{P}_{\theta}(h(\textbf{X}, \theta) = Y)- \max_{j \neq Y} \mathbb{P}_{\theta}(h(\textbf{X}, \theta) = j) < 0)$$
+which assures the method does not overfit for big ensembles of trees.
+\end{theorem}
+
+\begin{proof}
+By definition of almost sure convergence, it suffices to show that there is a set of probability zero $C$ on the sequence space  $\{\theta_{k} \mid k \in K \}$ such that outside of $C$, $\forall x$,
+$$ \sum_{k=1}^{K} \frac{I(h(\textbf{x},\theta_{k})= j) }{K} \rightarrow \mathbb{P}_{\theta}(h(\textbf{x}, \theta) = j)$$
+For a fixed training set and fixed $\theta$ , $\{x \mid h(x, \theta) = j \}$ is a union of hyper-rectangles. This follows from the definition of decision tree. Moreover, $\forall$  $h(x, \theta)$ $\exists ! T < \infty$ number of such unions of hyper-rectangles, denoted by $S_{1},..., S_{T}$ . Define $\phi(\theta) = t$ iff $\{x \mid  h(x, \theta) = j \} = S_{t}$. Let $K_{t}$ be the number of times that $\phi(\theta_{k}) = t$ in the first $K$ trials. Then
+$$ \sum_{k=1}^{K} \frac{I(h(\textbf{x},\theta_{k})= j) }{K} = \sum_{t} \frac{K_{t}I(x \in S_{t}) }{K}$
+By the Law of Large Numbers,
+$$K_{t} = \sum_{k=1}^{K} \frac{I(\phi(\theta_{k})= t) }{K} $$
+converges almost surely to $\mathbb{P}_{\theta}(\phi(\theta) = t)$. Taking unions of all the sets on which convergence does not occur for some value of $k$ gives a set $C$ of zero probability such that outside of $C$,
+$$ \sum_{k=1}^{K} \frac{I(h(\textbf{x},\theta_{k})= j) }{K} \rightarrow \sum_{t} \mathbb{P}_{\theta}(\phi(\theta) = t)I(x \in S_{t})$$
+The right hand side is $\mathbb{P}_{\theta}(h(\textbf{x}, \theta) = j)$ ✷
+\end{proof}
+
+\end{document}

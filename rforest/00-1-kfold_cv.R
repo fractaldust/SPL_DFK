@@ -10,6 +10,7 @@ library(pROC)
 library(doParallel)
 library(microbenchmark)
 library(data.table)
+library(randomForest)
 
 # k-fold cross validation
 k <- k              # is choosen in parent script
@@ -27,10 +28,10 @@ message(paste("\n Registered number of cores:\n",getDoParWorkers(),"\n"))
 timing.par <- system.time(
   # loop for different nnet settings
   results.par <- foreach(n = 1:nrow(parameters), .combine = cbind, 
-                         .packages = c("caret", "nnet", "pROC", "data.table")) %:%
+                         .packages = c("caret", "nnet", "pROC", "data.table", "randomForest")) %:%
     # loop for cross validation
     foreach(i = 1:k, 
-            .packages = c("caret","nnet", "pROC", "data.table")) %dopar%{
+            .packages = c("caret","nnet", "pROC", "data.table", "randomForest")) %dopar%{
               gc()
               set.seed(1234)
               # Split data into training and validation
@@ -39,12 +40,11 @@ timing.par <- system.time(
               cv.train <- cv.train[order(cv.train$order_item_id),]
               cv.val   <- train.rnd[idx.val,]
               cv.val   <- cv.val[order(cv.val$order_item_id),]
-              # train nnet and make prediction
-              neunet <- nnet(return~. -order_item_id - tau, data = cv.train,
-                                trace = FALSE, maxit = 1000,
-                                size = parameters$size[n], decay = parameters$decay[n])
-              yhat.val <- predict(neunet, newdata = cv.val, type = "raw")
-
+              # train forest and make prediction 
+              rf       <- randomForest(as.factor(return) ~. -order_item_id - tau, data = cv.train, 
+                                 ntree = parameters$ntree[n], mtry = parameters$mtry[n])
+              yhat.val <- predict(rf, newdata = cv.val, type = "prob")[,2]
+              
               auc  <- auc(cv.val$return, as.vector(yhat.val))[[1]]
               loss <- helper.loss(tau_candidates = tau_candidates, 
                                   truevals       = cv.val$return, 
@@ -55,8 +55,8 @@ timing.par <- system.time(
               res  <- list("loss"        = max(loss), 
                            "auc"         = auc,
                            "sse"         = min(sse), 
-                           "parameters"  = data.table("size"  = parameters$size[n],
-                                                      "decay" = parameters$decay[n]))
+                           "parameters"  = data.table("ntree" = parameters$ntree[n],
+                                                      "mtry"  = parameters$mtry[n]))
               res
             }
 )
