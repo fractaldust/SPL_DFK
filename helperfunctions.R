@@ -41,7 +41,7 @@ helper.loss <- function(tau_candidates, truevals, predictedvals, itemprice){
   loss <- 1:length(tau_candidates)
   for (s in loss) {
     # translate prob.prediction to 1/0 prediction due to tau_candidate
-    cv_yhat_dt_zerone          <- 1:length(cv.val$return)
+    cv_yhat_dt_zerone          <- 1:length(truevals)
     cv_yhat_dt_zerone[predictedvals >= tau_candidates[s]] <- 1
     cv_yhat_dt_zerone[predictedvals <  tau_candidates[s]] <- 0
     # calculate loss
@@ -57,7 +57,7 @@ helper.sse  <- function(truevals, predictedvals){
   sse <- 1:length(thresh)
   for (s in 1:length(thresh)) {
     # translate prob.prediction to 1/0 prediction due to tau_candidate
-    cv_yhat_dt_zerone          <- 1:length(cv.val$return)
+    cv_yhat_dt_zerone          <- 1:length(truevals)
     cv_yhat_dt_zerone[predictedvals >= thresh[s]] <- 1
     cv_yhat_dt_zerone[predictedvals <  thresh[s]] <- 0
     err <- (truevals - cv_yhat_dt_zerone)**2
