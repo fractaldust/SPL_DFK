@@ -1,4 +1,3 @@
-# setwd("~/Documents/Projects/OneMoment/bads-ws1718-group07/submission")
 #----------------------------------------------------------------------------------
 # make prediction on training dataset to see how tuned nnet performs
 #----------------------------------------------------------------------------------
@@ -9,52 +8,50 @@
 
 library(caret)
 library(nnet)
-library(pROC)
 library(data.table)
 
-load(file = "./data/known-unknown-data.RData")
-real_price <- data.frame(known$order_item_id, known$item_price)  # for loss function
-colnames(real_price) <- c("order_item_id", "item_price")
+load(file  = "./data/known-unknown-data.RData")
+real_price = data.frame(known$order_item_id, known$item_price)  # for loss function
+colnames(real_price) = c("order_item_id", "item_price")
 
 # splits train set into split.train and split.test
-set.seed(1234)
-split.idx      <- createDataPartition(y = known$return, p = 0.75, list = FALSE)
-split.train    <- known[split.idx,]
-split.test     <- known[-split.idx,]
-real_price_ts  <- real_price$item_price[split.test$order_item_id] # for loss function
+set.seed(1234) # set.seed for reproducibility
+split.idx      = createDataPartition(y = known$return, p = 0.75, list = FALSE)
+split.train    = known[split.idx,]    # 75% of known dataset for training
+split.test     = known[-split.idx,]   # 25% of known dataset for prediction 
+real_price_ts  = real_price$item_price[split.test$order_item_id] # for loss function
 
 #----------------------------------------------------------------------------------
 # nnet function that returns predictions and loss as measure
 #----------------------------------------------------------------------------------
-make_nnet <- function(train, test, par){
-  # trains and nnet and makes predictions, then calculates loss as measure
-  # train   : dataset for training
-  # test    : dataset for prediction 
-  # par     : parameter for nnet 
-  neunet <- nnet(return~. -order_item_id - tau - tau_v, data = train,
-                    trace = FALSE, maxit = 1000,   # general options
-                    size = par[1], decay = par[2]) # tuned parameter from par_tuning.R
-  yhat   <- predict(neunet, newdata = test, type = "raw")
+make_nnet = function(train, test, par){
+    # trains and nnet and makes predictions, then calculates loss as measure
+    # train   : dataset for training
+    # test    : dataset for prediction 
+    # par     : parameter for nnet 
+    neunet = nnet(return~. -order_item_id - tau - tau_v, data = train,
+                  trace = FALSE, maxit = 1000,   # general options
+                  size = par[1], decay = par[2]) # tuned parameter from par_tuning.R
+    yhat   = predict(neunet, newdata = test, type = "raw")
   
-  # transform prob.prediction to 1/0-prediction 
-  cv_yhat_dt_zerone      <- 1:length(test$return)
-  cv_yhat_dt_zerone[yhat >= test$tau_v] <- 1
-  cv_yhat_dt_zerone[yhat <  test$tau_v] <- 0
+    # transform prob.prediction to 1/0-prediction 
+    cv_yhat_dt_zerone      = 1:length(test$return)
+    cv_yhat_dt_zerone[yhat >= test$tau_v] = 1
+    cv_yhat_dt_zerone[yhat <  test$tau_v] = 0
   
-  results <- list(data.table("order_item_id" = test$order_item_id, # unique id
-                             "return"        = test$return,        # actual return
-                             "yhat.01"       = cv_yhat_dt_zerone), # predicted return
-                  neunet)  
+    results = data.table("order_item_id" = test$order_item_id, # unique id
+                         "return"        = test$return,        # actual return
+                         "yhat.01"       = cv_yhat_dt_zerone)  # predicted return
   return(results)
 }
 
 #----------------------------------------------------------------------------------
 # train nnets and make predictions (on the four decomposed subsets)
-known <- split.train
-unknown <- split.test
+known   = split.train
+unknown = split.test
 
 # decompose dataset in pure subsets
-source(file="Decompose_Dataset.R")
+source(file = "Decompose_Dataset.R")
 
 #----------------------------------------------------------------------------------
 # load subsets for different models
@@ -67,112 +64,109 @@ source(file="Decompose_Dataset.R")
 #----------------------------------------------------------------------------------
 # .f       : full model
 #----------------------------------------------------------------------------------
-known         <- known.f
-unknown       <- unknown.f
+known         = known.f
+unknown       = unknown.f
 # additional data preparation for nnet
-source(file = "./nnet/00-3-nnet_DataPrep.R")
-split.train   <- known.n       # comes from additional data preparation
-split.test    <- unknown.n     # 
+source(file   = "./nnet/00-3-nnet_DataPrep.R")
+split.train   = known.n       # comes from additional data preparation
+split.test    = unknown.n     # 
 
 # tuned parameter from par_tuning.R and tau_tuning.R
-par <- c(3, 0.8)
-tau <- c(0.444, 0.588, 0.564, 0.614, 0.574, 0.656)
+par = c(3, 0.8)
+tau = c(0.444, 0.588, 0.564, 0.614, 0.574, 0.656)
 # add tau values for each tau-category (tau_c) to dataset
 for (tau_c in 1:6){
-  split.train$tau_v[split.train$tau == tau_c] <- tau[tau_c]
-  split.test$tau_v[split.test$tau == tau_c]   <- tau[tau_c]
+    split.train$tau_v[split.train$tau == tau_c] = tau[tau_c]
+    split.test$tau_v[split.test$tau   == tau_c] = tau[tau_c]
 }
 
 # make prediction 
-results.f <- make_nnet(split.train, split.test, par)
+results.f = make_nnet(split.train, split.test, par)
 
 #----------------------------------------------------------------------------------
 # .u       : model without user_retrate
 #----------------------------------------------------------------------------------
-known   <- rbind(known.f, known.u) # can also use .f for training, variables are pure
-unknown <- unknown.u   
+known   = rbind(known.f, known.u) # can also use .f for training, variables are pure
+unknown = unknown.u   
 # additional data preparation for nnet
-source(file = "./nnet/00-3-nnet_DataPrep.R")
-known.n$user_retrate   <- NULL   # remove user_retrate (uncertain categories)
-unknown.n$user_retrate <- NULL   #
-split.train   <- known.n         # comes from additional data preparation
-split.test    <- unknown.n       # 
+source(file   = "./nnet/00-3-nnet_DataPrep.R")
+known.n$user_retrate   = NULL   # remove user_retrate (uncertain categories)
+unknown.n$user_retrate = NULL   #
+split.train   = known.n         # comes from additional data preparation
+split.test    = unknown.n       # 
 
 # tuned parameter from par_tuning.R and tau_tuning.R
-par <- c(9, 1)
-tau <- c(0.516, 0.570, 0.540, 0.620, 0.610, 0.564)
+par = c(9, 1)
+tau = c(0.516, 0.570, 0.540, 0.620, 0.610, 0.564)
 # add tau values for each tau-category (tau_c) to dataset
 for (tau_c in 1:6){
-  split.train$tau_v[split.train$tau == tau_c] <- tau[tau_c]
-  split.test$tau_v[split.test$tau == tau_c]   <- tau[tau_c]
+    split.train$tau_v[split.train$tau == tau_c] = tau[tau_c]
+    split.test$tau_v[split.test$tau   == tau_c] = tau[tau_c]
 }
 
 # make prediction 
-results.u <- make_nnet(split.train, split.test, par)
+results.u = make_nnet(split.train, split.test, par)
 
 #----------------------------------------------------------------------------------
 # .i       : model without user_retrate
 #----------------------------------------------------------------------------------
-known   <- rbind(known.f, known.i) # can also use .f for training, variables are pure
-unknown <- unknown.i               # 
+known   = rbind(known.f, known.i) # can also use .f for training, variables are pure
+unknown = unknown.i               # 
 # additional data preparation for nnet
 source(file = "./nnet/00-3-nnet_DataPrep.R")
-known.n$item_retrate   <- NULL   # remove user_retrate (uncertain categories)
-unknown.n$item_retrate <- NULL   #
-split.test  <- unknown.n         # comes from additional data preparation
-split.train <- known.n           #
+known.n$item_retrate   = NULL   # remove user_retrate (uncertain categories)
+unknown.n$item_retrate = NULL   #
+split.test  = unknown.n         # comes from additional data preparation
+split.train = known.n           #
 
 # tuned parameter from par_tuning.R and tau_tuning.R
-par <- c(5, 0.8)
-tau <- c(0.536, 0.562, 0.572, 0.644, 0.450, 0.488)
+par = c(5, 0.8)
+tau = c(0.536, 0.562, 0.572, 0.644, 0.450, 0.488)
 # add tau values for each tau-category (tau_c) to dataset
 for (tau_c in 1:6){
-  split.train$tau_v[split.train$tau == tau_c] <- tau[tau_c]
-  split.test$tau_v[split.test$tau == tau_c]   <- tau[tau_c]
+    split.train$tau_v[split.train$tau == tau_c] = tau[tau_c]
+    split.test$tau_v[split.test$tau   == tau_c] = tau[tau_c]
 }
 
 # make prediction 
-results.i <- make_nnet(split.train, split.test, par)
+results.i = make_nnet(split.train, split.test, par)
 
 #----------------------------------------------------------------------------------
 # .iu      : model without user_retrate AND item_retrate
 #----------------------------------------------------------------------------------
-known   <- rbind(known.f, known.i, known.u, known.iu)
-unknown <- unknown.iu
+known   = rbind(known.f, known.i, known.u, known.iu)
+unknown = unknown.iu
 # additional data preparation for nnet
 source(file = "./nnet/00-3-nnet_DataPrep.R")
-known.n$item_retrate   <- NULL   # remove user_retrate (uncertain categories)
-known.n$user_retrate   <- NULL   #
-unknown.n$item_retrate <- NULL   #
-unknown.n$user_retrate <- NULL   #
-                                 #   
-split.test  <- unknown.n         # output of additional data preparation 
-split.train <- known.n           # 
+known.n$item_retrate   = NULL   # remove user_retrate (uncertain categories)
+known.n$user_retrate   = NULL   #
+unknown.n$item_retrate = NULL   #
+unknown.n$user_retrate = NULL   #
+                                #   
+split.test  = unknown.n         # output of additional data preparation 
+split.train = known.n           # 
 
 # tuned parameter from par_tuning.R and tau_tuning.R
-par <- c(7, 0.5)
-tau <- c(0.538, 0.570, 0.586, 0.580, 0.632, 0.636)
+par = c(7, 0.5)
+tau = c(0.538, 0.570, 0.586, 0.580, 0.632, 0.636)
 # add tau values for each tau-category (tau_c) to dataset
 for (tau_c in 1:6){
-  split.train$tau_v[split.train$tau == tau_c] <- tau[tau_c]
-  split.test$tau_v[split.test$tau == tau_c]   <- tau[tau_c]
+    split.train$tau_v[split.train$tau == tau_c] = tau[tau_c]
+    split.test$tau_v[split.test$tau   == tau_c] = tau[tau_c]
 }
 
 # make prediction 
-results.iu <- make_nnet(split.train, split.test, par)
+results.iu = make_nnet(split.train, split.test, par)
 
 
 #----------------------------------------------------------------------------------
 # evaluate performance 
 #---------------------------------------------------------------------------------- 
 # combine predictions of subsets
-all <- rbind(results.f[[1]], results.u[[1]], results.i[[1]], results.iu[[1]])
+all = rbind(results.f, results.u, results.i, results.iu)
 setkey(all, order_item_id)     # order by unique id
 
 # calculate loss and AUC measure
-loss <- helper.calcloss(all$return, all$yhat.01, real_price_ts)
-auc <- auc(all$return, all$yhat.01)
-
-loss                   # loss measure 
-auc                     # AUC
-sum(all$yhat.01)/25000  # return rate
+loss = helper.calcloss(all$return, all$yhat.01, real_price_ts)
+loss                    # loss measure: -239499.7
+sum(all$yhat.01)/25000  # return rate : 38.90%

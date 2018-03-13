@@ -12,42 +12,47 @@ parameters <- expand.grid("nrounds" = c(50, 100, 150),
 cv.list <- cv.list.iu
 source(file = "evaluatecvlist.R")
 
-x <- 1:length(tau[[1]]$loss$mean)
+x = 1:length(tau[[1]]$loss$mean)
 
-# loss
-df <- data.frame(tau)/10000
-blank.x <- theme(axis.title.x = element_blank())
-caption.b <- labs(y= "loss [10.000]")
-caption  <- labs(x = "parameter index", 
+# 3x2 plot for each tau-category
+df        = data.frame(tau)/10000
+blank.x   = theme(axis.title.x = element_blank())
+caption.b = labs(y = "loss [10.000]")    # only y-axis
+caption   = labs(x = "parameter index",  # x- and y-axis
                  y = "loss [10.000]")
-text     <- annotate(geom = "text", x=Inf, y=-Inf,hjust = 1, vjust = 0, 
+# text inside plot (for tau-category 1)
+text      = annotate(geom  = "text", x=Inf, y=-Inf,hjust = 1, vjust = 0, 
                      color = "red", size  = 4,
                      label = "tau_c = 1")
-g1 <- ggplot(df, aes(x=x, y=loss.mean)) + geom_point()  + caption.b + text + theme_bw() + blank.x
-text     <- annotate(geom = "text", x=Inf, y=-Inf,hjust = 1, vjust = 0, 
-                     color = "red", size  = 4,
-                     label = "tau_c = 2")
-g2 <- ggplot(df, aes(x=x, y=loss.mean.1)) + geom_point() + caption.b + text + theme_bw() + blank.x
-text     <- annotate(geom = "text", x=Inf, y=-Inf,hjust = 1, vjust = 0, 
-                     color = "red", size  = 4,
-                     label = "tau_c = 3")
-g3 <- ggplot(df, aes(x=x, y=loss.mean.2)) + geom_point() + caption.b + text + theme_bw() + blank.x
-text     <- annotate(geom = "text", x=Inf, y=-Inf,hjust = 1, vjust = 0, 
-                     color = "red", size  = 4,
-                     label = "tau_c = 4")
-g4 <- ggplot(df, aes(x=x, y=loss.mean.3)) + geom_point() + caption.b + text + theme_bw() + blank.x
-text     <- annotate(geom = "text", x=Inf, y=-Inf,hjust = 1, vjust = 0, 
-                     color = "red", size  = 4,
-                     label = "tau_c = 5")
-g5 <- ggplot(df, aes(x=x, y=loss.mean.4)) + geom_point() + caption + text + theme_bw()
-text     <- annotate(geom = "text", x=Inf, y=-Inf,hjust = 1, vjust = 0, 
-                     color = "red", size  = 4,
-                     label = "tau_c = 6")
-g6 <- ggplot(df, aes(x=x, y=loss.mean.5)) + geom_point() + caption + text + theme_bw()
+# sub-plot for tau-category 1
+g1 = ggplot(df, aes(x=x, y=loss.mean)) + geom_point()  + caption.b + text + theme_bw() + blank.x
 
-plot <- grid.arrange(g1, g2 , g3, g4, g5, g6, nrow = 3, ncol = 2)
-plot
+# sub-plots for tau-category 2:6
+text     = annotate(geom  = "text", x=Inf, y=-Inf,hjust = 1, vjust = 0, 
+                    color = "red", size  = 4,
+                    label = "tau_c = 2")
+g2 = ggplot(df, aes(x=x, y=loss.mean.1)) + geom_point() + caption.b + text + theme_bw() + blank.x
+text     = annotate(geom = "text", x=Inf, y=-Inf,hjust = 1, vjust = 0, 
+                    color = "red", size  = 4,
+                    label = "tau_c = 3")
+g3 = ggplot(df, aes(x=x, y=loss.mean.2)) + geom_point() + caption.b + text + theme_bw() + blank.x
+text     = annotate(geom = "text", x=Inf, y=-Inf,hjust = 1, vjust = 0, 
+                    color = "red", size  = 4,
+                    label = "tau_c = 4")
+g4 = ggplot(df, aes(x=x, y=loss.mean.3)) + geom_point() + caption.b + text + theme_bw() + blank.x
+text     = annotate(geom = "text", x=Inf, y=-Inf,hjust = 1, vjust = 0, 
+                    color = "red", size  = 4,
+                    label = "tau_c = 5")
+g5 = ggplot(df, aes(x=x, y=loss.mean.4)) + geom_point() + caption + text + theme_bw()
+text     = annotate(geom = "text", x=Inf, y=-Inf,hjust = 1, vjust = 0, 
+                    color = "red", size  = 4,
+                    label = "tau_c = 6")
+g6 = ggplot(df, aes(x=x, y=loss.mean.5)) + geom_point() + caption + text + theme_bw()
 
+# combine plots
+plot = grid.arrange(g1, g2 , g3, g4, g5, g6, nrow = 3, ncol = 2)
+
+# save plot as png
 width <- 2
 hight <- 1
 b <- 11
