@@ -1,5 +1,5 @@
 #----------------------------------------------------------------------------------
-#  performs t times repeated cross validation (that is k-fold itself)
+#  performs m times repeated cross validation (that is k-fold itself)
 #----------------------------------------------------------------------------------
 # input   : known (=train) and unknown (=test) dataset
 # output  : cv.list, measure.list : store measures (AUC, tau (for best split), loss)
