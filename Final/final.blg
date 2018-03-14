@@ -1,0 +1,10 @@
+This is BibTeX, Version 0.99dThe top-level auxiliary file: final.aux
+The style file: ecta.bst
+White space in argument---line 71 of file final.aux
+ : \citation{A
+ :             BIAS CORRECTION FOR THE MINIMUM ERROR RATE IN CROSS-VALIDATION By Ryan J. Tibshirani1 and Robert Tibshirani2 Stanford University and Stanford University}
+I'm skipping whatever remains of this command
+Database file #1: lit.bib
+Warning--I didn't find a database entry for "nature"
+Warning--empty journal in manyika2011
+(There was 1 error message)

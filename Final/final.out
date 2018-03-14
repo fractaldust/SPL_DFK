@@ -1,0 +1,27 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{Data}{}% 2
+\BOOKMARK [1][-]{section.3}{Feature Engineering}{}% 3
+\BOOKMARK [2][-]{subsection.3.1}{definition and explanation of variables }{section.3}% 4
+\BOOKMARK [2][-]{subsection.3.2}{Feature engineering: the case of item\137retrate}{section.3}% 5
+\BOOKMARK [3][-]{subsubsection.3.2.1}{Interval boundary choice}{subsection.3.2}% 6
+\BOOKMARK [3][-]{subsubsection.3.2.2}{Weight of Evidence}{subsection.3.2}% 7
+\BOOKMARK [2][-]{subsection.3.3}{item\137type}{section.3}% 8
+\BOOKMARK [1][-]{section.4}{Preparation of Data Set for Models}{}% 9
+\BOOKMARK [2][-]{subsection.4.1}{Decomposition due to uncertain categories}{section.4}% 10
+\BOOKMARK [2][-]{subsection.4.2}{On multiple \040thresholds}{section.4}% 11
+\BOOKMARK [1][-]{section.5}{Cross Validation}{}% 12
+\BOOKMARK [2][-]{subsection.5.1}{N-repeated stratified K-fold C.V.}{section.5}% 13
+\BOOKMARK [1][-]{section.6}{Cross Validation}{}% 14
+\BOOKMARK [1][-]{section.7}{Classification Alogrithms}{}% 15
+\BOOKMARK [2][-]{subsection.7.1}{Extreme Gradient Boosting}{section.7}% 16
+\BOOKMARK [1][-]{section.8}{Random Forest}{}% 17
+\BOOKMARK [1][-]{section.9}{Neural Network}{}% 18
+\BOOKMARK [2][-]{subsection.9.1}{Backpropagation}{section.9}% 19
+\BOOKMARK [2][-]{subsection.9.2}{Remarks on Neural Network}{section.9}% 20
+\BOOKMARK [2][-]{subsection.9.3}{Additional Data Preparation}{section.9}% 21
+\BOOKMARK [2][-]{subsection.9.4}{Parameter Tuning}{section.9}% 22
+\BOOKMARK [3][-]{subsubsection.9.4.1}{Parameters of Neural Network}{subsection.9.4}% 23
+\BOOKMARK [3][-]{subsubsection.9.4.2}{optimal \040for loss function}{subsection.9.4}% 24
+\BOOKMARK [2][-]{subsection.9.5}{Comparison with random forest}{section.9}% 25
+\BOOKMARK [2][-]{subsection.9.6}{Prediction}{section.9}% 26
+\BOOKMARK [1][-]{section.10}{Conclusion}{}% 27
