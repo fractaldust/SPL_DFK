@@ -42,6 +42,18 @@
   Timestamp                = {2018.02.12}
 }
 
+@Article{lecun2015,
+  Title                    = {Deep learning},
+  Author                   = {LeCun, Yann and Bengio, Yoshua and Hinton, Geoffrey},
+  Journal                  = {nature},
+  Year                     = {2015},
+  Number                   = {7553},
+  Pages                    = {436},
+  Volume                   = {521},
+
+  Publisher                = {Nature Publishing Group}
+}
+
 @Article{lessmann2015,
   Title                    = {Benchmarking state-of-the-art classification algorithms for credit scoring: An update of research},
   Author                   = {Lessmann, Stefan and Baesens, Bart and Seow, Hsin-Vonn and Thomas, Lyn C},
@@ -71,6 +83,16 @@
   Volume                   = {72},
 
   Publisher                = {Elsevier}
+}
+
+@Article{tibshirani2009bias,
+  Title                    = {A bias correction for the minimum error rate in cross-validation},
+  Author                   = {Tibshirani, Ryan J and Tibshirani, Robert},
+  Journal                  = {The Annals of Applied Statistics},
+  Year                     = {2009},
+  Pages                    = {822--829},
+
+  Publisher                = {JSTOR}
 }
 
 @InProceedings{yu2006,

@@ -134,9 +134,6 @@ The data set has been provided by a german online retailer, more information abo
 \label{raw data set}
 \end{table}
 
-%\section{Data Preprocessing}
-%Data preprocessing includes data cleaning (debug noisy data, imputation of missing values, treatment of outliers), data reduction (decreas dimensionality and feature selection) and data projection (structural transformation, e.g. mapping continous variables into categories) \cite{lessmann2015}. As the given data set contains only 13 variables, it is not necessary to reduce dimensionality. 
-% Konstantin: I would add WOE and the interval boundary choice to this section (data transformation)
 
 
  \section{Feature Engineering}
@@ -174,22 +171,33 @@ item\_type
 \end{table}
 
 
-
-\begin{figure}
-  \begin{minipage}[c]{0.65\textwidth}
-    \includegraphics[width=\textwidth]{pictures/correlation.png}
-  \end{minipage}\hfill
-  \begin{minipage}[c]{0.35\textwidth}
-    \caption{Correlation of features that are used for prediction. Red indicates positive correlation, blue inverse correlation. Intensity of color and size of circle depict correlation magnitude.}
-    \label{Figure::Correlation}
-  \end{minipage}
-\end{figure}
-
 \subsection{Feature engineering: the case of item\_retrate}\label{Subsec::ItemRetrate}
-Let’s assume to work on item\_retrate, the same reasoning is also valid for user\_retrate with only minor changes and can be extended to a wide class of features.
+Let's assume to work on item\_retrate, the same reasoning is also valid for user\_retrate with only minor changes and can be extended to a wide class of features.
 \newline
-As seen in Table \ref{Table::Features}, item\_retrate is a numerical value for each observation whose item\_id appears in the train set at least once. For the observations in test set with an item\_id that does not appear in train set, the value of item\_retrate can not be calculated, therefore the value $unknown$ is assigned. Since most models can not handle mixed class variables, item\_retrate must be turned into a factor variable.
+As seen in Table \ref{Table::Features}, item\_retrate is a numerical value for each observation whose item\_id appears in the train set at least once. 
+For the observations in test set with an item\_id that does not appear in train set, the value of item\_retrate can not be calculated, therefore the value $new$ is assigned (\texttt{line 15}). Since most models can not handle mixed class variables, item\_retrate must be turned into a factor variable. 
+\\
+\begin{lstlisting}
+item.k = joint.k[, list(item_nr.obs.k = .N, item_retrate = mean(return)), by = "item_id"]
+c = c(0, 0.26, 0.4, 0.56, 0.71, 1.1)
+tag = c("very low", "low", "normal", "high", "very high")
+item.k$item_retrate_c = split(item.k$item_retrate_c, item.k$item_retrate, c, tag)
+item.k$item_retrate_c[item.k$item_nr.obs.k <= 15] = "unknown"
 
+# item_id of items that ordered ONLY in test set
+new.item = unique(item$item_id[!(item$item_id %in% item.k$item_id)])
+length(new.item)
+
+# combine known and general item-matrix
+setkey(item, item_id)
+setkey(item.k, item_id)
+item = item.k[item]
+item$item_retrate_c[is.na(item$item_retrate_c)] = "new"
+item$item_retrate_c = factor(item$item_retrate_c, levels = c(tag, "unknown", "new"))
+
+\end{lstlisting}
+
+The \textit{split} function used in \texttt{line 4} turns a numerical variable into character. It categorizes all the elements of the column $item.k\$item\_retrate\_c$ based on the values of the boundaries given by vector $c$ (\texttt{line 2}), naming them by the values of $tag$.
 
 \subsubsection{Interval boundary choice}\label{Subsec::Interval}
 
@@ -264,7 +272,8 @@ Rising $N_{item}$ to $10$ can improve this result (see right side of Table 2).
 This means that the local maximum success estimation of $P_1$ already raised to $65.6 \%$ $( = 20.5\% + 24.6\% + 20.5\%)$ of the times for the same interval $[0.4,0.6]$.
 \newline
 In conclusion it is better to raise $N_{item}$ whenever feasible, in this case until too many item\_retrate are placed in the $unknown$ category.
-The final choices are $N_{item} \geq 15$ and $t =7$ for item\_retrate; $N_{item} \geq 6$ and $t =5$ for user\_retrate. \\
+The final choices are $N_{item} \geq 15$ (\texttt{line 5}) and $t =5 \ (+2)$ (\texttt{lines 2,3 and 16}) for item\_retrate ; $N_{item} \geq 6$ and $t =5$ for user\_retrate. \\
+
 The categories of item\_retrate are presented in Table \ref{Table::intervals}. Their distribution in Figure \ref{Figure::ItemRetrate}.
 \begin{center}
 \begin{table}[h]
@@ -287,6 +296,10 @@ WOE(category) := ln \left( \frac{\mathbb{P}(return=1 \mid item\_retrate=category
 \end{equation*}
 \newline
 Since the feature item\_retrate was developed by considering the rate of return in the past, the WOE follows the anticipated logarithmic conduct for the categories "very low" to "very high". An WOE = 0 denotes an average chance of return, which is especially the case for the "normal" category. Also "unknown" and "new" have an WOE around zero, since it is not possible to deduce their previous return rate. The WOE of the variable item\_retrate is shown in figure \ref{Figure::ItemRetrateWOE}.\\
+\begin{lstlisting}
+woe.object.full  <- woe(return ~ ., data = known, zeroadj = 0.5) 
+--> can you explain whats the code doing with woe, Franziska?
+\end{lstlisting}
 
 \begin{figure}
 	\subfigure[]{\includegraphics[width=0.5\textwidth]{pictures/item_retrate_r.png}}
@@ -307,6 +320,21 @@ Since the feature item\_retrate was developed by considering the rate of return 
 \subsection{item\_type}
 High cardinality attributes are impractical for most predictive algorithms. The original data set contained the variable item\_size, which overall consists of more than 100 categories. Even after merging duplicate naming such as (... xs, s, m, l, ...) and (... XS, S, M, L, ...), the variable is still of high cardinality. One method of reducing the categories of a variable is semantic grouping (c.f. \cite{moeyersoms2015}). Categories were generated with respect to common sizing systems for shoes and clothes. Additionally the category "rest" stores items that could not be allocated to shoes or clothes and "unsized" stores items without a specific size. By using semantic grouping it was not only possible to reduce over 100 categories to only four, but also a difference in the return rate of the categories can be observed. Figure \ref{Figure::ItemType} shows that "unsized" has a considerably lower return rate than average (Also the return rate of "rest" is lower than average, but because of the small size of the category it will not add much information to the model.)
 
+\begin{lstlisting}
+shoes = c(30:48, paste(35:46, "+", sep = ""),
+          1:9, paste(1:12, "+", sep = ""))
+clothes = c("xs", "s", "m", "l", "xl", "xxl", "xxxl",
+            "XS", "S", "M", "L", "XL", "XXL", "XXXL",
+            100:176)
+unsized = c("unsized")
+
+item$type                               = "rest"
+item$type[item$item_size %in% shoes]    = "shoes"
+item$type[item$item_size %in% clothes]  = "clothes"
+item$type[item$item_size %in% unsized]  = "unsized"
+
+\end{lstlisting}
+
 \begin{figure}
   \begin{minipage}[c]{0.55\textwidth}
     \includegraphics[width=\textwidth]{pictures/item_type.png}
@@ -318,10 +346,22 @@ High cardinality attributes are impractical for most predictive algorithms. The 
 \end{figure}
 
 
+
 \section{Preparation of Data Set for Models}
 
 \subsection{Decomposition due to uncertain categories}\label{Subsec::4Split}
-When creating the variables item\_retrate and user\_retrate (section \ref{Subsec::ItemRetrate}), it is only justified to infer from items/user that occur more than 15/6 times (explanation see \ref{Subsec::Interval}). All remaining items/user were stored in the category "unknown". However, this category can not be treated like the categories "very low" to "very high" that are directly connected to the previous return rate of the item/user. To ensure that the predictive algorithm does not treat the category incorrectly, the data set gets decomposed into certain and uncertain subsets, as shown in Table \ref{Figure::Decomposition}. The decomposition ensures that in each subset the remaining columns are "pure" (do not contain category "unknown" or "new"). For example subset .u (second row) is the subset, where the column "user\_retrate" got removed and "item\_retrate" contains only certain categories. Therefore the model is trained on this subset without the feature item\_retrate and accordingly predicts the test.u subset. Actually for training the model not only the train.u subset can be used, but also the train.f subset, since it is only important that the remaining columns are pure.\\
+When creating the variables item\_retrate and user\_retrate (section \ref{Subsec::ItemRetrate}), it is only justified to infer from items/user that occur more than 15/6 times (explanation see \ref{Subsec::Interval}). All remaining items/user were stored in the category "unknown". However, this category can not be treated like the categories "very low" to "very high" that are directly connected to the previous return rate of the item/user. To ensure that the predictive algorithm does not treat the category incorrectly, the data set gets decomposed into certain and uncertain subsets, as shown in Table \ref{Figure::Decomposition}. The decomposition ensures that in each subset the remaining columns are "pure" (do not contain category "unknown" or "new"). For example subset .u (second row) is the subset, where the column "user\_retrate" got removed and "item\_retrate" contains only certain categories. 
+\begin{lstlisting}
+# .u       : model without user_retrate
+# remove   : "unknown" and "new" of "item_retrate"
+# model    : item_retrate is clean now, can be used for model
+# n.k = 67143
+# n.u = 35703
+known.u    <- known[item_retrate!="unknown" & user_retrate=="unknown",]
+unknown.u  <- unknown[item_retrate!="unknown" & item_retrate!="new",]
+unknown.u  <- unknown.u[user_retrate=="unknown" | user_retrate=="new",]
+\end{lstlisting}
+Therefore the model is trained on this subset without the feature item\_retrate and accordingly predicts the test.u subset. Actually for training the model not only the train.u subset can be used, but also the train.f subset, since it is only important that the remaining columns are pure.\\
 \begin{center}
 \begin{figure}[h]
 \begin{tabular}{|c | c| c || r | r|}
@@ -347,7 +387,7 @@ In total four models get trained and used for prediction (full model, without it
 
 \subsection{On multiple $\tau$ thresholds}\label{Subsec::Tau}
 
-By observing the given loss table for this specific task, it is evident that depending on item price, type 1 errors can be more penalising than type 2 errors and vice versa.
+By observing the given loss table for this specific task (see Table \ref{cost matrix}), it is evident that depending on item price, type 1 errors can be more penalising than type 2 errors and vice versa.
 In order  to optimise the results, an analysis of its explicit dependence from item\_price is due.
 \newline
 The essential boundaries of when type 1 and type 2 errors are equally relevant are to be assessed, resulting in a meaningful first split of the data. In most cases $\tau<0.5$ and $\tau>0.5$ are found to be optimal when type 2 error loss is bigger and smaller than type 1 error loss respectively.
@@ -383,17 +423,17 @@ Let's assume to be in one of the following situations:
 \item the prediction algorithm of choice has a variety of parameters that need to be tuned, which means optimised in order to improve accuracy (or any other measure of goodness)
 \item performances of a group of completely different models need to be assessed and ranked for selection purposes
 \end{itemize}
-Cross validation is a widely (if not the most) used class of methods to assign to each different model an estimate of their "goodness". A great asset of cross validation is that it offers the flexibility to choose the most appropriate measure of goodness, depending on the situation. Such measures can be the very intuitive accuracy, the ever popular AUC or, as in this paper's case study, a customised function depending on a loss matrix (in this case Table \ref{loss matrix konstantin}).\\
-The class of C.V. methods contains, among others:
+Cross validation is a widely (if not the most) used class of methods to assign to each different model an estimate of their "goodness". A great asset of cross validation is that it offers the flexibility to choose the most appropriate measure of goodness, depending on the situation. Such measures can be the very intuitive accuracy, the ever popular AUC or, as in this paper's case study, a customised function depending on a loss matrix (in this case Table \ref{cost matrix}).\\
+The class of Cross Validation (CV) methods contains, among others:
 \begin{itemize}
-\item K-fold cross validation
-\item leave-one-out cross validation (limit case of K-fold for $K:= \# \{ training \enskip set\}$)
-\item stratified K-fold C.V.
-\item N-repeated stratified K-fold C.V.
-\item Monte Carlo C.V.
-\item Generalised CV
+\item K-fold CV
+\item leave-one-out CV (limit case of K-fold for $K:= \# \{ training \enskip set\}$)
+\item stratified K-fold CV
+\item N-repeated stratified K-fold CV
+%\item Monte Carlo C.V.
+%\item Generalised CV
 \end{itemize}
-The method that was chosen for this study is a 6-repeated  stratified 3-fold C.V.
+The method that was chosen for this study is a 6-repeated  stratified 3-fold CV, which offers a good balance between accuracy and computational intensity. 
 
 \subsection{N-repeated stratified K-fold C.V.}
 
@@ -410,7 +450,7 @@ A subset $T_{k} \subset T$ is called a stratified K-fold of $T$ if
 First of all $\forall k \in 1, ..,K$ a stratified K-fold $T_{k}$ of $T$ is taken. A model prediction will be called $ \hat{M}(\cdot,\theta)$ for simplicity and in order to stress its dependence from the parameter $\theta$ to be tuned.
 Note that $\hat{M}(\cdot,\theta)$ could be interpreted as a total different model prediction $\hat{M}_{\theta}$ as well.\\
 The second step consists in training the model on $T \setminus T_{k} \enskip \forall \theta_{i} \in \Theta $ the parameter candidates set (from now on we use the simplified notation $ \hat{M}_{k}(\cdot,\theta):=\hat{M}_{T \setminus T_{k}}(\cdot,\theta)$ ).
-Finally $\forall (v_{j},y_{j} \in T_{k} $  $$ L(\hat{M}_{k}(v_{j},\theta_{i}),y_{j})$$ is calculated and the results summarised in the following way (C.f. \cite{A BIAS CORRECTION FOR THE MINIMUM ERROR RATE IN CROSS-VALIDATION By Ryan J. Tibshirani1 and Robert Tibshirani2 Stanford University and Stanford University} ) $$ CV(\theta):= \frac{1}{\#T} \sum_{k=1}^{K} \sum_{j \in C_{k}} L(\hat{M}_{k}(v_{j},\theta),y_{j})$$
+Finally $\forall (v_{j},y_{j} \in T_{k} $  $$ L(\hat{M}_{k}(v_{j},\theta_{i}),y_{j})$$ is calculated and the results summarised in the following way (C.f. \cite{tibshirani2009} ) $$ CV(\theta):= \frac{1}{\#T} \sum_{k=1}^{K} \sum_{j \in C_{k}} L(\hat{M}_{k}(v_{j},\theta),y_{j})$$
 For minimisation and maximisation reasons the multiplication by $\frac{1}{\# T}$ is irrelevant so it can be omitted.
 
 %------------------------------------------------------------
@@ -467,7 +507,7 @@ stopCluster(cl) # stop parallel computing
 \end{lstlisting}
 
 Since the performance of the model also depends on the 'quality' of the training data and the training data is determined randomly, it is crucial to change the randomness of the splits. By varying the seed \texttt{set.seed(1234*t)} in the mother script  \texttt{00-2-rep\_cv.R} , the randomness of the training set tr is changed (line 11-16). \\ 
-Further this script \texttt{00-2-rep\_cv.R} splits the dataset according to the six tau-categories \ref{@@@}. The k-fold cross validation from the previous section is then performed for every of these subsets. The results for each tau-category \texttt{v} are then stored in a list \texttt{tau\_c} (line 22). \\
+Further this script \texttt{00-2-rep\_cv.R} splits the dataset according to the six tau-categories (see Table \ref{Table::Tau}). The k-fold cross validation from the previous section is then performed for every of these subsets. The results for each tau-category \texttt{v} are then stored in a list \texttt{tau\_c} (line 22). \\
 The output of the m-times repeated cross validation is a list of m times the same cross validation procedure (only with different randomness). Each element of the m-sized list is a list of the k*n matrix for the six tau-categories v.\\
 (m : number of repeated cross validations (same procedure but different randomness), v : six tau-categories, k : k-fold cross validation, n : number of variations of settings for model)\\ 
 
@@ -495,8 +535,8 @@ for (t in 1:m){
 
 
 
-Section \ref{@@@} explains the importance of decomposing our dataset into four subsets according to the 'quality' @@@aussagekraft of the features for training. In script \texttt{01-par-tuning.R} the whole tuning-process is performed for the different subsets. The following explains the preparation of the .u subset exemplarily.\\
-The known dataset consists of the subsets where a full model can be trained (.f) and the subset where the model without \texttt{user\_retrate} can be trained (\texttt{.u}). These two subsets are combined to the known data set (line 51). For training a neural network additional data preparation as described in section \ref{@@@} is necessary (line 54). Then the columns of the feature \texttt{user\_retrate} get removed and the set is named according to the requirements of the script for cross validation (lines 55-59). \\
+Section \ref{Subsec::4Split} explains the importance of decomposing our dataset into four subsets according to the explanatory power of the features for training. In script \texttt{01-par-tuning.R} the whole tuning-process is performed for the different subsets. The following explains the preparation of the .u subset exemplarily.\\
+The known dataset consists of the subsets where a full model can be trained (.f) and the subset where the model without \texttt{user\_retrate} can be trained (\texttt{.u}). These two subsets are combined to the known data set (line 51). For training a neural network additional data preparation as described in section \ref{Subsec::AddPrep} is necessary (line 54). Then the columns of the feature \texttt{user\_retrate} get removed and the set is named according to the requirements of the script for cross validation (lines 55-59). \\
 After performing the m times repeated k-fold cross validation for the n variations of settings for the model, the results are stored in a the list \texttt{cv.list.u} for further evaluation (line 71).
 
 \begin{lstlisting}[language=r]
@@ -554,13 +594,13 @@ Note that $\theta_{k}$ indicates how to create such a partition by determining
 \end{enumerate}
 where the first is a randomly chosen subset of the parameters of cardinality equal to \textit{m\_tree} in the \textit{random.Forest} package, the second is chosen in order to maximize information gain, the third corresponds to \textit{n\_tree} in \textit{random.Forest}. 
 
-The concept of generalization error for a random forest was first introduced in \cite{breiman2001random}.
+The concept of generalization error for a random forest was first presented in \cite{breiman2001random}. The following theory represents the theory introduced in the article. 
 
 \begin{definition}
 A random forest is a classifier consisting of a collection of tree-structured classifiers $\{h( \textbf{x},  \theta_{k} ) \mid k \in  \overline{n} \}$ where the $\theta_{k}$ are i.i.d. random vectors and each tree casts a unit vote for the most popular class at input $\textbf{x}$.
 \end{definition}
 
-Since the results we are going to prove hold for any type of ensemble, not only of tree-structured classifiers, $h( \textbf{x},  \theta_{k} )$ can be replace with a generic classifier $h _{k}( \textbf{x} )$ and viceversa.
+For notation simplicity purposes, from now on, $h( \textbf{x},  \theta_{k} )$ can be replaced with $h _{k}( \textbf{x} )$ and viceversa.
 \begin{definition}
 Given $\{h_{k} ( \textbf{x}) \mid k \in  \overline{K} \}$, the training set drawn
 at random from the distribution $\textbf{X}$ and its realisation $Y$ (through $h(\cdot)$), define the margin function as $$mg(\textbf{X},Y)= \sum_{k=1}^{K} \frac{I(h_{k}(\textbf{X})=Y) }{K} - \max_{j \neq Y}  \sum_{k=1}^{K}\frac{I(h_{k}(\textbf{X})=j) }{K} $$
@@ -626,15 +666,7 @@ Once the weights and structure of the network are determined it is a mere substi
 \end{figure}
 %--------------------------------------------------------
 
-\subsection{Remarks on Neural Network}
-A neural network tries to linearise the boundaries of the dataset by applying different layers of weighting and non linear transformations, such as sigmoids (c.f. \cite{lecun2015}).
-
-$nnet$ in particular tends to perform worse than e.g. a random forest out of the box but often outperforms it once parameter tuning has been carried out.
-
-Parameters that can be tuned are $size$ and $decay$: size is the number of units in the only hidden layer of nnet, decay prevents from overfitting.
-
-
-\subsection{Additional Data Preparation}
+\subsection{Additional Data Preparation}\label{Subsec::AddPrep}
 The performance of neural networks increases, when the data is numerical (instead of categorical). Different techniques can be used to convert a categorical variable to a numerical, but not every technique is suitable for every case.\\
 Since item\_retrate and user\_retrate are based on their connection to the target variable, assigning the Weight of Evidence (WOE) to each category does not aggravate overfitting even more. The WOE is also used for the categories of delivery\_time and price\_comp, but to prevent overfitting, the WOE was calculated on a small subset of the train set, that is not going to be used for training anymore (c.f.\cite{moeyersoms2015}):\\
 If the variable only has few categories, it is beneficial to introduce dummy variables. Instead of having one variable item\_type with four categories, there will be four binary dummy variables that indicate whether the item is of this category. 
