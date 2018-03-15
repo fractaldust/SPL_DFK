@@ -154,7 +154,7 @@ delivery\_time
 & & \\
 price\_comp
 & Created by assigning the percentage deviation from the average price of the specific item to each purchase. 
-& Let’s assume a customer bought an item on sale, it is more likely that he will keep the item with respect to buying it full price. \\
+& Let's assume a customer bought an item on sale, it is more likely that he will keep the item with respect to buying it full price. \\
 & & \\
 item\_double
 & Counts when an item is ordered  at least twice by the same user.
@@ -175,7 +175,7 @@ item\_type
 Let's assume to work on item\_retrate, the same reasoning is also valid for user\_retrate with only minor changes and can be extended to a wide class of features.
 \newline
 As seen in Table \ref{Table::Features}, item\_retrate is a numerical value for each observation whose item\_id appears in the train set at least once. 
-For the observations in test set with an item\_id that does not appear in train set, the value of item\_retrate can not be calculated, therefore the value $new$ is assigned (\texttt{line 15}). Since most models can not handle mixed class variables, item\_retrate must be turned into a factor variable. 
+For the observations in test set with an item\_id that does not appear in train set (\texttt{line 8}), the value of item\_retrate can not be calculated, therefore the value $new$ is assigned (\texttt{line 15}). Since most models can not handle mixed class variables, item\_retrate must be turned into a factor variable. 
 \\
 \begin{lstlisting}
 item.k = joint.k[, list(item_nr.obs.k = .N, item_retrate = mean(return)), by = "item_id"]
@@ -186,7 +186,6 @@ item.k$item_retrate_c[item.k$item_nr.obs.k <= 15] = "unknown"
 
 # item_id of items that ordered ONLY in test set
 new.item = unique(item$item_id[!(item$item_id %in% item.k$item_id)])
-length(new.item)
 
 # combine known and general item-matrix
 setkey(item, item_id)
@@ -197,7 +196,7 @@ item$item_retrate_c = factor(item$item_retrate_c, levels = c(tag, "unknown", "ne
 
 \end{lstlisting}
 
-The \textit{split} function used in \texttt{line 4} turns a numerical variable into character. It categorizes all the elements of the column $item.k\$item\_retrate\_c$ based on the values of the boundaries given by vector $c$ (\texttt{line 2}), naming them by the values of $tag$.
+The \texttt{split} function used in \texttt{line 4} turns a numerical variable into character. It categorizes all the elements of the column \texttt{item.k\$item\_retrate\_c} based on the values of the boundaries given by vector \texttt{c} (\texttt{line 2}), naming them by the values of \texttt{tag}.
 
 \subsubsection{Interval boundary choice}\label{Subsec::Interval}
 
@@ -295,7 +294,7 @@ A method to measure the meaningfulness of a feature is the Weight of Evidence (W
 WOE(category) := ln \left( \frac{\mathbb{P}(return=1 \mid item\_retrate=category)}{\mathbb{P}(return=0 \mid item\_retrate=category)} \right) 
 \end{equation*}
 \newline
-Since the feature item\_retrate was developed by considering the rate of return in the past, the WOE follows the anticipated logarithmic conduct for the categories "very low" to "very high". An WOE = 0 denotes an average chance of return, which is especially the case for the "normal" category. Also "unknown" and "new" have an WOE around zero, since it is not possible to deduce their previous return rate. The WOE of the variable item\_retrate is shown in figure \ref{Figure::ItemRetrateWOE}.\\
+Since the feature \texttt{item\_retrate} was developed by considering the rate of return in the past, the WOE follows the anticipated logarithmic conduct for the categories "very low" to "very high". An WOE = 0 denotes an average chance of return, which is especially the case for the "normal" category. Also "unknown" and "new" have an WOE around zero, since it is not possible to deduce their previous return rate. The WOE of the variable item\_retrate is shown in figure \ref{Figure::ItemRetrateWOE}.\\
 \begin{lstlisting}
 woe.object.full  <- woe(return ~ ., data = known, zeroadj = 0.5) 
 --> can you explain whats the code doing with woe, Franziska?
@@ -304,7 +303,7 @@ woe.object.full  <- woe(return ~ ., data = known, zeroadj = 0.5)
 \begin{figure}
 	\subfigure[]{\includegraphics[width=0.5\textwidth]{pictures/item_retrate_r.png}}
 	\subfigure[]{\includegraphics[width=0.5\textwidth]{pictures/item_retrate_ku.png}}
-	\caption{(a) Display of the artificially created feature item\_retrate. red shading: average return rate of observations of this category with comparison to average return rate of all items in training set (red line, avg.returnrate = 0.48174). blue histogram: number of observations in each category. (b) Distribution of variable item\_retrate in train and test set. In both data sets the newly created variable follows a similar distribution.}
+	\caption{(a) Display of the artificially created feature \texttt{item\_retrate}. red shading: average return rate of observations of this category with comparison to average return rate of all items in training set (red line, avg.returnrate = 0.48174). blue histogram: number of observations in each category. (b) Distribution of variable \texttt{item\_retrate} in train and test set. In both data sets the newly created variable follows a similar distribution.}
 	\label{Figure::ItemRetrate}
 \end{figure}
 
@@ -313,12 +312,12 @@ woe.object.full  <- woe(return ~ ., data = known, zeroadj = 0.5)
     \includegraphics[width=\textwidth]{pictures/item_retrate_woe.png}
   \end{minipage}\hfill
   \begin{minipage}[c]{0.35\textwidth}
-    \caption{Weight of Evidence (WOE) of the feature "item\_retrate". Categories "very low" to "very high" were created by grouping the items  according to their return rate in the training set. This created a strong feature in terms of WOE.} \label{Figure::ItemRetrateWOE}
+    \caption{Weight of Evidence (WOE) of the feature \texttt{item\_retrate}. Categories "very low" to "very high" were created by grouping the items  according to their return rate in the training set. This created a strong feature in terms of WOE.} \label{Figure::ItemRetrateWOE}
   \end{minipage}
 \end{figure}
 
 \subsection{item\_type}
-High cardinality attributes are impractical for most predictive algorithms. The original data set contained the variable item\_size, which overall consists of more than 100 categories. Even after merging duplicate naming such as (... xs, s, m, l, ...) and (... XS, S, M, L, ...), the variable is still of high cardinality. One method of reducing the categories of a variable is semantic grouping (c.f. \cite{moeyersoms2015}). Categories were generated with respect to common sizing systems for shoes and clothes. Additionally the category "rest" stores items that could not be allocated to shoes or clothes and "unsized" stores items without a specific size. By using semantic grouping it was not only possible to reduce over 100 categories to only four, but also a difference in the return rate of the categories can be observed. Figure \ref{Figure::ItemType} shows that "unsized" has a considerably lower return rate than average (Also the return rate of "rest" is lower than average, but because of the small size of the category it will not add much information to the model.)
+High cardinality attributes are impractical for most predictive algorithms. The original data set contained the variable \texttt{item\_size}, which overall consists of more than 100 categories. Even after merging duplicate naming such as (... xs, s, m, l, ...) and (... XS, S, M, L, ...), the variable is still of high cardinality. One method of reducing the categories of a variable is semantic grouping (c.f. \cite{moeyersoms2015}). Categories were generated with respect to common sizing systems for shoes and clothes. Additionally the category \texttt{rest} stores items that could not be allocated to shoes or clothes and \texttt{unsized} stores items without a specific size. By using semantic grouping it was not only possible to reduce over 100 categories to only four, but also a difference in the return rate of the categories can be observed. Figure \ref{Figure::ItemType} shows that \texttt{unsized} has a considerably lower return rate than average (Also the return rate of \texttt{rest} is lower than average, but because of the small size of the category it will not add much information to the model.)
 
 \begin{lstlisting}
 shoes = c(30:48, paste(35:46, "+", sep = ""),
@@ -340,7 +339,7 @@ item$type[item$item_size %in% unsized]  = "unsized"
     \includegraphics[width=\textwidth]{pictures/item_type.png}
   \end{minipage}\hfill
   \begin{minipage}[c]{0.4\textwidth}
-    \caption{Display of the artificially created feature item\_type. red shading: average return rate of orders in this categories in training set. blue histogram: number of orders of each category.}
+    \caption{Display of the artificially created feature \texttt{item\_type}. red shading: average return rate of orders in this categories in training set. blue histogram: number of orders of each category.}
     \label{Figure::ItemType}
   \end{minipage}
 \end{figure}
@@ -350,18 +349,16 @@ item$type[item$item_size %in% unsized]  = "unsized"
 \section{Preparation of Data Set for Models}
 
 \subsection{Decomposition due to uncertain categories}\label{Subsec::4Split}
-When creating the variables item\_retrate and user\_retrate (section \ref{Subsec::ItemRetrate}), it is only justified to infer from items/user that occur more than 15/6 times (explanation see \ref{Subsec::Interval}). All remaining items/user were stored in the category "unknown". However, this category can not be treated like the categories "very low" to "very high" that are directly connected to the previous return rate of the item/user. To ensure that the predictive algorithm does not treat the category incorrectly, the data set gets decomposed into certain and uncertain subsets, as shown in Table \ref{Figure::Decomposition}. The decomposition ensures that in each subset the remaining columns are "pure" (do not contain category "unknown" or "new"). For example subset .u (second row) is the subset, where the column "user\_retrate" got removed and "item\_retrate" contains only certain categories. 
+When creating the variables \texttt{item\_retrate} and \texttt{user\_retrate} (section \ref{Subsec::ItemRetrate}), it is only justified to infer from items/user that occur more than 15/6 times (explanation see \ref{Subsec::Interval}). All remaining items/user were stored in the category \texttt{unknown}. However, this category can not be treated like the categories "very low" to "very high" that are directly connected to the previous return rate of the item/user. To ensure that the predictive algorithm does not treat the category incorrectly, the data set gets decomposed into certain and uncertain subsets, as shown in Table \ref{Figure::Decomposition}. The decomposition ensures that in each subset the remaining columns are "pure" (do not contain category \texttt{unknown} or \texttt{new}). For example subset \texttt{.u} (second row) is the subset, where the column \texttt{user\_retrate} got removed and \texttt{item\_retrate} contains only certain categories. 
 \begin{lstlisting}
 # .u       : model without user_retrate
 # remove   : "unknown" and "new" of "item_retrate"
 # model    : item_retrate is clean now, can be used for model
-# n.k = 67143
-# n.u = 35703
 known.u    <- known[item_retrate!="unknown" & user_retrate=="unknown",]
 unknown.u  <- unknown[item_retrate!="unknown" & item_retrate!="new",]
 unknown.u  <- unknown.u[user_retrate=="unknown" | user_retrate=="new",]
 \end{lstlisting}
-Therefore the model is trained on this subset without the feature item\_retrate and accordingly predicts the test.u subset. Actually for training the model not only the train.u subset can be used, but also the train.f subset, since it is only important that the remaining columns are pure.\\
+Therefore the model is trained on this subset without the feature \texttt{user\_retrate} and accordingly predicts the \texttt{test.u} subset. Actually for training the model not only the \texttt{known.u} subset can be used, but also the \texttt{known.f} subset, since it is only important that the remaining columns are pure.\\
 \begin{center}
 \begin{figure}[h]
 \begin{tabular}{|c | c| c || r | r|}
@@ -383,7 +380,7 @@ u/n & u/n & 1 & .iu - without item\_retrate & 5734 / 3402\\
 \end{figure}
 \end{center}
 \newpage
-In total four models get trained and used for prediction (full model, without item\_retrate, without user\_retrate, without item\_retrate and user\_retrate). This decomposition increased the performance from $loss_{full} = -244229.0  $ and $AUC_{full} = 65.50\%$ to $loss_{dec} = -238879.0 $ and $AUC_{dec} = 66.75\%$ (with a tuned neural network).
+In total four models get trained and used for prediction (full model, without item\_retrate, without user\_retrate, without item\_retrate and user\_retrate). This decomposition increased the performance from $loss_{full} = -243104.7 $ and $AUC_{full} = 65.27\%$ to $loss_{dec} = -239499.7 $ and $AUC_{dec} = 66.52\%$ (with a tuned neural network).
 
 \subsection{On multiple $\tau$ thresholds}\label{Subsec::Tau}
 
@@ -416,7 +413,7 @@ Implementing this dependence in the cross validation code is essential not only 
 Running the cross validation for each of $$T_k:=\{observation \in Split.Train \ | \ \tau = k\}$$ produces significantly different optimal values for $\tau$ (see Table \ref{Table::Moobs}), which is a confirmation of what was expected from the above reasoning. 
 
 %------------------------------------------------------------
-\section{Cross Validation}
+\section{Cross Validation - Theory}
 
 Let's assume to be in one of the following situations: 
 \begin{itemize}
@@ -454,7 +451,7 @@ Finally $\forall (v_{j},y_{j} \in T_{k} $  $$ L(\hat{M}_{k}(v_{j},\theta_{i}),y_
 For minimisation and maximisation reasons the multiplication by $\frac{1}{\# T}$ is irrelevant so it can be omitted.
 
 %------------------------------------------------------------
-\section{Cross Validation}
+\section{Cross Validation - Implementation}
 
 
 Script \texttt{00-1-kfold.R} performs k-fold cross validations for n variations of settings for a neural network. In order to perform a k-fold cross validation, the dataset is randomly split into k subsets folds(line 5). For every run i of the k-fold cross validation subset \texttt{folds==i} is left out for prediction, which means that the model is trained on the subset without \texttt{folds==i} and the prediction is performed on subset \texttt{fold==i}. This split is performed in lines 17-22, followed by training the model (line 24) and prediction (line 29). Note that the second @@@@laufindex n indicates the settings for the neural network (line 27+28). This index n is changed by the outer foreach-loop (line 11). \\
@@ -581,7 +578,7 @@ that consists of a training loss term $l(y_i,\hat{y}_i)$ and a regularization te
 This sequential procedure stops when no further improvements can be made, e.g. when the reduction of the loss term is smaller then the change in the regularization term. \\
 
 %--------------------------------------------------------
-\section{Random Forest}
+\subsection{Random Forest}
 
 \begin{definition}
 A tree-structured classifier $h_{\theta_{k} }(\textbf{x})$ is a generalised step function $h_{\theta_{k} }: \textbf{X} \rightarrow F \subset \mathbb{R}$ where $\textbf{X}$ is the data set and $F$ is a finite cardinality set. This function has constant values on a partition of the data set consisting of hyper-rectangles.
@@ -631,7 +628,7 @@ The right hand side is $\mathbb{P}_{\theta}(h(\textbf{x}, \theta) = j)$ ✷
 \end{proof}
 %----------------------------------------------------------
 
-\section{Neural Network}
+\subsection{Neural Network}
 
 Neural networks were first developed in the middle of the twentieth century, had great importance for a few decades and then overshadowed by other algorithms such as support vector machines in the later decades of the last century until they were discovered to be great in performance when paired with backpropagation for unsupervised learning.
 The idea behind this category of algorithms is that most real life problems are highly non linear, and therefore standard models such as linear regression will not be suited for approximation of reality.
@@ -649,7 +646,7 @@ The way this class of algorithms work is calculating numerous weighted linear co
 This procedure is repeated multiple times depending on the design of the network, each of these basic operation is called a neuron.
 The group of neurons on a same level is called hidden layer, there can be multiple hidden layers each performed taking the outputs of the previous one (altough the \textit{nnet} package uses only one, see Figure \ref{Figure::Nnet_1}).
 Neural networks not only depend on the number of neurons for each hidden layer (this is called \textit{size} in \textit{nnet} package), number of layers and definition of input variables for each neuron. In fact they are defined also by which nonlinear function is applied in each neuron: the traditionally used are sigmoid functions such as hyperbolic tangent and logistic function, $$f_{1}(t):=\tanh(t) \quad f_{2}(t):= \frac{1}{1+ e^{-t}} $$ the latter being used in the \textit{nnet} package. The reason for the application of such functions for each elementary step is an attempt to linearise the boundary of highly nonlinear sets. 
-\subsection{Backpropagation}
+\subsubsection{Backpropagation}
 Backpropagation is one of the milestones of the development of neural networks and plays a fundamental role especially for deep networks, which consist of multiple hidden layers.
 This process aims to find out the most appropriate weights $w_{i,j}$ for the construction of each neuron in the net (see Figure \ref{Figure::Nnet_1}).
 To start with an objective function, generally a loss function, is differentiated and used as in Figure \ref{Figure::Nnet_2} together with the chain rule to find partial derivatives of the error function with respect to the weights $w_{i,j}$ for each stage and using gradient descent method with learning rate $\eta$ (which is often associated with the parameter \textit{decay} in \textit{nnet}) to define new weights $$\hat{w}_{i,j}:=w_{i,j}- \eta \frac{\partial E}{\partial w_{i,j}}$$

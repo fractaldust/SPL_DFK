@@ -1,4 +1,4 @@
-\begin{thebibliography}{8}
+\begin{thebibliography}{9}
 \newcommand{\enquote}[1]{``#1''}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 
@@ -43,6 +43,12 @@
   high-cardinality attributes in predictive models: A case study in churn
   prediction in the energy sector,} \emph{Decision support systems}, 72,
   72--81.
+
+\bibitem[\protect\citeauthoryear{Tibshirani and Tibshirani}{Tibshirani and
+  Tibshirani}{2009}]{tibshirani2009}
+\textsc{Tibshirani, R.~J. and R.~Tibshirani} (2009): \enquote{A bias correction
+  for the minimum error rate in cross-validation,} \emph{The Annals of Applied
+  Statistics}, 822--829.
 
 \bibitem[\protect\citeauthoryear{Yu, Lai, Wang, and Huang}{Yu
   et~al.}{2006}]{yu2006}

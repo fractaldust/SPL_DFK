@@ -35,80 +35,77 @@
 \newlabel{Subsec::variables}{{3.1}{4}{definition and explanation of variables}{subsection.3.1}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Overview of the main features that are used for the predictive model.}}{4}{table.3}}
 \newlabel{Table::Features}{{3}{4}{Overview of the main features that are used for the predictive model}{table.3}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Correlation of features that are used for prediction. Red indicates positive correlation, blue inverse correlation. Intensity of color and size of circle depict correlation magnitude.}}{5}{figure.1}}
-\newlabel{Figure::Correlation}{{1}{5}{Correlation of features that are used for prediction. Red indicates positive correlation, blue inverse correlation. Intensity of color and size of circle depict correlation magnitude}{figure.1}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Feature engineering: the case of item\_retrate}{5}{subsection.3.2}}
 \newlabel{Subsec::ItemRetrate}{{3.2}{5}{Feature engineering: the case of item\_retrate}{subsection.3.2}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.1}Interval boundary choice}{5}{subsubsection.3.2.1}}
-\newlabel{Subsec::Interval}{{3.2.1}{5}{Interval boundary choice}{subsubsection.3.2.1}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.1}Interval boundary choice}{6}{subsubsection.3.2.1}}
+\newlabel{Subsec::Interval}{{3.2.1}{6}{Interval boundary choice}{subsubsection.3.2.1}{}}
 \newlabel{Table::probs}{{3.2.1}{7}{Interval boundary choice}{Item.2}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Classification outcomes for $N_{item}=6$ (left) and $N_{item}=10$ (right).}}{7}{table.4}}
-\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Definition of tau categories. Every order is sorted to an tau category, depending on the price of the item that got ordered.}}{7}{table.5}}
-\newlabel{Table::intervals}{{5}{7}{Definition of tau categories. Every order is sorted to an tau category, depending on the price of the item that got ordered}{table.5}{}}
 \citation{moeyersoms2015}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces (a) Display of the artificially created feature item\_retrate. red shading: average return rate of observations of this category with comparison to average return rate of all items in training set (red line, avg.returnrate = 0.48174). blue histogram: number of observations in each category. (b) Distribution of variable item\_retrate in train and test set. In both data sets the newly created variable follows a similar distribution.}}{8}{figure.2}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {}}}{8}{figure.2}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {}}}{8}{figure.2}}
-\newlabel{Figure::ItemRetrate}{{2}{8}{(a) Display of the artificially created feature item\_retrate. red shading: average return rate of observations of this category with comparison to average return rate of all items in training set (red line, avg.returnrate = 0.48174). blue histogram: number of observations in each category. (b) Distribution of variable item\_retrate in train and test set. In both data sets the newly created variable follows a similar distribution}{figure.2}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Definition of tau categories. Every order is sorted to an tau category, depending on the price of the item that got ordered.}}{8}{table.5}}
+\newlabel{Table::intervals}{{5}{8}{Definition of tau categories. Every order is sorted to an tau category, depending on the price of the item that got ordered}{table.5}{}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.2}Weight of Evidence}{8}{subsubsection.3.2.2}}
 \newlabel{Subsec::WOE}{{3.2.2}{8}{Weight of Evidence}{subsubsection.3.2.2}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Weight of Evidence (WOE) of the feature "item\_retrate". Categories "very low" to "very high" were created by grouping the items according to their return rate in the training set. This created a strong feature in terms of WOE.}}{9}{figure.3}}
-\newlabel{Figure::ItemRetrateWOE}{{3}{9}{Weight of Evidence (WOE) of the feature "item\_retrate". Categories "very low" to "very high" were created by grouping the items according to their return rate in the training set. This created a strong feature in terms of WOE}{figure.3}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}item\_type}{9}{subsection.3.3}}
-\@writefile{toc}{\contentsline {section}{\numberline {4}Preparation of Data Set for Models}{9}{section.4}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Decomposition due to uncertain categories}{9}{subsection.4.1}}
-\newlabel{Subsec::4Split}{{4.1}{9}{Decomposition due to uncertain categories}{subsection.4.1}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Display of the artificially created feature item\_type. red shading: average return rate of orders in this categories in training set. blue histogram: number of orders of each category.}}{10}{figure.4}}
-\newlabel{Figure::ItemType}{{4}{10}{Display of the artificially created feature item\_type. red shading: average return rate of orders in this categories in training set. blue histogram: number of orders of each category}{figure.4}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Decomposition of data set due to uncertain categories. u/n stands for "unknown" and "new" categories (= uncertain categories), 1 for certain categories. Categories "unknown" and "new" in item\_retrate and user\_retrate are uncertain and should not be included in models. Decomposition in pure subsets ensures that model only is fed with certain categories.}}{10}{table.6}}
-\newlabel{Figure::Decomposition}{{6}{10}{Decomposition of data set due to uncertain categories. u/n stands for "unknown" and "new" categories (= uncertain categories), 1 for certain categories. Categories "unknown" and "new" in item\_retrate and user\_retrate are uncertain and should not be included in models. Decomposition in pure subsets ensures that model only is fed with certain categories}{table.6}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}On multiple $\tau $ thresholds}{11}{subsection.4.2}}
-\newlabel{Subsec::Tau}{{4.2}{11}{On multiple $\tau $ thresholds}{subsection.4.2}{}}
-\newlabel{boobies}{{1}{11}{On multiple $\tau $ thresholds}{equation.4.1}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces Definition of tau categories. Every order is sorted to an tau category, depending on the price of the item that got ordered.}}{11}{table.7}}
-\newlabel{Table::Tau}{{7}{11}{Definition of tau categories. Every order is sorted to an tau category, depending on the price of the item that got ordered}{table.7}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5}Cross Validation}{12}{section.5}}
-\citation{A BIAS CORRECTION FOR THE MINIMUM ERROR RATE IN CROSS-VALIDATION By Ryan J. Tibshirani1 and Robert Tibshirani2 Stanford University and Stanford University}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}N-repeated stratified K-fold C.V.}{13}{subsection.5.1}}
-\@writefile{toc}{\contentsline {section}{\numberline {6}Cross Validation}{14}{section.6}}
-\@writefile{toc}{\contentsline {section}{\numberline {7}Classification Alogrithms}{17}{section.7}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Extreme Gradient Boosting}{17}{subsection.7.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}item\_type}{8}{subsection.3.3}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces (a) Display of the artificially created feature \texttt  {item\_retrate}. red shading: average return rate of observations of this category with comparison to average return rate of all items in training set (red line, avg.returnrate = 0.48174). blue histogram: number of observations in each category. (b) Distribution of variable \texttt  {item\_retrate} in train and test set. In both data sets the newly created variable follows a similar distribution.}}{9}{figure.1}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {}}}{9}{figure.1}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {}}}{9}{figure.1}}
+\newlabel{Figure::ItemRetrate}{{1}{9}{(a) Display of the artificially created feature \texttt {item\_retrate}. red shading: average return rate of observations of this category with comparison to average return rate of all items in training set (red line, avg.returnrate = 0.48174). blue histogram: number of observations in each category. (b) Distribution of variable \texttt {item\_retrate} in train and test set. In both data sets the newly created variable follows a similar distribution}{figure.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Weight of Evidence (WOE) of the feature \texttt  {item\_retrate}. Categories "very low" to "very high" were created by grouping the items according to their return rate in the training set. This created a strong feature in terms of WOE.}}{9}{figure.2}}
+\newlabel{Figure::ItemRetrateWOE}{{2}{9}{Weight of Evidence (WOE) of the feature \texttt {item\_retrate}. Categories "very low" to "very high" were created by grouping the items according to their return rate in the training set. This created a strong feature in terms of WOE}{figure.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Display of the artificially created feature \texttt  {item\_type}. red shading: average return rate of orders in this categories in training set. blue histogram: number of orders of each category.}}{10}{figure.3}}
+\newlabel{Figure::ItemType}{{3}{10}{Display of the artificially created feature \texttt {item\_type}. red shading: average return rate of orders in this categories in training set. blue histogram: number of orders of each category}{figure.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Preparation of Data Set for Models}{11}{section.4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Decomposition due to uncertain categories}{11}{subsection.4.1}}
+\newlabel{Subsec::4Split}{{4.1}{11}{Decomposition due to uncertain categories}{subsection.4.1}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Decomposition of data set due to uncertain categories. u/n stands for "unknown" and "new" categories (= uncertain categories), 1 for certain categories. Categories "unknown" and "new" in item\_retrate and user\_retrate are uncertain and should not be included in models. Decomposition in pure subsets ensures that model only is fed with certain categories.}}{12}{table.6}}
+\newlabel{Figure::Decomposition}{{6}{12}{Decomposition of data set due to uncertain categories. u/n stands for "unknown" and "new" categories (= uncertain categories), 1 for certain categories. Categories "unknown" and "new" in item\_retrate and user\_retrate are uncertain and should not be included in models. Decomposition in pure subsets ensures that model only is fed with certain categories}{table.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}On multiple $\tau $ thresholds}{12}{subsection.4.2}}
+\newlabel{Subsec::Tau}{{4.2}{12}{On multiple $\tau $ thresholds}{subsection.4.2}{}}
+\newlabel{boobies}{{1}{12}{On multiple $\tau $ thresholds}{equation.4.1}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces Definition of tau categories. Every order is sorted to an tau category, depending on the price of the item that got ordered.}}{13}{table.7}}
+\newlabel{Table::Tau}{{7}{13}{Definition of tau categories. Every order is sorted to an tau category, depending on the price of the item that got ordered}{table.7}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Cross Validation - Theory}{13}{section.5}}
+\citation{tibshirani2009}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}N-repeated stratified K-fold C.V.}{14}{subsection.5.1}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Cross Validation - Implementation}{15}{section.6}}
+\@writefile{toc}{\contentsline {section}{\numberline {7}Classification Alogrithms}{18}{section.7}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Extreme Gradient Boosting}{18}{subsection.7.1}}
 \citation{breiman2001random}
-\@writefile{toc}{\contentsline {section}{\numberline {8}Random Forest}{18}{section.8}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}Random Forest}{19}{subsection.7.2}}
 \citation{lecun2015}
-\@writefile{toc}{\contentsline {section}{\numberline {9}Neural Network}{20}{section.9}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.3}Neural Network}{21}{subsection.7.3}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces An example of a neural network structure map. In this particular case there are three input variables, two hidden layers consisting of four and three neurons respectively and two output variables. Note that in the \textit  {nnet} R-package there is only one hidden layer. Source: \cite  {lecun2015}}}{22}{figure.4}}
+\newlabel{Figure::Nnet_1}{{4}{22}{An example of a neural network structure map. In this particular case there are three input variables, two hidden layers consisting of four and three neurons respectively and two output variables. Note that in the \textit {nnet} R-package there is only one hidden layer. Source: \cite {lecun2015}}{figure.4}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.3.1}Backpropagation}{22}{subsubsection.7.3.1}}
 \citation{lecun2015}
-\citation{lecun2015}
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces An example of a neural network structure map. In this particular case there are three input variables, two hidden layers consisting of four and three neurons respectively and two output variables. Note that in the \textit  {nnet} R-package there is only one hidden layer. Source: \cite  {lecun2015}}}{21}{figure.5}}
-\newlabel{Figure::Nnet_1}{{5}{21}{An example of a neural network structure map. In this particular case there are three input variables, two hidden layers consisting of four and three neurons respectively and two output variables. Note that in the \textit {nnet} R-package there is only one hidden layer. Source: \cite {lecun2015}}{figure.5}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {9.1}Backpropagation}{21}{subsection.9.1}}
 \citation{lecun2015}
 \citation{moeyersoms2015}
 \citation{moeyersoms2015}
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Diagram on how the backpropagation procedure is carried out. Starting from the error $y_{l}-t_{l}$, the chain rule of derivatives is used to explicit a variation in the error as function of variations in the input variables. Note that the error is taken as the differentiation of a loss function: in this case $\frac  {1}{2} (y_{l}-t_{l})^{2}$. Source: \cite  {lecun2015}}}{22}{figure.6}}
-\newlabel{Figure::Nnet_2}{{6}{22}{Diagram on how the backpropagation procedure is carried out. Starting from the error $y_{l}-t_{l}$, the chain rule of derivatives is used to explicit a variation in the error as function of variations in the input variables. Note that the error is taken as the differentiation of a loss function: in this case $\frac {1}{2} (y_{l}-t_{l})^{2}$. Source: \cite {lecun2015}}{figure.6}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {9.2}Remarks on Neural Network}{22}{subsection.9.2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {9.3}Additional Data Preparation}{22}{subsection.9.3}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {9.4}Parameter Tuning}{23}{subsection.9.4}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {9.4.1}Parameters of Neural Network}{23}{subsubsection.9.4.1}}
-\newlabel{Subsec::ParsNNet}{{9.4.1}{23}{Parameters of Neural Network}{subsubsection.9.4.1}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Tuning graph for the six different subsets (according to tau categories). For every subset 35 different models were trained and the loss of each prediction calculated. The settings change as follows: size = 3, 5, ... , 15 then dacay = 0.01, 0.1, 0.5, 0.8, 1.0. Stable loss values for bigger decays, size does not have much influence for high decay values.}}{24}{figure.7}}
-\newlabel{Figure::ParameterGraph}{{7}{24}{Tuning graph for the six different subsets (according to tau categories). For every subset 35 different models were trained and the loss of each prediction calculated. The settings change as follows: size = 3, 5, ... , 15 then dacay = 0.01, 0.1, 0.5, 0.8, 1.0. Stable loss values for bigger decays, size does not have much influence for high decay values}{figure.7}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {9.4.2}optimal $\tau $ for loss function}{24}{subsubsection.9.4.2}}
-\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Sum of normed tuning graphs of the six subsets from graph \ref  {Figure::ParameterGraph}. Loss is the highest for bigger decay values. Size only has little influence on loss values for high decay values.}}{25}{figure.8}}
-\newlabel{Figure::NormedSum}{{8}{25}{Sum of normed tuning graphs of the six subsets from graph \ref {Figure::ParameterGraph}. Loss is the highest for bigger decay values. Size only has little influence on loss values for high decay values}{figure.8}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Loss function for the six tau-categories. In each category the loss is calculated for each tau-candidate. The negative loss shows its maximum in the range between $\tau =0.45$ and $\tau = 0.65$.}}{25}{figure.9}}
-\newlabel{Figure::FindTau}{{9}{25}{Loss function for the six tau-categories. In each category the loss is calculated for each tau-candidate. The negative loss shows its maximum in the range between $\tau =0.45$ and $\tau = 0.65$}{figure.9}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Diagram on how the backpropagation procedure is carried out. Starting from the error $y_{l}-t_{l}$, the chain rule of derivatives is used to explicit a variation in the error as function of variations in the input variables. Note that the error is taken as the differentiation of a loss function: in this case $\frac  {1}{2} (y_{l}-t_{l})^{2}$. Source: \cite  {lecun2015}}}{23}{figure.5}}
+\newlabel{Figure::Nnet_2}{{5}{23}{Diagram on how the backpropagation procedure is carried out. Starting from the error $y_{l}-t_{l}$, the chain rule of derivatives is used to explicit a variation in the error as function of variations in the input variables. Note that the error is taken as the differentiation of a loss function: in this case $\frac {1}{2} (y_{l}-t_{l})^{2}$. Source: \cite {lecun2015}}{figure.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.4}Additional Data Preparation}{23}{subsection.7.4}}
+\newlabel{Subsec::AddPrep}{{7.4}{23}{Additional Data Preparation}{subsection.7.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.5}Parameter Tuning}{24}{subsection.7.5}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.5.1}Parameters of Neural Network}{24}{subsubsection.7.5.1}}
+\newlabel{Subsec::ParsNNet}{{7.5.1}{24}{Parameters of Neural Network}{subsubsection.7.5.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Tuning graph for the six different subsets (according to tau categories). For every subset 35 different models were trained and the loss of each prediction calculated. The settings change as follows: size = 3, 5, ... , 15 then dacay = 0.01, 0.1, 0.5, 0.8, 1.0. Stable loss values for bigger decays, size does not have much influence for high decay values.}}{25}{figure.6}}
+\newlabel{Figure::ParameterGraph}{{6}{25}{Tuning graph for the six different subsets (according to tau categories). For every subset 35 different models were trained and the loss of each prediction calculated. The settings change as follows: size = 3, 5, ... , 15 then dacay = 0.01, 0.1, 0.5, 0.8, 1.0. Stable loss values for bigger decays, size does not have much influence for high decay values}{figure.6}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.5.2}optimal $\tau $ for loss function}{25}{subsubsection.7.5.2}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Sum of normed tuning graphs of the six subsets from graph \ref  {Figure::ParameterGraph}. Loss is the highest for bigger decay values. Size only has little influence on loss values for high decay values.}}{25}{figure.7}}
+\newlabel{Figure::NormedSum}{{7}{25}{Sum of normed tuning graphs of the six subsets from graph \ref {Figure::ParameterGraph}. Loss is the highest for bigger decay values. Size only has little influence on loss values for high decay values}{figure.7}{}}
 \citation{breiman2001random}
-\@writefile{toc}{\contentsline {subsection}{\numberline {9.5}Comparison with random forest}{26}{subsection.9.5}}
-\@writefile{lot}{\contentsline {table}{\numberline {8}{\ignorespaces Results of cross validation for random forest, m\_tree was excluded as the best value always resulted 2}}{26}{table.8}}
-\newlabel{Table::Moobs}{{8}{26}{Results of cross validation for random forest, m\_tree was excluded as the best value always resulted 2}{table.8}{}}
-\newlabel{my-label}{{9.5}{26}{Comparison with random forest}{table.8}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {9}{\ignorespaces Estimated total loss of random forest and nnet in comparison to trivial predictions. Performed on 25000 observations (25\% of train set.}}{26}{table.9}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Loss function for the six tau-categories. In each category the loss is calculated for each tau-candidate. The negative loss shows its maximum in the range between $\tau =0.45$ and $\tau = 0.65$.}}{26}{figure.8}}
+\newlabel{Figure::FindTau}{{8}{26}{Loss function for the six tau-categories. In each category the loss is calculated for each tau-candidate. The negative loss shows its maximum in the range between $\tau =0.45$ and $\tau = 0.65$}{figure.8}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.6}Comparison with random forest}{26}{subsection.7.6}}
 \citation{yu2006}
-\@writefile{toc}{\contentsline {subsection}{\numberline {9.6}Prediction}{27}{subsection.9.6}}
-\@writefile{toc}{\contentsline {section}{\numberline {10}Conclusion}{27}{section.10}}
-\newlabel{Sec:Conc}{{10}{27}{Conclusion}{section.10}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {8}{\ignorespaces Results of cross validation for random forest, m\_tree was excluded as the best value always resulted 2}}{27}{table.8}}
+\newlabel{Table::Moobs}{{8}{27}{Results of cross validation for random forest, m\_tree was excluded as the best value always resulted 2}{table.8}{}}
+\newlabel{my-label}{{7.6}{27}{Comparison with random forest}{table.8}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {9}{\ignorespaces Estimated total loss of random forest and nnet in comparison to trivial predictions. Performed on 25000 observations (25\% of train set.}}{27}{table.9}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.7}Prediction}{27}{subsection.7.7}}
+\@writefile{toc}{\contentsline {section}{\numberline {8}Conclusion}{28}{section.8}}
+\newlabel{Sec:Conc}{{8}{28}{Conclusion}{section.8}{}}
 \citation{*}
 \bibdata{lit}
 \bibcite{breiman2001random}{{1}{2001}{{Breiman}}{{Breiman}}}
@@ -118,4 +115,5 @@
 \bibcite{lessmann2015}{{5}{2015}{{Lessmann et~al.}}{{Lessmann, Baesens, Seow, and Thomas}}}
 \bibcite{manyika2011}{{6}{2011}{{Manyika et~al.}}{{Manyika, Chui, Brown, Bughin, Dobbs, Roxburgh, and Byers}}}
 \bibcite{moeyersoms2015}{{7}{2015}{{Moeyersoms and Martens}}{{Moeyersoms and Martens}}}
-\bibcite{yu2006}{{8}{2006}{{Yu et~al.}}{{Yu, Lai, Wang, and Huang}}}
+\bibcite{tibshirani2009}{{8}{2009}{{Tibshirani and Tibshirani}}{{Tibshirani and Tibshirani}}}
+\bibcite{yu2006}{{9}{2006}{{Yu et~al.}}{{Yu, Lai, Wang, and Huang}}}

@@ -9,19 +9,18 @@
 \BOOKMARK [1][-]{section.4}{Preparation of Data Set for Models}{}% 9
 \BOOKMARK [2][-]{subsection.4.1}{Decomposition due to uncertain categories}{section.4}% 10
 \BOOKMARK [2][-]{subsection.4.2}{On multiple \040thresholds}{section.4}% 11
-\BOOKMARK [1][-]{section.5}{Cross Validation}{}% 12
+\BOOKMARK [1][-]{section.5}{Cross Validation - Theory}{}% 12
 \BOOKMARK [2][-]{subsection.5.1}{N-repeated stratified K-fold C.V.}{section.5}% 13
-\BOOKMARK [1][-]{section.6}{Cross Validation}{}% 14
+\BOOKMARK [1][-]{section.6}{Cross Validation - Implementation}{}% 14
 \BOOKMARK [1][-]{section.7}{Classification Alogrithms}{}% 15
 \BOOKMARK [2][-]{subsection.7.1}{Extreme Gradient Boosting}{section.7}% 16
-\BOOKMARK [1][-]{section.8}{Random Forest}{}% 17
-\BOOKMARK [1][-]{section.9}{Neural Network}{}% 18
-\BOOKMARK [2][-]{subsection.9.1}{Backpropagation}{section.9}% 19
-\BOOKMARK [2][-]{subsection.9.2}{Remarks on Neural Network}{section.9}% 20
-\BOOKMARK [2][-]{subsection.9.3}{Additional Data Preparation}{section.9}% 21
-\BOOKMARK [2][-]{subsection.9.4}{Parameter Tuning}{section.9}% 22
-\BOOKMARK [3][-]{subsubsection.9.4.1}{Parameters of Neural Network}{subsection.9.4}% 23
-\BOOKMARK [3][-]{subsubsection.9.4.2}{optimal \040for loss function}{subsection.9.4}% 24
-\BOOKMARK [2][-]{subsection.9.5}{Comparison with random forest}{section.9}% 25
-\BOOKMARK [2][-]{subsection.9.6}{Prediction}{section.9}% 26
-\BOOKMARK [1][-]{section.10}{Conclusion}{}% 27
+\BOOKMARK [2][-]{subsection.7.2}{Random Forest}{section.7}% 17
+\BOOKMARK [2][-]{subsection.7.3}{Neural Network}{section.7}% 18
+\BOOKMARK [3][-]{subsubsection.7.3.1}{Backpropagation}{subsection.7.3}% 19
+\BOOKMARK [2][-]{subsection.7.4}{Additional Data Preparation}{section.7}% 20
+\BOOKMARK [2][-]{subsection.7.5}{Parameter Tuning}{section.7}% 21
+\BOOKMARK [3][-]{subsubsection.7.5.1}{Parameters of Neural Network}{subsection.7.5}% 22
+\BOOKMARK [3][-]{subsubsection.7.5.2}{optimal \040for loss function}{subsection.7.5}% 23
+\BOOKMARK [2][-]{subsection.7.6}{Comparison with random forest}{section.7}% 24
+\BOOKMARK [2][-]{subsection.7.7}{Prediction}{section.7}% 25
+\BOOKMARK [1][-]{section.8}{Conclusion}{}% 26
