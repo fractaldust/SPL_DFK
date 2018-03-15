@@ -1,10 +1,10 @@
 # plot tuning performance
 library(ggplot2)
 library(gridExtra)
-load(file = "./data/cv_lists-rf-tuning-01.RData")
+load(file = "./data/cv_lists-rf-tuning.RData")
 parameters <- expand.grid("ntree" = c(200, 300, 400, 500, 600, 700),
                           "mtry"  = c(2, 3, 4, 5))
-cv.list <- cv.list.iu
+cv.list <- cv.list.u
 source(file = "evaluatecvlist.R")
 
 x = 1:length(tau[[1]]$loss$mean)

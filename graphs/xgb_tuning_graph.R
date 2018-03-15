@@ -9,7 +9,7 @@ parameters <- expand.grid("nrounds" = c(50, 100, 150),
                           "gamma" = 0,
                           "colsample_bytree" = 0.8, 
                           "min_child_weight" = 1)
-cv.list <- cv.list.iu
+cv.list <- cv.list.u
 source(file = "evaluatecvlist.R")
 
 x = 1:length(tau[[1]]$loss$mean)
@@ -62,9 +62,9 @@ plot
 dev.off()
 
 # loss
-su <- (df[,3]*(-1))/max(df[,3]*(-1))
+su <- (df[,1]*(-1))/max(df[,1]*(-1))
 for (i in 2:6){
-  i  <- (i*6)-3
+  i  <- (i*2)-1
   print(i)
   su <- su + (df[,i]*(-1))/max(df[,i]*(-1))
 }
