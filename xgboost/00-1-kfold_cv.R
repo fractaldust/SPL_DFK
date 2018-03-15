@@ -64,8 +64,6 @@ for (n in 1:nrow(parameters)){
   results.par <- cbind(vec.1, vec)
 }
 
-
-
 # combine cross validations
 # measure <- helper.evaluate(results.par, tau_candidates)
 

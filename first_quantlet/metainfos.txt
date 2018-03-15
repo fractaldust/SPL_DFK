@@ -116,7 +116,7 @@ Output : graphs as pdf
 
 
 
-Name of QuantLet : Data_Decomposition
+Name of QuantLet : Decompose_Dataset
 
 Published in : Statistical programming languages - Student Project on ''Ecommerce'' 
 

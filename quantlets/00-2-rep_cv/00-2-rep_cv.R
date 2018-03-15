@@ -1,7 +1,7 @@
 #----------------------------------------------------------------------------------
 #  performs m times repeated cross validation (that is k-fold itself)
 #----------------------------------------------------------------------------------
-# input   : known (=train) and unknown (=test) dataset
+# input   : known (=train) data set
 # output  : cv.list stores measure (loss)
 #----------------------------------------------------------------------------------
 tau_c   = list()
@@ -9,11 +9,10 @@ cv.list = list()
 
 for (t in 1:m){
     set.seed(1234*t)
-    # Splitting the data into a test and a training set 
-    idx.train = caret::createDataPartition(y = known$return, p = 0.8, list = FALSE)
-    # Actual data splitting
-    tr = known[idx.train,  ] # training set
-    ts = known[-idx.train, ] # test set
+    # randomize rows of data set
+    sample.idx = sample(nrow(known))
+    tr  = known[sample.idx,] # randomised tr.v (same rows but random order)
+    rm(sample.idx)
     for (v in 1:6){
         # call script for each tau-class
         tr.v = tr[tr$tau == v, ]

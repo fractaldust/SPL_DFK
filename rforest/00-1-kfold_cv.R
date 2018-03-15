@@ -45,16 +45,11 @@ timing.par <- system.time(
                                  ntree = parameters$ntree[n], mtry = parameters$mtry[n])
               yhat.val <- predict(rf, newdata = cv.val, type = "prob")[,2]
               
-              auc  <- auc(cv.val$return, as.vector(yhat.val))[[1]]
               loss <- helper.loss(tau_candidates = tau_candidates, 
                                   truevals       = cv.val$return, 
                                   predictedvals  = yhat.val, 
                                   itemprice      = real_price$item_price[cv.val$order_item_id])
-              sse  <- helper.sse(truevals        = cv.val$return, 
-                                 predictedvals   = yhat.val)
               res  <- list("loss"        = max(loss), 
-                           "auc"         = auc,
-                           "sse"         = min(sse), 
                            "parameters"  = data.table("ntree" = parameters$ntree[n],
                                                       "mtry"  = parameters$mtry[n]))
               res
