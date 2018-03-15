@@ -1,0 +1,15 @@
+Name of QuantLet : item_retrate_graph
+
+Published in : Statistical programming languages - Student Project on ''Ecommerce'' 
+
+Description : Plots to evaluate artificially created feature item_retrate. 1st plot - Distribution of item_retrate in known data set together with the return probability of each category ’very low’ to ’very high’ and ’unknown’. 2nd plot - Distribution of item_retrate in known data set comparte to dist. in unknown data set. 
+
+Keywords : plot, histogram, graph
+
+Author : Damiano Ferrari [New], Franziska Wehrmann [New], Konstantin Haeusler [New]
+
+Datafile : known-unknown-data.RData
+
+Input : 
+
+Output : graphs as pdf
