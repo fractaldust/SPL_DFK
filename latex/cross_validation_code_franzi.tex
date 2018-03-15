@@ -34,8 +34,8 @@
 \section{Cross Validation}
 
 
-Script \texttt{00-1-kfold.R} performs k-fold cross validations for n variations of settings for a neural network. In order to perform a k-fold cross validation, the dataset is randomly split into k subsets folds(line 5). For every run i of the k-fold cross validation subset \texttt{folds==i} is left out for prediction, which means that the model is trained on the subset without \texttt{folds==i} and the prediction is performed on subset \texttt{fold==i}. This split is performed in lines 17-22, followed by training the model (line 24) and prediction (line 29). Note that the second @@@@laufindex n indicates the settings for the neural network (line 27+28). This index n is changed by the outer foreach-loop (line 11). \\
-To evaluate the performance of the model, the loss \ref{@@@} is used as a measure (line 30). \\
+Script \texttt{00-1-kfold.R} performs k-fold cross validations for n variations of settings for a neural network. In order to perform a k-fold cross validation, the dataset is randomly split into k subsets folds(line 5). For every run i of the k-fold cross validation subset \texttt{folds==i} is left out for prediction, which means that the model is trained on the subset without \texttt{folds==i} and the prediction is performed on subset \texttt{fold==i}. This split is performed in lines 17-22, followed by training the model (line 24) and prediction (line 29). Note that the second running index \texttt{n} indicates the settings for the neural network (line 27+28). This index n is changed by the outer foreach-loop (line 11). \\
+To evaluate the performance of the model, the loss-matrix (see table \ref{@@@Table::Loss}) is used as a measure (line 30). \\
 \\
 In order to decrease run time, the script uses the package \texttt{"doParallel"} for parallel computing. Lines 7-9 define the settings for parallel computing. In line 14 the nesting operator \texttt{\%dopar\%} starts parallel computing, so that different runs of the foreach-loop can be performed by a different cores at the same time.\\ 
 The output of the k-fold cross validation is a k*n matrix (k: k-fold cross validation, n: number of variations of settings for model), where every element consists of a list  of the measure and the settings of the model (line 36). \\
@@ -84,22 +84,20 @@ stopCluster(cl) # stop parallel computing
 \end{lstlisting}
 
 \\
-Since the performance of the model also depends on the "quality" of the training data and the training data is determined randomly, it is crucial to change the randomness of the splits. By varying the seed \texttt{set.seed(1234*t)} in the mother script  \texttt{00-2-rep\_cv.R} , the randomness of the training set tr is changed (line 11-16). \\ 
-Further this script \texttt{00-2-rep\_cv.R} splits the dataset according to the six tau-categories \ref{@@@}. The k-fold cross validation from the previous section is then performed for every of these subsets. The results for each tau-category \texttt{v} are then stored in a list \texttt{tau\_c} (line 22). \\
+Since the performance of the model also depends on the "quality" of the training data and the training data is determined randomly, it is crucial to change the randomness of the splits. By varying the seed \texttt{set.seed(1234*t)} in the mother script  \texttt{00-2-rep\_cv.R} , the randomness of the training set tr is changed (line 5-8). \\ 
+Further this script \texttt{00-2-rep\_cv.R} splits the dataset according to the six tau-categories (see section \ref{@@@Subsec::Tau}). The k-fold cross validation from the previous section is then performed for every of these subsets. The results for each tau-category \texttt{v} are then stored in a list \texttt{tau\_c} (line 16). \\
 The output of the m-times repeated cross validation is a list of m times the same cross validation procedure (only with different randomness). Each element of the m-sized list is a list of the k*n matrix for the six tau-categories v.\\
-(m : number of repeated cross validations (same procedure but different randomness), v : six tau-categories, k : k-fold cross validation, n : number of variations of settings for model)\\
+(m : number of repeated cross validations (same procedure but different randomness), v : six tau-categories, k : k-fold cross validation, n : number of variations of settings for model)
 
-\begin{lstlisting}
+\begin{lstlisting}[language=r]
 tau_c   = list()
 cv.list = list()
 
 for (t in 1:m){
     set.seed(1234*t)
-    # Splitting the data into a test and a training set 
-    idx.train = caret::createDataPartition(y = known$return, p = 0.8, list = FALSE)
-    # Actual data splitting
-    tr = known[idx.train,  ] # training set
-    ts = known[-idx.train, ] # test set
+    # randomize rows of dataset
+    sample.idx = sample(nrow(known))
+    tr  = known[sample.idx,] # randomised tr.v (same rows but random order)
     for (v in 1:6){
         # call script for each tau-class
         tr.v = tr[tr$tau == v, ]
@@ -109,28 +107,28 @@ for (t in 1:m){
   }
   cv.list[[t]] = tau_c
 }
+
 \end{lstlisting}
 
 
 
-Section \ref{@@@} explains the importance of decomposing our dataset into four subsets according to the "quality" @@@aussagekraft of the features for training. In script \texttt{01-par-tuning.R} the whole tuning-process is performed for the different subsets. The following explains the preparation of the .u subset exemplarily.\\
-The known dataset consists of the subsets where a full model can be trained (.f) and the subset where the model without \texttt{user\_retrate} can be trained (\texttt{.u}). These two subsets are combined to the known data set (line 51). For training a neural network additional data preparation as described in section \ref{@@@} is necessary (line 54). Then the columns of the feature \textttt{user\_retrate} get removed and the set is named according to the requirements of the script for cross validation (lines 55-59). \\
-After performing the m times repeated k-fold cross validation for the n variations of settings for the model, the results are stored in a the list \texttt{cv.list.u} for further evaluation (line 71).
+Section \ref{@@@Section::DecomposeDataset} explains the importance of decomposing our dataset into four subsets according to the validity of the features for training. In script \texttt{01-par-tuning.R} the whole tuning-process is performed for the different subsets. The following explains the preparation of the .u subset exemplarily.\\
+The known dataset consists of the subsets where a full model can be trained (.f) and the subset where the model without \texttt{user\_retrate} can be trained (\texttt{.u}). These two subsets are combined to the known data set (line 1). For training a neural network additional data preparation as described in section \ref{@@@Subsec::AdditionalDataPrepForNNet} is necessary (line 3). Then the columns of the feature \textttt{user\_retrate} get removed and the set is named according to the requirements of the script for cross validation (lines 7+8). \\
+After performing the m times repeated k-fold cross validation for the n variations of settings for the model, the results are stored in a the list \texttt{cv.list.u} for further evaluation (line 12).
 
 \begin{lstlisting}[language=r]
-known   = rbind(known.f, known.u) # can also use .f for training, variables are pure
-unknown = unknown.u               #
+known   = rbind(known.f, known.u) # can also use .f for training
 # additional data preparation for nnet
 source(file = "./nnet/00-3-nnet_DataPrep.R")
-known.n$user_retrate   = NULL     # remove user_retrate (uncertain categories)
+known.n$user_retrate   = NULL     # remove user_retrate
 unknown.n$user_retrate = NULL     #
                                   #
-known   = known.n                 # output of additional data preparation
+known   = known.n                 # rename for c.v.
 unknown = unknown.n               #
 
 # perform repeatet cross validation
 source(file = "./nnet/00-2-rep_cv.R")
-cv.list.u   = cv.list             # store result of repeated cross validation
+cv.list.u   = cv.list             # store result c.v. for .u
 
 \end{lstlisting}
 
