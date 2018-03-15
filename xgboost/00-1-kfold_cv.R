@@ -52,16 +52,11 @@ for (n in 1:nrow(parameters)){
     yhat <- predict(xgb, newdata = cv.val)
     yhat.val <- yhat[2]$data$prob.1
     
-    auc  <- auc(cv.val$return, as.vector(yhat.val))[[1]]
     loss <- helper.loss(tau_candidates = tau_candidates, 
                         truevals       = cv.val$return, 
                         predictedvals  = yhat.val, 
                         itemprice      = real_price$item_price[cv.val$order_item_id])
-    sse  <- helper.sse(truevals        = cv.val$return, 
-                       predictedvals   = yhat.val)
     res  <- list("loss"        = max(loss), 
-                 "auc"         = auc,
-                 "sse"         = min(sse), 
                  "parameters"  = parameters[n,])
     res
     vec[[i]] <- res

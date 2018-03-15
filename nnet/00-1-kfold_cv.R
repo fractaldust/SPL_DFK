@@ -26,7 +26,6 @@ results.par = foreach(n = 1:nrow(parameters), .combine = cbind,
     # loop for cross validation
     foreach(i = 1:k, 
             .packages = c("caret","nnet", "data.table")) %dopar%{
-        #gc() 
         set.seed(1234) # set seed for reproducibility 
         # Split data into training and validation
         idx.val  = which(folds == i, arr.ind = TRUE)
@@ -34,20 +33,23 @@ results.par = foreach(n = 1:nrow(parameters), .combine = cbind,
         cv.train = cv.train[order(cv.train$order_item_id),]
         cv.val   = train.rnd[idx.val,]
         cv.val   = cv.val[order(cv.val$order_item_id),]
+        price    = real_price$item_price[cv.val$order_item_id]
         # train nnet and make prediction
-        neunet   = nnet(return~. -order_item_id - tau, data = cv.train,
+        nnet     = nnet(return~. -order_item_id - tau, 
+                        data  = cv.train,
                         trace = FALSE, maxit = 1000,
-                        size = parameters$size[n], decay = parameters$decay[n])
-        yhat.val = predict(neunet, newdata = cv.val, type = "raw")
-
+                        size  = parameters$size[n], 
+                        decay = parameters$decay[n])
+        yhat.val = predict(nnet, newdata = cv.val, type = "raw")
         loss     = helper.loss(tau_candidates = tau_candidates, 
                                truevals       = cv.val$return, 
                                predictedvals  = yhat.val, 
-                               itemprice      = real_price$item_price[cv.val$order_item_id])
-        res  = list("loss"       = max(loss), 
-                    "parameters" = data.table("size"  = parameters$size[n],
-                                              "decay" = parameters$decay[n]))
-        }
+                               itemprice      = price)
+        pars     = data.table("size"  = parameters$size[n],
+                              "decay" = parameters$decay[n])
+        res      = list("loss"        = max(loss), 
+                        "parameters"  = pars)              
+            }
 
 # stop parallel computing
 stopCluster(cl)
