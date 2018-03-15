@@ -78,3 +78,4 @@ plot = ggplot(su2, aes(x=x, y=su2)) + geom_point() + caption + theme_bw()
 plot
 
 parameters[which.max(su2[[1]]),]  # best settings for random forest
+df[which.max(su2[[1]]),]          # results for best settings

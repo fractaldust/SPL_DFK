@@ -85,3 +85,4 @@ plot
 dev.off()
 
 parameters[which.max(su2[[1]]),]  # best settings for nnet
+df[which.max(su2[[1]]),]          # results for best settings

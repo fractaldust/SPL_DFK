@@ -73,7 +73,7 @@ su2 <- data.frame(su2)
 caption  <- labs(x = "parameter index", 
                  y = "normed loss")
 plot <- ggplot(su2, aes(x=x, y=su2)) + geom_point() + caption + theme_bw()
-plot 
+plot
 
 width <- 1
 hight <- 1/2
@@ -84,3 +84,4 @@ plot
 dev.off()
 
 parameters[which.max(su2[[1]]),]
+df[which.max(su2[[1]]),]
