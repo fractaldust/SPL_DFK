@@ -1,4 +1,3 @@
-# setwd("~/Documents/Projects/OneMoment/bads-ws1718-group07/submission")
 #----------------------------------------------------------------------------------
 # Data Cleaning
 #----------------------------------------------------------------------------------
@@ -169,7 +168,6 @@ item$item_retrate_c = factor(item$item_retrate_c,
 item.final = item[, list("item_id"         = item_id,
                          "item_retrate"    = as.factor(item_retrate_c),
                          "item_avg.price" = item_avg.price, 
-                        #"item_nr.obs"     = item_nr.obs, 
                          "item_type"       = as.factor(type)
 )]
 item.final = unique(item.final)
@@ -256,8 +254,4 @@ joint$tau = split(joint$tau,
 
 rm(c, tag, double)
 
-#----------------------------------------------------------------------------------
-# write file of complete data set
-#----------------------------------------------------------------------------------
-#write.csv(joint, file="./data/joint.csv")
 

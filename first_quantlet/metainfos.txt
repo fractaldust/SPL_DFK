@@ -1,0 +1,154 @@
+Name of QuantLet : SPL_ecommerce_datacleaning
+
+Published in : Statistical programming languages - Student Project on ''Ecommerce'' 
+
+Description : Prepares the data of an online retailer to be used in models such as neural network and
+random forest, consists of data cleaning and feature engineering
+
+Keywords : data, cleaning, preprocessing, feature, engineering, table, preparation
+
+Author : Damiano Ferrari [New], Franziska Wehrmann [New], Konstantin Haeusler [New]
+
+Datafile : BADS_WS1718_class.csv, BADS_WS1718_known.csv
+
+Input : Raw data frame with many variables, missing values, transcription errors.
+
+Output : Data table ready for model application
+
+
+
+Name of QuantLet : 00-1-kfold_cv
+
+Published in : Statistical programming languages - Student Project on ''Ecommerce'' 
+
+Description : Performs n different k-fold cross validations, where n is the amount of different variations of settings for the neural network. Uses parallel computing to decrease runtime. Calculates loss as a measure of performance of neural network. In order to find best settings of neural network.
+
+Keywords : cross validation, tuning, neural network, parallel computing, 
+
+Author : Damiano Ferrari [New], Franziska Wehrmann [New], Konstantin Haeusler [New]
+
+Datafile : 
+
+Input : tr.v : data.table, subset with tau-category=v
+        k    : numeric, dimension of cross validation
+        parameters: list, variations of different parameters for neural network
+
+Output : results.par : n*k matrix, where every element is a list of results of the performance of the model
+
+
+
+
+Name of QuantLet : 00-2-rep_cv.R
+
+Published in : Statistical programming languages - Student Project on ''Ecommerce'' 
+
+Description : Splits data set into subsets according to their tau-categories. Then performs m times repeated cross validation (that is k-fold itself). Uses function set.seed to change randomness. 
+
+Keywords : cross validation
+
+Author : Damiano Ferrari [New], Franziska Wehrmann [New], Konstantin Haeusler [New]
+
+Datafile : 00-1-kfold_cv.R
+
+Input : known : data.table, data set for training
+
+Output : cv.list : results of m times repeated, k-fold cross validation for n different sets of parameters for neural network
+
+
+
+
+Name of QuantLet : 01-par_tuning
+
+Published in : Statistical programming languages - Student Project on ''Ecommerce'' 
+
+Description : runs m repeated (different seed) k-fold cross validations for different tuning parameters, does this procedure for the four decomposed subsets
+
+Keywords : cross validation, tuning, neural network
+
+Author : Damiano Ferrari [New], Franziska Wehrmann [New], Konstantin Haeusler [New]
+
+Datafile : known-unknown-data.RData, Decompose_Dataset.R, helperfunctions.R, 00-2-rep_cv.R, 00-3-nnet_DataPrep.R, 
+
+Input : m              : m-times repeated c.v. (different randomness)
+        k              : k-fold c.v.
+        parameters     : parameters for tuning
+        tau_candidates : thresholds to transform prediction (probability to 0/1), used to calculate loss function
+
+Output : cv.list.f, cv.list.i, cv.list.iu, cv.list.u : lists, results of m times repeated, k-fold cross validation for n different sets of parameters for neural network for decomposed subsets .f, .i, .iu, .u
+
+
+
+
+Name of QuantLet : nnet_tuning_graph
+
+Published in : Statistical programming languages - Student Project on ''Ecommerce'' 
+
+Description : Plots the results of parameter tuning for neural network. 1st plot: 3*2=6 subplots for the six tau-categories, 2nd plot: combined results (in terms of tau-categories) to evaluate performance of neural network. Optimal/tuned settings are when loss is minimal (maximum of negative loss). 
+
+Keywords : graph, plot, evaluation
+
+Author : Damiano Ferrari [New], Franziska Wehrmann [New], Konstantin Haeusler [New]
+
+Datafile : cv_list-nnet-tuning.RData
+
+Input : cv.list : list, results of m times repeated, k-fold cross validation for n different sets of parameters for neural network
+
+Output : graphs as pdf
+
+
+
+
+Name of QuantLet : item_retrate_graph
+
+Published in : Statistical programming languages - Student Project on ''Ecommerce'' 
+
+Description : Plots to evaluate artificially created feature item_retrate. 1st plot: Distribution of item_retrate in known data set together with the return probability of each category ’very low’ to ’very high’ and ’unknown’. 2nd plot: Distribution of item_retrate in known data set comparte to dist. in unknown data set. 
+
+Keywords : plot, histogram, graph
+
+Author : Damiano Ferrari [New], Franziska Wehrmann [New], Konstantin Haeusler [New]
+
+Datafile : known-unknown-data.RData
+
+Input : 
+
+Output : graphs as pdf
+
+
+
+Name of QuantLet : Data_Decomposition
+
+Published in : Statistical programming languages - Student Project on ''Ecommerce'' 
+
+Description : Decomposes data set according to the quality of the features item_retrate and user_retrate for the models. Since the dirty levels 'unknown' and 'new' carry different information than the pure categories 'very low' to 'very high', they should not be treated equally by the model. Therefore the data set is decomposed according to the dirty/pure levels. When in the subset only remain dirty levels of one feature, the column of the feature is deleted. 
+
+Keywords : data cleaning, decomposition
+
+Author : Damiano Ferrari [New], Franziska Wehrmann [New], Konstantin Haeusler [New]
+
+Datafile : 
+
+Input : known   : data set for training
+        unknown : data set for prediction
+
+Output : known.f, known.i, known.iu, known.u, unknown.f, unknown.i, unknown.iu, unknown.u : clean subsets where .f: full model, .i: model without item_retrate, .iu: model without item_retrate and user_retrate, .u: model without user_retrate
+
+
+
+
+
+Name of QuantLet : 
+
+Published in : Statistical programming languages - Student Project on ''Ecommerce'' 
+
+Description : 
+
+Keywords : 
+
+Author : Damiano Ferrari [New], Franziska Wehrmann [New], Konstantin Haeusler [New]
+
+Datafile : 
+
+Input : 
+
+Output : 
