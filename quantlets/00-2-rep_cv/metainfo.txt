@@ -1,4 +1,4 @@
-Name of QuantLet : 00-2-rep_cv.R
+Name of QuantLet : 00-2-rep_cv
 
 Published in : Statistical programming languages - Student Project on ''Ecommerce'' 
 
