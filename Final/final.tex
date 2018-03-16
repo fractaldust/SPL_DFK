@@ -353,11 +353,11 @@ When creating the variables \texttt{item\_retrate} and \texttt{user\_retrate} (s
 # .u       : model without user_retrate
 # remove   : "unknown" and "new" of "item_retrate"
 # model    : item_retrate is clean now, can be used for model
-train.u    <- train[item_retrate!="unknown" & user_retrate=="unknown",]
-test.u  <- test[item_retrate!="unknown" & item_retrate!="new",]
-test.u  <- test.u[user_retrate=="unknown" | user_retrate=="new",]
+known.u    <- known[item_retrate!="unknown" & user_retrate=="unknown",]
+unknown.u  <- unknown[item_retrate!="unknown" & item_retrate!="new",]
+unknown.u  <- unknown.u[user_retrate=="unknown" | user_retrate=="new",]
 \end{lstlisting}
-Therefore the model is trained on this subset without the feature \texttt{user\_retrate} and accordingly predicts the \texttt{test.u} subset. Actually for training the model not only the \texttt{train.u} subset can be used, but also the \texttt{train.f} subset, since it is only important that the remaining columns are pure.\\
+Therefore the model is trained on this subset without the feature \texttt{user\_retrate} and accordingly predicts the \texttt{unknown.u} subset. Actually for training the model not only the \texttt{known.u} subset can be used, but also the \texttt{known.f} subset, since it is only important that the remaining columns are pure.\\
 \begin{center}
 \begin{figure}[h]
 \begin{tabular}{|c | c| c || r | r|}
