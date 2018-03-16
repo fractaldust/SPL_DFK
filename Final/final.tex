@@ -358,7 +358,7 @@ known.u    <- known[item_retrate!="unknown" & user_retrate=="unknown",]
 unknown.u  <- unknown[item_retrate!="unknown" & item_retrate!="new",]
 unknown.u  <- unknown.u[user_retrate=="unknown" | user_retrate=="new",]
 \end{lstlisting}
-Therefore the model is trained on this subset without the feature \texttt{user\_retrate} and accordingly predicts the \texttt{test.u} subset. Actually for training the model not only the \texttt{known.u} subset can be used, but also the \texttt{known.f} subset, since it is only important that the remaining columns are pure.\\
+Therefore the model is trained on this subset without the feature \texttt{user\_retrate} and accordingly predicts the \texttt{unknown.u} subset. Actually for training the model not only the \texttt{known.u} subset can be used, but also the \texttt{known.f} subset, since it is only important that the remaining columns are pure.\\
 \begin{center}
 \begin{figure}[h]
 \begin{tabular}{|c | c| c || r | r|}
@@ -579,6 +579,8 @@ This sequential procedure stops when no further improvements can be made, e.g. w
 
 %--------------------------------------------------------
 \subsection{Random Forest}
+A random forest is an ensemble of tree classifiers with implemented randomisation procedures.
+Random forest tends to be good out of the box and apt for parallelization.
 
 \begin{definition}
 A tree-structured classifier $h_{\theta_{k} }(\textbf{x})$ is a generalised step function $h_{\theta_{k} }: \textbf{X} \rightarrow F \subset \mathbb{R}$ where $\textbf{X}$ is the data set and $F$ is a finite cardinality set. This function has constant values on a partition of the data set consisting of hyper-rectangles.
@@ -626,6 +628,13 @@ converges almost surely to $\mathbb{P}_{\theta}(\phi(\theta) = t)$. Taking union
 $$ \sum_{k=1}^{K} \frac{I(h(\textbf{x},\theta_{k})= j) }{K} \rightarrow \sum_{t} \mathbb{P}_{\theta}(\phi(\theta) = t)I(x \in S_{t})$$
 The right hand side is $\mathbb{P}_{\theta}(h(\textbf{x}, \theta) = j)$ ✷
 \end{proof}
+
+The model default parameters are (c.f. \cite{breiman2001random})
+\begin{enumerate}
+\item m\_tree:  $(\#features) \cdot \frac{1}{3} $ for regression, $ (\#features)^{1/2}$ for classification
+\item n\_tree:  $500$
+\item nodesize: $1$ (for classification), $5$ (for regression)
+\end{enumerate}
 %----------------------------------------------------------
 
 \subsection{Neural Network}
@@ -663,16 +672,16 @@ Once the weights and structure of the network are determined it is a mere substi
 \end{figure}
 %--------------------------------------------------------
 
-\subsection{Additional Data Preparation}\label{Subsec::AddPrep}
+\subsubsection{Additional Data Preparation}\label{Subsec::AddPrep}
 The performance of neural networks increases, when the data is numerical (instead of categorical). Different techniques can be used to convert a categorical variable to a numerical, but not every technique is suitable for every case.\\
 Since item\_retrate and user\_retrate are based on their connection to the target variable, assigning the Weight of Evidence (WOE) to each category does not aggravate overfitting even more. The WOE is also used for the categories of delivery\_time and price\_comp, but to prevent overfitting, the WOE was calculated on a small subset of the train set, that is not going to be used for training anymore (c.f.\cite{moeyersoms2015}):\\
 If the variable only has few categories, it is beneficial to introduce dummy variables. Instead of having one variable item\_type with four categories, there will be four binary dummy variables that indicate whether the item is of this category. 
 \\
 The advantage of dummy variables is, that they are independent of the target variable but since every category requires a new dummy variable, they should only be used for lower dimensional variables (c.f. \cite{moeyersoms2015}).
 
-\subsection{Parameter Tuning}
+\section{Parameter Tuning}
 
-\subsubsection{Parameters of Neural Network}\label{Subsec::ParsNNet}
+\subsection{Parameters of Neural Network}\label{Subsec::ParsNNet}
 To increase the performance of a model it is vital to use the optimal parameter depending on the input data. Since the data set is decomposed into four subsets, that differ in the composition of predictive variables (see section \ref{Subsec::4Split}), the tuning needs to be performed on every subset separately. In the following the subset test.u (model without the variable user\_retrate) is evaluated exemplarily.\\
 The results of the parameter tuning are shown in Figure \ref{Figure::ParameterGraph}. The data set was divided into six subsets according to their tau-categories (see section \ref{Subsec::Tau}). The tuning parameters are as follows: size of the hidden layer: [3, 5, 7, 9, 11, 13, 15] and decay: [0.01, 0.1, 0.5, 0.8, 1.0].\\
 \begin{center}
@@ -721,39 +730,14 @@ Figure \ref{Figure::FindTau} displays the loss function for the six tau-categori
  \label{Figure::FindTau}
 \end{figure}
 
-\subsection{Comparison with random forest}
-A random forest is an ensemble of trees with implemented randomisation procedures.
-Random forest tends to be good out of the box and apt for parallelization.
+\subsection{Performance Benchmark}
 
-The model default parameters are (c.f. \cite{breiman2001random})
-\begin{enumerate}
-\item m\_tree:  $(\#features) \cdot \frac{1}{3} $ for regression, $ (\#features)^{1/2}$ for classification
-\item n\_tree:  $500$
-\item nodesize: $1$ (for classification), $5$ (for regression)
-\end{enumerate}
-
-For random forest a 10 times repeated 3 fold cross validation with implemented multiple $\tau$ optimisation was carried out.
-
-\begin{center}
-\begin{table}[h]
-\centering
-\begin{tabular}{|l|| c | c | c | c | c | c |}
-\hline
-\textbf{tau category} & 1 & 2 & 3 & 4 & 5 & 6 \\
-\textbf{n\_tree} & 600 & 600 & 600 & 300 & 500 & 600 \\
-\textbf{optimised $\tau$} & 0.52 & 0.55 & 0.58 & 0.65 & 0.62 & 0.65 \\
-\hline
-\end{tabular}
- \caption{Results of cross validation for random forest, m\_tree was excluded as the best value always resulted 2}
- \label{Table::Moobs}
-\end{table}
-\end{center}
-The following table shows how neural network outperformed random forest in this problem for a set of 25000 observations. Double values are expected in the test set, which contains 50000 observations.
+The following table shows how neural network outperformed random forest and xgboost in this problem for a set of 25000 observations. Double values are expected in the test set, which contains 50000 observations.
 
 \begin{table}[h]
 \centering
 \label{my-label}
-\begin{tabular}{|cc|}
+\begin{tabular}{|lc|}
 \hline
 \textbf{Prediction} & \textbf{Estimated total loss} \\
 \hline \hline
@@ -763,10 +747,11 @@ random 01 vector with $mean=0.48$                            &  $- 365703.9  $  
 \hline
 first randomForest ($\tau=0.5$)                                     & $- 321420.5$                \\
 tuned randomForest (optimised multiple $\tau$)          &  $-260608.5$               \\
-tuned nnet (optimised multiple $\tau$)                          & $-238879.0$                   \\
+tuned xgboost (optimised multiple $\tau$)         & $-290419.9$ \\
+tuned nnet (optimised multiple $\tau$)                          & $-239499.7$                   \\
 \hline
 \end{tabular}
-\caption{Estimated total loss of random forest and nnet in comparison to trivial predictions. Performed on 25000 observations (25\% of train set.}
+\caption{Estimated total loss of random forest, xgboost and nnet in comparison to trivial predictions. Performed on 25000 observations (25\% of train set.}
 \end{table}
 
 \subsection{Prediction}
