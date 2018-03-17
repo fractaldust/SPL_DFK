@@ -30,18 +30,12 @@ calc.loss = function(known, tau_c, pars){
                  size = par[1], decay = par[2])
   yhat.val = predict(neunet, newdata = cv.val, type = "raw")
   
-  auc  = auc(cv.val$return, as.vector(yhat.val))[[1]]
-  
   loss = helper.loss(tau_candidates = tau_candidates, 
                       truevals       = cv.val$return, 
                       predictedvals  = yhat.val, 
                       itemprice      = real_price$item_price[cv.val$order_item_id])
   
-  sse  = helper.sse(truevals        = cv.val$return, 
-                     predictedvals   = yhat.val)
   res  = list("loss.list"        = loss, 
-               "auc"              = auc,
-               "sse.list"         = sse, 
                "parameters"  = data.table("size"  = par[1],
                                           "decay" = par[2]))
   return(res)
@@ -66,7 +60,7 @@ known   = known.f
 unknown = unknown.f
 # additional data preparation for nnet
 source(file = "./nnet/00-3-nnet_DataPrep.R")
-pars = c(3, 0.8)
+pars = c(5, 0.5)
 
 #----------------------------------------------------------------------------------
 # .u       : model without user_retrate, n = 92.409
@@ -77,7 +71,7 @@ unknown = unknown.u
 source(file = "./nnet/00-3-nnet_DataPrep.R")
 known.n$user_retrate = NULL
 unknown.n$user_retrate = NULL
-pars = c(9, 1)
+pars = c(11, 1)
 
 #----------------------------------------------------------------------------------
 # .i       : model without user_retrate, n = 27.123
@@ -88,7 +82,7 @@ unknown = unknown.i               #
 source(file = "./nnet/00-3-nnet_DataPrep.R")
 known.n$item_retrate   = NULL     # remove user_retrate (uncertain categories)
 unknown.n$item_retrate = NULL     #
-pars = c(5, 0.8)
+pars = c(7, 1)
 
 
 #----------------------------------------------------------------------------------
@@ -102,7 +96,7 @@ known.n$item_retrate   = NULL     # remove user_retrate (uncertain categories)
 known.n$user_retrate   = NULL     #
 unknown.n$item_retrate = NULL     #
 unknown.n$user_retrate = NULL     #
-pars = c(7, 0.5)
+pars = c(13, 0.5)
 
 known = known.n
 tau_candidates = 0.002*125:425

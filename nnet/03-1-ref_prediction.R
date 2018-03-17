@@ -10,6 +10,7 @@ library(caret)
 library(nnet)
 library(data.table)
 
+source(file = "helperfunctions.R")
 load(file  = "./data/known-unknown-data.RData")
 real_price = data.frame(known$order_item_id, known$item_price)  # for loss function
 colnames(real_price) = c("order_item_id", "item_price")
@@ -72,8 +73,8 @@ split.train   = known.n       # comes from additional data preparation
 split.test    = unknown.n     # 
 
 # tuned parameter from par_tuning.R and tau_tuning.R
-par = c(3, 0.8)
-tau = c(0.444, 0.588, 0.564, 0.614, 0.574, 0.656)
+par = c(5, 0.5)
+tau = c(0.466, 0.496, 0.524, 0.554, 0.634, 0.612)
 # add tau values for each tau-category (tau_c) to dataset
 for (tau_c in 1:6){
     split.train$tau_v[split.train$tau == tau_c] = tau[tau_c]
@@ -96,8 +97,8 @@ split.train   = known.n         # comes from additional data preparation
 split.test    = unknown.n       # 
 
 # tuned parameter from par_tuning.R and tau_tuning.R
-par = c(9, 1)
-tau = c(0.516, 0.570, 0.540, 0.620, 0.610, 0.564)
+par = c(11, 1)
+tau = c(0.516, 0.532, 0.602, 0.624, 0.640, 0.646)
 # add tau values for each tau-category (tau_c) to dataset
 for (tau_c in 1:6){
     split.train$tau_v[split.train$tau == tau_c] = tau[tau_c]
@@ -120,8 +121,8 @@ split.test  = unknown.n         # comes from additional data preparation
 split.train = known.n           #
 
 # tuned parameter from par_tuning.R and tau_tuning.R
-par = c(5, 0.8)
-tau = c(0.536, 0.562, 0.572, 0.644, 0.450, 0.488)
+par = c(7, 1)
+tau = c(0.520, 0.508, 0.492, 0.462, 0.542, 0.616)
 # add tau values for each tau-category (tau_c) to dataset
 for (tau_c in 1:6){
     split.train$tau_v[split.train$tau == tau_c] = tau[tau_c]
@@ -147,8 +148,8 @@ split.test  = unknown.n         # output of additional data preparation
 split.train = known.n           # 
 
 # tuned parameter from par_tuning.R and tau_tuning.R
-par = c(7, 0.5)
-tau = c(0.538, 0.570, 0.586, 0.580, 0.632, 0.636)
+par = c(13, 0.5)
+tau = c(0.534, 0.572, 0.594, 0.604, 0.616, 0.632)
 # add tau values for each tau-category (tau_c) to dataset
 for (tau_c in 1:6){
     split.train$tau_v[split.train$tau == tau_c] = tau[tau_c]
@@ -168,5 +169,5 @@ setkey(all, order_item_id)     # order by unique id
 
 # calculate loss and AUC measure
 loss = helper.calcloss(all$return, all$yhat.01, real_price_ts)
-loss                    # loss measure: -239499.7
-sum(all$yhat.01)/25000  # return rate : 38.90%
+loss                    # loss measure: -238717.0
+sum(all$yhat.01)/25000  # return rate : 37.96%

@@ -34,8 +34,8 @@ tau_candidates = 0.002*125:425
 known   = known.f
 unknown = unknown.f
 # tuned parameter from par_tuning.R
-parameters = expand.grid("size"  = seq(from = 3, to = 3, by = 1),
-                         "decay" = 0.8)
+parameters = expand.grid("size"  = seq(from = 5, to = 5, by = 1),
+                         "decay" = 0.5)
 # additional data preparation for nnet
 source(file = "./nnet/00-3-nnet_DataPrep.R")
 known   = known.n       # output of additional data preparation
@@ -51,8 +51,8 @@ cv.list.f   = cv.list   # store result of repeated cross validation
 known   = rbind(known.f, known.u) # can also use .f for training, variables are pure
 unknown = unknown.u   
 # tuned parameter from par_tuning.R
-parameters = expand.grid("size"  = seq(from = 9, to = 9, by = 1),
-                         "decay" = 0.1)
+parameters = expand.grid("size"  = seq(from = 11, to = 11, by = 1),
+                         "decay" = 1)
 # additional data preparation for nnet
 source(file = "./nnet/00-3-nnet_DataPrep.R")
 known.n$user_retrate   = NULL     # remove user_retrate (uncertain categories)
@@ -71,8 +71,8 @@ cv.list.u   = cv.list             # store result of repeated cross validation
 known   = rbind(known.f, known.i) # can also use .f for training, variables are pure
 unknown = unknown.i               # 
 # tuned parameter from par_tuning.R
-parameters = expand.grid("size"  = seq(from = 5, to = 5, by = 1),
-                         "decay" = 0.8)
+parameters = expand.grid("size"  = seq(from = 7, to = 7, by = 1),
+                         "decay" = 1)
 # additional data preparation for nnet
 source(file = "./nnet/00-3-nnet_DataPrep.R")
 known.n$item_retrate   = NULL     # remove user_retrate (uncertain categories)
@@ -91,7 +91,7 @@ cv.list.i   = cv.list             # store result of repeated cross validation
 known   = rbind(known.f, known.i, known.u, known.iu)
 unknown = unknown.iu
 # tuned parameter from par_tuning.R
-parameters = expand.grid("size"  = seq(from = 7, to = 7, by = 1),
+parameters = expand.grid("size"  = seq(from = 13, to = 13, by = 1),
                          "decay" = 0.5)
 # additional data preparation for nnet
 source(file = "./nnet/00-3-nnet_DataPrep.R")

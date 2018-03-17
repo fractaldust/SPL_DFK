@@ -49,16 +49,16 @@ source(file = "Decompose_Dataset.R")
 #----------------------------------------------------------------------------------
 # .f       : full model
 #----------------------------------------------------------------------------------
-known        = known.f
-unknown      = unknown.f
+known       = known.f
+unknown     = unknown.f
 # additional data preparation for nnet
 source(file = "./nnet/00-3-nnet_DataPrep.R")
-known       = known.n     # comes from additional data preparation
-unknown     = unknown.n   # 
+known       = known.n       # comes from additional data preparation
+unknown     = unknown.n     # 
 
 # tuned parameter from par_tuning.R and tau_tuning.R
-par = c(3, 0.8)
-tau = c(0.444, 0.588, 0.564, 0.614, 0.574, 0.656)
+par = c(5, 0.5)
+tau = c(0.466, 0.496, 0.524, 0.554, 0.634, 0.612)
 # add tau values for each tau-category (tau_c) to dataset
 for (tau_c in 1:6){
     known$tau_v[known$tau     == tau_c] = tau[tau_c]
@@ -71,18 +71,18 @@ results.f = make_nnet(known, unknown, par)
 #----------------------------------------------------------------------------------
 # .u       : model without user_retrate
 #----------------------------------------------------------------------------------
-known   = rbind(known.f, known.u) # can also use .f for training, variables are pure
-unknown = unknown.u   
+known       = rbind(known.f, known.u) # can also use .f for training, variables are pure
+unknown     = unknown.u   
 # additional data preparation for nnet
 source(file = "./nnet/00-3-nnet_DataPrep.R")
-known.n$user_retrate   = NULL # remove user_retrate (uncertain categories)
-unknown.n$user_retrate = NULL #
-known       = known.n         # comes from additional data preparation
-unknown     = unknown.n       # 
+known.n$user_retrate   = NULL   # remove user_retrate (uncertain categories)
+unknown.n$user_retrate = NULL   #
+known       = known.n           # comes from additional data preparation
+unknown     = unknown.n         # 
 
 # tuned parameter from par_tuning.R and tau_tuning.R
-par = c(9, 1)
-tau = c(0.516, 0.570, 0.540, 0.620, 0.610, 0.564)
+par = c(11, 1)
+tau = c(0.516, 0.532, 0.602, 0.624, 0.640, 0.646)
 # add tau values for each tau-category (tau_c) to dataset
 for (tau_c in 1:6){
     known$tau_v[known$tau     == tau_c] = tau[tau_c]
@@ -99,14 +99,14 @@ known   = rbind(known.f, known.i) # can also use .f for training, variables are 
 unknown = unknown.i               # 
 # additional data preparation for nnet
 source(file = "./nnet/00-3-nnet_DataPrep.R")
-known.n$item_retrate   = NULL # remove user_retrate (uncertain categories)
-unknown.n$item_retrate = NULL #
-unknown     = unknown.n       # comes from additional data preparation
-known       = known.n         #
+known.n$item_retrate   = NULL   # remove user_retrate (uncertain categories)
+unknown.n$item_retrate = NULL   #
+unknown     = unknown.n         # comes from additional data preparation
+known       = known.n           #
 
 # tuned parameter from par_tuning.R and tau_tuning.R
-par = c(5, 0.8)
-tau = c(0.536, 0.562, 0.572, 0.644, 0.450, 0.488)
+par = c(7, 1)
+tau = c(0.520, 0.508, 0.492, 0.462, 0.542, 0.616)
 # add tau values for each tau-category (tau_c) to dataset
 for (tau_c in 1:6){
     known$tau_v[known$tau     == tau_c] = tau[tau_c]
@@ -123,17 +123,17 @@ known   = rbind(known.f, known.i, known.u, known.iu)
 unknown = unknown.iu
 # additional data preparation for nnet
 source(file = "./nnet/00-3-nnet_DataPrep.R")
-known.n$item_retrate   = NULL # remove user_retrate (uncertain categories)
-known.n$user_retrate   = NULL #
-unknown.n$item_retrate = NULL #
-unknown.n$user_retrate = NULL #
-                              #   
-unknown  = unknown.n          # output of additional data preparation 
-known    = known.n            # 
+known.n$item_retrate   = NULL   # remove user_retrate (uncertain categories)
+known.n$user_retrate   = NULL   #
+unknown.n$item_retrate = NULL   #
+unknown.n$user_retrate = NULL   #
+                                #   
+unknown = unknown.n             # output of additional data preparation 
+known   = known.n               # 
 
 # tuned parameter from par_tuning.R and tau_tuning.R
-par = c(7, 0.5)
-tau = c(0.538, 0.570, 0.586, 0.580, 0.632, 0.636)
+par = c(13, 0.5)
+tau = c(0.534, 0.572, 0.594, 0.604, 0.616, 0.632)
 # add tau values for each tau-category (tau_c) to dataset
 for (tau_c in 1:6){
     known$tau_v[known$tau     == tau_c] = tau[tau_c]
@@ -151,4 +151,4 @@ results.iu = make_nnet(known, unknown, par)
 all = rbind(results.f, results.u, results.i, results.iu)
 setkey(all, order_item_id)     # order by unique id
 
-sum(all$yhat.01)/50000  # return rate : 38.38%
+sum(all$yhat.01)/50000  # return rate : 36.75%
