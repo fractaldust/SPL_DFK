@@ -17,4 +17,3 @@ for(m in 1:length(cv.list)){              # m times repeated cv
     tau[[v]] = measure
     }
 }
-plot(tau[[2]]$loss$mean)
