@@ -7,6 +7,8 @@
 #      by maximising negative loss function (helper.loss)
 #----------------------------------------------------------------------------------
 
+library(caret)
+
 load(file  = "./data/known-unknown-data.RData")
 real_price = data.frame(known$order_item_id, known$item_price) # for loss function
 colnames(real_price) = c("order_item_id", "item_price")
