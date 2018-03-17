@@ -558,7 +558,7 @@ cv.list.u   = cv.list             # store result of repeated cross validation
 \section{Classification Alogrithms}\label{Sec::Algorit}
 
 \subsection{Extreme Gradient Boosting}
-Extreme Gradient Boosting is a gradient boosting decision tree algorithm. Boosting refers to an additive training technique where starting with some base classifiers $\hat{y}^{(0)}= f_0(x_0)$, an objective function $F(y,f_k)$,
+Extreme Gradient Boosting is a gradient boosting decision tree algorithm, which may be implemented in \texttt{R} via the package \texttt{xgboost} by \citep{chen2016} Boosting refers to an additive training technique where starting with some base classifiers $\hat{y}^{(0)}= f_0(x_0)$, an objective function $F(y,f_k)$,
 
 \begin{eqnarray*}
 F = \displaystyle\sum_{i=1}^{N} l(y_i, \hat{y}_i) + \displaystyle\sum_{k=1}^{K} \Omega(f_k) 
@@ -575,6 +575,13 @@ that consists of a training loss term $l(y_i,\hat{y}_i)$ and a regularization te
 \end{eqnarray*}
 
 This sequential procedure stops when no further improvements can be made, e.g. when the reduction of the loss term is smaller then the change in the regularization term. \\
+
+Various parameters can be tuned $^2$, : \footnotetext[2]{https://cran.r-project.org/web/packages/xgboost/index.html}
+\begin{enumerate}
+\item \texttt{n\_rounds}: number of trees that were sequentially created. Several values were tested, e.g. 50, 100 or 500
+\item \texttt{eta}: learning rate - how far we go into the direction of the gradient (the gradient is used in the Taylor approximation of the objective function). Values used for tuning: 0.01, 0.1, 0.15
+\item \texttt{min\_child\_weight}: minimum number of observations in a node to make a split. Ususally set to 1. 
+\end{enumerate}
 
 %--------------------------------------------------------
 \subsection{Random Forest}
