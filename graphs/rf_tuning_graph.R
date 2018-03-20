@@ -1,13 +1,15 @@
 # plot tuning performance
 library(ggplot2)
 library(gridExtra)
-load(file = "./data/cv_lists-rf-tuning.RData")
-parameters <- expand.grid("ntree" = c(200, 300, 400, 500, 600, 700),
-                          "mtry"  = c(2, 3, 4, 5))
-cv.list <- cv.list.u
-source(file = "evaluatecvlist.R")
 
-x = 1:length(tau[[1]]$loss$mean)
+source(file = "helperfunctions.R")
+load(file = "./data/cv_lists-rf-tuning.RData")
+parameters = expand.grid("ntree" = c(200, 300, 400, 500, 600, 700),
+                          "mtry"  = c(2, 3, 4, 5))
+
+# extract results from tuning with helperfunction
+tau = helper.cvlist(cv.list.u)
+x   = 1:length(tau[[1]]$loss$mean)
 
 # 3x2 plot for each tau-category
 df        = data.frame(tau)/10000
@@ -47,12 +49,12 @@ g6 = ggplot(df, aes(x=x, y=loss.mean.5)) + geom_point() + caption + text + theme
 # combine plots
 plot = grid.arrange(g1, g2 , g3, g4, g5, g6, nrow = 3, ncol = 2)
 
-# save plot as png
+# save plot as pdf
 width <- 2
 hight <- 1
 b <- 11
-ggsave(file="./graphs/plots/rf_tuning.png",  plot,
-       width = b*width, height = b*hight, dpi = 150, units = "cm", device='png')
+ggsave(file="./graphs/plots/rf_tuning.pdf",  plot,
+       width = b*width, height = b*hight, dpi = 150, units = "cm", device='pdf')
 plot
 dev.off()
 

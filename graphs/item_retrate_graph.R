@@ -44,12 +44,12 @@ plot = p + theme_bw() + retrate  + hline + histo + caption + text + text.l + leg
 plot
 
 
-# save plot as png
+# save plot as pdf
 width = 1
 hight = 1
 b = 11 #some factor to make nice proportion of font and everything else
-ggsave(filename = "./graphs/plots/item_retrate_r.png", plot,
-       width = b*width, height = b*hight, dpi = 150, units = "cm", device='png')
+ggsave(filename = "./graphs/plots/item_retrate_r.pdf", plot,
+       width = b*width, height = b*hight, dpi = 150, units = "cm", device='pdf')
 plot
 dev.off()
 
@@ -109,8 +109,8 @@ plot = grid.arrange(g1, g2 , nrow = 2)
 plot
 
 b = 11
-ggsave(file="./graphs/plots/item_retrate_ku.png",  plot,
-       width = b*width, height = b*hight, dpi = 150, units = "cm", device='png')
+ggsave(file="./graphs/plots/item_retrate_ku.pdf",  plot,
+       width = b*width, height = b*hight, dpi = 150, units = "cm", device='pdf')
 plot
 dev.off()
 

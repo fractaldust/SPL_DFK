@@ -98,4 +98,3 @@ cv.list.iu  = cv.list             # store result of repeated cross validation
 
 save(cv.list.f, cv.list.u, cv.list.iu, cv.list.i,
      file   = "./data/cv_lists-nnet-tuning.RData")
-

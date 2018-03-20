@@ -11,8 +11,8 @@ library(nnet)
 library(data.table)
 
 source(file = "helperfunctions.R")
-load(file  = "./data/known-unknown-data.RData")
-real_price = data.frame(known$order_item_id, known$item_price)  # for loss function
+load(file   = "./data/known-unknown-data.RData")
+real_price  = data.frame(known$order_item_id, known$item_price)  # for loss function
 colnames(real_price) = c("order_item_id", "item_price")
 
 # splits train set into split.train and split.test

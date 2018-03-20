@@ -2,12 +2,13 @@
 library(ggplot2)
 library(gridExtra)
 
-load(file  = "./data/cv_lists-nnet-tuning.RData")
-parameters = expand.grid("size"  = seq(from = 3, to = 15, by = 2),
-                         "decay" = c(0.01, 0.1, 0.5, 0.8, 1))
-cv.list = cv.list.u
-source(file = "evaluatecvlist.R")
+source(file = "helperfunctions.R")
+load(file   = "./data/cv_lists-nnet-tuning.RData")
+parameters  = expand.grid("size"  = seq(from = 3, to = 15, by = 2),
+                          "decay" = c(0.01, 0.1, 0.5, 0.8, 1))
 
+# extract results from tuning with helperfunction
+tau = helper.cvlist(cv.list.u)
 
 x = 1:length(tau[[1]]$loss$mean)
 
