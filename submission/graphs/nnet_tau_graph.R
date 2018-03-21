@@ -44,12 +44,12 @@ calc.loss = function(known, tau_c, pars){
 }
 
 source(file = "helperfunctions.R")
-source(file = "Decompose_Dataset.R") 
 
 #tau_loss graph
 load(file  = "./data/known-unknown-data.RData")
 real_price = data.frame(known$order_item_id, known$item_price)
 colnames(real_price) = c("order_item_id", "item_price")
+source(file = "Decompose_Dataset.R") 
 
 # #----------------------------------------------------------------------------------
 # # .f       : full model, n = 25.266
@@ -107,6 +107,7 @@ tau_6 = calc.loss(known.n, 6, pars)
 
 tau_loss = data.frame(tau_1$loss.list, tau_2$loss.list, tau_3$loss.list, 
                       tau_4$loss.list, tau_5$loss.list, tau_6$loss.list)
+# maximum of negative loss function
 idx.l    = apply(tau_loss, 2, which.max)
 tau_candidates[idx.l]
 tau_loss = tau_loss/10000
