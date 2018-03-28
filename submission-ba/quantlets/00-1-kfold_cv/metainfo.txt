@@ -1,0 +1,17 @@
+Name of QuantLet : 00-1-kfold_cv
+
+Published in : Statistical programming languages - Student Project on ''Ecommerce'' 
+
+Description : Performs n different k-fold cross validations, where n is the amount of different variations of settings for the neural network. Uses parallel computing to decrease runtime. Calculates loss as a measure of performance of neural network. In order to find best settings of neural network.
+
+Keywords : cross validation, tuning, neural network, parallel computing, 
+
+Author : Damiano Ferrari [New], Franziska Wehrmann [New], Konstantin Haeusler [New]
+
+Datafile : 
+
+Input : tr.v - data.table, subset with tau-category=v
+        k    -  numeric, dimension of cross validation
+        parameters - list, variations of different parameters for neural network
+
+Output : results.par - n*k matrix, where every element is a list of results of the performance of the model
