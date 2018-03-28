@@ -53,6 +53,7 @@ for (n in 1:nrow(parameters)){
                        predictedvals  = yhat.val, 
                        itemprice      = real_price$item_price[cv.val$order_item_id])
     res  = list("loss"        = max(loss), 
+                "tau"         = tau_candidates[which.max(loss)],
                 "parameters"  = parameters[n,])
     vec[[i]] = res
   }

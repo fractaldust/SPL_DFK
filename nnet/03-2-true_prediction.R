@@ -12,11 +12,19 @@ library(data.table)
 
 load(file  = "./data/known-unknown-data.RData")
 
+# load threshold values for tau from 02-tau_tuning
+load(file  = "./data/cv_lists-tau-tuning.RData")
+source(file = "helperfunctions.R")
+measure.f  = helper.cvlist.tau(cv.list.f)
+measure.u  = helper.cvlist.tau(cv.list.u)
+measure.i  = helper.cvlist.tau(cv.list.i)
+measure.iu = helper.cvlist.tau(cv.list.iu)
+
 #----------------------------------------------------------------------------------
 # nnet function that returns predictions and loss as measure
 #----------------------------------------------------------------------------------
 make_nnet = function(train, test, par){
-    # trains and nnet and makes predictions, then calculates loss as measure
+    # trains and nnet and makes predictions, returns predictions
     # train   : dataset for training
     # test    : dataset for prediction 
     # par     : parameter for nnet 
@@ -58,7 +66,7 @@ unknown     = unknown.n     #
 
 # tuned parameter from par_tuning.R and tau_tuning.R
 par = c(5, 0.5)
-tau = c(0.466, 0.496, 0.524, 0.554, 0.634, 0.612)
+tau = measure.f$tau$mean
 # add tau values for each tau-category (tau_c) to dataset
 for (tau_c in 1:6){
     known$tau_v[known$tau     == tau_c] = tau[tau_c]
@@ -82,7 +90,7 @@ unknown     = unknown.n         #
 
 # tuned parameter from par_tuning.R and tau_tuning.R
 par = c(11, 1)
-tau = c(0.516, 0.532, 0.602, 0.624, 0.640, 0.646)
+tau = measure.u$tau$mean
 # add tau values for each tau-category (tau_c) to dataset
 for (tau_c in 1:6){
     known$tau_v[known$tau     == tau_c] = tau[tau_c]
@@ -106,7 +114,7 @@ known       = known.n           #
 
 # tuned parameter from par_tuning.R and tau_tuning.R
 par = c(7, 1)
-tau = c(0.520, 0.508, 0.492, 0.462, 0.542, 0.616)
+tau = measure.i$tau$mean
 # add tau values for each tau-category (tau_c) to dataset
 for (tau_c in 1:6){
     known$tau_v[known$tau     == tau_c] = tau[tau_c]
@@ -133,7 +141,7 @@ known   = known.n               #
 
 # tuned parameter from par_tuning.R and tau_tuning.R
 par = c(13, 0.5)
-tau = c(0.534, 0.572, 0.594, 0.604, 0.616, 0.632)
+tau = measure.iu$tau$mean
 # add tau values for each tau-category (tau_c) to dataset
 for (tau_c in 1:6){
     known$tau_v[known$tau     == tau_c] = tau[tau_c]
@@ -151,4 +159,4 @@ results.iu = make_nnet(known, unknown, par)
 all = rbind(results.f, results.u, results.i, results.iu)
 setkey(all, order_item_id)     # order by unique id
 
-sum(all$yhat.01)/50000  # return rate : 36.75%
+sum(all$yhat.01)/50000  # return rate : 38.95%

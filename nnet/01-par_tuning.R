@@ -98,3 +98,7 @@ cv.list.iu  = cv.list             # store result of repeated cross validation
 
 save(cv.list.f, cv.list.u, cv.list.iu, cv.list.i,
      file   = "./data/cv_lists-nnet-tuning.RData")
+
+# to evaluate results
+measure.f = helper.cvlist.tune(cv.list.f)
+# results for different settings - better evaluation in nnet_tuning_graph.R

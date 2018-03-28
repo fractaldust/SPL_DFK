@@ -104,20 +104,80 @@ helper.cvlist <- function(cv.list){
     loss    = matrix(data = NA, nrow = length(cv.list)*k, ncol = nrow(parameters))
     measure = list()
     tau     = list()
+    pars    = list()
     for(m in 1:length(cv.list)){              # m times repeated cv 
         run.m = cv.list[[m]]
         for(v in 1:length(run.m)){            # tau-category 1:6
             tau.v = run.m[[v]]
             for (n in 1:dim(tau.v)[2]){       # change in parameters
-                for (k in 1:dim(tau.v)[1]){   # same parameters, k-fold
-                      j = k+((m-1)*dim(tau.v)[1])
-                      loss[j,n] = tau.v[,n][[k]]$loss
-                }
-                measure$loss$mean  = apply(loss, 2, mean)
-                measure$loss$sd    = apply(loss, 2, sd)
+              for (k in 1:dim(tau.v)[1]){     # same parameters, k-fold
+                j = k+((m-1)*dim(tau.v)[1])
+                loss[j,v] = tau.v[,n][[k]]$loss
+              }
+              pars[[n]] = loss
             }
-            tau[[v]] = measure
         }
+        measure$loss$mean  = apply(loss, 2, mean)
+        measure$loss$sd    = apply(loss, 2, sd)
+        
     }
     return(tau)
 }
+
+helper.cvlist.tau <- function(cv.list){
+  # extracts mean and standard deviation of cv.list (m*k repetitions)
+  # saves results in list tau
+  k       = length(cv.list[[1]][[1]])       # dimension of k-fold cross validation
+  loss    = matrix(data = NA, nrow = length(cv.list)*k, ncol = 6)
+  tau.m   = loss
+  measure = list()
+  tau     = list()
+  for(m in 1:length(cv.list)){              # m times repeated cv 
+    run.m = cv.list[[m]]
+    for(v in 1:length(run.m)){            # tau-category 1:6
+      tau.v = run.m[[v]]
+      for (n in 1:1){       # change in parameters  DONT NEED ThaT ANYMore
+          for (k in 1:length(tau.v)){   # same parameters, k-fold
+            j = k+((m-1)*length(tau.v))
+            loss[j,v] = tau.v[[k]]$loss
+            tau.m[j,v]  = tau.v[[k]]$tau
+        }
+      }
+    }
+    measure$loss$mean  = apply(loss,  2, mean)
+    measure$loss$sd    = apply(loss,  2, sd)
+    measure$tau$mean   = apply(tau.m, 2, mean)
+    measure$tau$sd     = apply(tau.m, 2, sd)  
+    }
+  return(measure)
+}
+
+
+helper.cvlist.tune <- function(cv.list){
+  # extracts mean and standard deviation of cv.list (m*k repetitions)
+  # saves results in list measure
+  k       = length(cv.list[[1]][[1]][,1])       # dimension of k-fold cross validation
+  loss    = matrix(data = NA, nrow = length(cv.list)*k, ncol = dim(cv.list[[1]][[1]])[2])
+  tau.m   = loss
+  measure = list()
+  pars    = list()
+  for(m in 1:length(cv.list)){              # m times repeated cv 
+    run.m = cv.list[[m]]
+    for(v in 1:length(run.m)){            # tau-category 1:6
+      tau.v = run.m[[v]]
+      for (n in 1:dim(tau.v)[2]){        # change in parameters 
+        for (k in 1:dim(tau.v)[1]){      # same parameters, k-fold
+          j = k+((m-1)*dim(tau.v)[1])
+          loss[j,n] = tau.v[,n][[k]]$loss    # loss of m-th kfold-cv for tau_c == v
+        }
+        pars[[v]] = loss
+      }
+    }
+  }
+  # now calculate mean and standard deviation for each m*k-fold c.v
+  for (i in 1:6){
+    loss = pars[[i]]
+    measure[[paste("tau_c ==", i)]] = apply(loss, 2, mean)
+  }
+  return(measure)
+}  

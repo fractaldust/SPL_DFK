@@ -111,3 +111,7 @@ cv.list.iu  = cv.list             # store result of repeated cross validation
 
 save(cv.list.f, cv.list.u, cv.list.iu, cv.list.i,
      file = "./data/cv_lists-tau-tuning.RData")
+
+# to evaluate results
+measure.f = helper.cvlist.tau(cv.list.f)
+tau.f = measure.f$tau$mean

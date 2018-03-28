@@ -8,11 +8,11 @@ parameters = expand.grid("size"  = seq(from = 3, to = 15, by = 2),
                          "decay" = c(0.01, 0.1, 0.5, 0.8, 1))
 
 # extract results from tuning with helperfunction
-tau = helper.cvlist(cv.list.u)
-x   = 1:length(tau[[1]]$loss$mean)
+loss = helper.cvlist.tune(cv.list.u)
+x    =  1:length(loss[[1]])
 
 # 3x2 plot for each tau-category
-df        = data.frame(tau)/10000
+df        = data.frame(loss[[1]])/10000
 blank.x   = theme(axis.title.x = element_blank())
 caption.b = labs(y = "loss [10.000]")    # only y-axis
 caption   = labs(x = "parameter index",  # x- and y-axis
@@ -22,29 +22,29 @@ text      = annotate(geom  = "text", x=Inf, y=-Inf,hjust = 1, vjust = 0,
                      color = "red", size  = 4,
                      label = "tau_c = 1")
 # sub-plot for tau-category 1
-g1 = ggplot(df, aes(x=x, y=loss.mean)) + geom_point()  + caption.b + text + theme_bw() + blank.x
+g1 = ggplot(df, aes(x=x, y=loss[[1]]/10000)) + geom_point()  + caption.b + text + theme_bw() + blank.x
 
 # sub-plots for tau-category 2:6
 text     = annotate(geom  = "text", x=Inf, y=-Inf,hjust = 1, vjust = 0, 
                     color = "red", size  = 4,
                     label = "tau_c = 2")
-g2 = ggplot(df, aes(x=x, y=loss.mean.1)) + geom_point() + caption.b + text + theme_bw() + blank.x
+g2 = ggplot(df, aes(x=x, y=loss[[2]]/10000)) + geom_point() + caption.b + text + theme_bw() + blank.x
 text     = annotate(geom = "text", x=Inf, y=-Inf,hjust = 1, vjust = 0, 
                      color = "red", size  = 4,
                      label = "tau_c = 3")
-g3 = ggplot(df, aes(x=x, y=loss.mean.2)) + geom_point() + caption.b + text + theme_bw() + blank.x
+g3 = ggplot(df, aes(x=x, y=loss[[3]]/10000)) + geom_point() + caption.b + text + theme_bw() + blank.x
 text     = annotate(geom = "text", x=Inf, y=-Inf,hjust = 1, vjust = 0, 
                      color = "red", size  = 4,
                      label = "tau_c = 4")
-g4 = ggplot(df, aes(x=x, y=loss.mean.3)) + geom_point() + caption.b + text + theme_bw() + blank.x
+g4 = ggplot(df, aes(x=x, y=loss[[4]]/10000)) + geom_point() + caption.b + text + theme_bw() + blank.x
 text     = annotate(geom = "text", x=Inf, y=-Inf,hjust = 1, vjust = 0, 
                      color = "red", size  = 4,
                      label = "tau_c = 5")
-g5 = ggplot(df, aes(x=x, y=loss.mean.4)) + geom_point() + caption + text + theme_bw()
+g5 = ggplot(df, aes(x=x, y=loss[[5]]/10000)) + geom_point() + caption + text + theme_bw()
 text     = annotate(geom = "text", x=Inf, y=-Inf,hjust = 1, vjust = 0, 
                      color = "red", size  = 4,
                      label = "tau_c = 6")
-g6 = ggplot(df, aes(x=x, y=loss.mean.5)) + geom_point() + caption + text + theme_bw()
+g6 = ggplot(df, aes(x=x, y=loss[[6]]/10000)) + geom_point() + caption + text + theme_bw()
 
 # combine plots
 plot = grid.arrange(g1, g2 , g3, g4, g5, g6, nrow = 3, ncol = 2)
@@ -63,11 +63,10 @@ dev.off()
 # the item_price, as well as the tau-category. 
 # higher tau-category leads naturally to a higher loss
 su = (df[,1]*(-1))/max(df[,1]*(-1)) # tau-category 1
-
-for (i in 2:6){                     # tau-cateogries 2:6
-    i  = (i*2)-1
+su = tau[[1]]*(-1)/max(tau[[1]]*(-1))
+for (i in 2:6){     
     print(i)
-    su = su + (df[,i]*(-1))/max(df[,i]*(-1))
+    su = su + (tau[[i]]*(-1))/max(tau[[i]]*(-1))
 }
 su = su/6 * (-1)      # normalize and change sign 
                       # to compare shape to previous plots
