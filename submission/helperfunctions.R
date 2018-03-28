@@ -50,27 +50,6 @@ helper.loss = function(tau_candidates, truevals, predictedvals, itemprice){
     return(loss)
 }
 
-# # for nnet tuning
-# helper.evaluate = function(results.par, tau_candidates){
-#   auc      = 1:length(results.par) # to store auc for every cv + tuning iteration
-#   loss     = 1:length(results.par) # to store max(tau_measure)
-#   
-#   for (i in 1:length(results.par)) {
-#     auc[i]      = results.par[[i]]$auc
-#     loss[i]     = results.par[[i]]$loss
-#   }
-#   # combine the cross validations again (100 = 20 * 5 --> 20)
-#   measure = list()
-#   for (i in 1:nrow(parameters)){
-#     auc.i  = auc[(i*k-k+1):(i*k)]
-#     loss.i = loss[(i*k-k+1):(i*k)]
-#     measure[["auc"]][[i]]  = mean(auc.i)
-#     measure[["loss"]][[i]] = mean(loss.i)
-#     measure[["pars"]][[i]] = results.par[[(i*k-k+1)]]$parameters
-#   }
-#   return(measure)
-# }
-
 # for data processing for nnet
 # assignes numbers to factors of categorical variables
 helper.fac2num = function(){
@@ -97,27 +76,61 @@ helper.fac2num = function(){
     return(fac2num)
 }
 
-helper.cvlist <- function(cv.list){
-    # extracts mean and standard deviation of cv.list (m*k repetitions)
-    # saves results in list tau
-    k       = length(cv.list[[1]][[1]][,1])       # dimension of k-fold cross validation
-    loss    = matrix(data = NA, nrow = length(cv.list)*k, ncol = nrow(parameters))
-    measure = list()
-    tau     = list()
-    for(m in 1:length(cv.list)){              # m times repeated cv 
-        run.m = cv.list[[m]]
-        for(v in 1:length(run.m)){            # tau-category 1:6
-            tau.v = run.m[[v]]
-            for (n in 1:dim(tau.v)[2]){       # change in parameters
-                for (k in 1:dim(tau.v)[1]){   # same parameters, k-fold
-                      j = k+((m-1)*dim(tau.v)[1])
-                      loss[j,n] = tau.v[,n][[k]]$loss
-                }
-                measure$loss$mean  = apply(loss, 2, mean)
-                measure$loss$sd    = apply(loss, 2, sd)
-            }
-            tau[[v]] = measure
+
+helper.cvlist.tau <- function(cv.list){
+  # extracts mean and standard deviation of cv.list (m*k repetitions)
+  # saves results in list tau
+  k       = length(cv.list[[1]][[1]])       # dimension of k-fold cross validation
+  loss    = matrix(data = NA, nrow = length(cv.list)*k, ncol = 6)
+  tau.m   = loss
+  measure = list()
+  tau     = list()
+  for(m in 1:length(cv.list)){              # m times repeated cv 
+    run.m = cv.list[[m]]
+    for(v in 1:length(run.m)){            # tau-category 1:6
+      tau.v = run.m[[v]]
+      for (n in 1:1){       # change in parameters  DONT NEED ThaT ANYMore
+          for (k in 1:length(tau.v)){   # same parameters, k-fold
+            j = k+((m-1)*length(tau.v))
+            loss[j,v] = tau.v[[k]]$loss
+            tau.m[j,v]  = tau.v[[k]]$tau
         }
+      }
     }
-    return(tau)
+    measure$loss$mean  = apply(loss,  2, mean)
+    measure$loss$sd    = apply(loss,  2, sd)
+    measure$tau$mean   = apply(tau.m, 2, mean)
+    measure$tau$sd     = apply(tau.m, 2, sd)  
+    }
+  return(measure)
 }
+
+
+helper.cvlist.tune <- function(cv.list){
+  # extracts mean and standard deviation of cv.list (m*k repetitions)
+  # saves results in list measure
+  k       = length(cv.list[[1]][[1]][,1])       # dimension of k-fold cross validation
+  loss    = matrix(data = NA, nrow = length(cv.list)*k, ncol = dim(cv.list[[1]][[1]])[2])
+  tau.m   = loss
+  measure = list()
+  pars    = list()
+  for(m in 1:length(cv.list)){              # m times repeated cv 
+    run.m = cv.list[[m]]
+    for(v in 1:length(run.m)){            # tau-category 1:6
+      tau.v = run.m[[v]]
+      for (n in 1:dim(tau.v)[2]){        # change in parameters 
+        for (k in 1:dim(tau.v)[1]){      # same parameters, k-fold
+          j = k+((m-1)*dim(tau.v)[1])
+          loss[j,n] = tau.v[,n][[k]]$loss    # loss of m-th kfold-cv for tau_c == v
+        }
+        pars[[v]] = loss
+      }
+    }
+  }
+  # now calculate mean and standard deviation for each m*k-fold c.v
+  for (i in 1:6){
+    loss = pars[[i]]
+    measure[[paste("tau_c ==", i)]] = apply(loss, 2, mean)
+  }
+  return(measure)
+}  

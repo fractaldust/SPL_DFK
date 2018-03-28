@@ -48,6 +48,7 @@ results.par = foreach(n = 1:nrow(parameters), .combine = cbind,
         pars     = data.table("size"  = parameters$size[n],
                               "decay" = parameters$decay[n])
         res      = list("loss"        = max(loss), 
+                        "tau"         = tau_candidates[which.max(loss)],
                         "parameters"  = pars)              
             }
 
