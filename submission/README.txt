@@ -5,7 +5,7 @@ Title:		Predicting return probabilities of an online retailer by
 
 Authors: 	Wehrmann, Franziska. Ferrari, Damiano. Haeusler, Konstantin.
 
-Content of this folder:
+Content of this folder: 
 
 folder name	|	description
 ---------------------------------------------------------------------------
@@ -27,6 +27,7 @@ rforest		|	.R files for implementation of random forest
 xgboost		|	.R files for implementation of extreme gradient 
 		|	boosting
 ---------------------------------------------------------------------------
+
 
 Order of execution: 
 
