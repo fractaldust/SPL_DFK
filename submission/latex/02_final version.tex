@@ -44,6 +44,8 @@
 \usepackage{cooltooltips}
 \usepackage{colordef}
 \usepackage{lvblisting}
+
+\newcommand{\quantnet}{\hspace*{\fill} \raisebox{-1pt}{\includegraphics[scale=0.05]{qletlogo}}\,}
 %------------------------------------------------------------		
 							
 % define citation style
@@ -194,7 +196,8 @@ item$item_retrate_c[is.na(item$item_retrate_c)] = "new"
 item$item_retrate_c = factor(item$item_retrate_c, levels = c(tag, "unknown", "new"))
 
 \end{lstlisting}
-
+\quantnet \href{https://github.com/fractaldust/SPL_DFK/blob/master/submission/quantlets/Data_Cleaning/Data_Cleaning.R}{Data\_Cleaning} 
+\newline
 The \texttt{split} function used in \texttt{line 4} turns a numerical variable into character. It categorizes all the elements of the column \texttt{item.k\$item\_retrate\_c} based on the values of the boundaries given by vector \texttt{c} (\texttt{line 2}), naming them by the values of \texttt{tag}.
 
 \subsubsection{Interval boundary choice}\label{Subsec::Interval}
@@ -313,9 +316,10 @@ Since the feature \texttt{item\_retrate} was developed by considering the rate o
 \begin{figure}
 	\subfigure[]{\includegraphics[width=0.5\textwidth]{pictures/item_retrate_r.pdf}}
 	\subfigure[]{\includegraphics[width=0.5\textwidth]{pictures/item_retrate_ku.pdf}}
-	\caption{(a) Display of the artificially created feature \texttt{item\_retrate}. red shading: average return rate of observations of this category with comparison to average return rate of all items in \texttt{train} set (red line, avg.returnrate = 0.48174). blue histogram: number of observations in each category. (b) Distribution of variable \texttt{item\_retrate} in \texttt{train} and \texttt{test} set. In both data sets the newly created variable follows a similar distribution.}
+	\caption{(a) Display of the artificially created feature \texttt{item\_retrate}. red shading: average return rate of observations of this category with comparison to average return rate of all items in \texttt{train} set (red line, avg.returnrate = 0.48174). blue histogram: number of observations in each category. (b) Distribution of variable \texttt{item\_retrate} in \texttt{train} and \texttt{test} set. In both data sets the newly created variable follows a similar distribution. }%{\includegraphics[scale=0.05]{qletlogo} \href{https://github.com/fractaldust/SPL_DFK/blob/master/submission/quantlets/item_retrate_graph/item_retrate_graph.R}{item\_retrate\_graph}}
 	\label{Figure::ItemRetrate}
 \end{figure}
+
 
 \subsection{semantic grouping: the case of \texttt{item\_type}}
 High cardinality attributes are impractical for most predictive algorithms. The original data set contained the variable \texttt{item\_size}, which overall consists of more than 100 categories. Even after merging duplicate naming such as (... xs, s, m, l, ...) and (... XS, S, M, L, ...), the variable is still of high cardinality. One method of reducing the categories of a variable is semantic grouping (c.f. \cite{moeyersoms2015}). Categories were generated with respect to common sizing systems for shoes and clothes. Additionally the category \texttt{rest} stores items that could not be allocated to \texttt{shoes} or \texttt{clothes} and \texttt{unsized} stores items without a specific size. By using semantic grouping it was not only possible to reduce over 100 categories to only four, but also a difference in the return rate of the categories can be observed. Figure \ref{Figure::ItemType} shows that \texttt{unsized} has a considerably lower return rate than average (Also the return rate of \texttt{rest} is lower than average, but because of the small size of the category it will not add much information to the model.)
@@ -334,6 +338,7 @@ item$type[item$item_size %in% clothes]  = "clothes"
 item$type[item$item_size %in% unsized]  = "unsized"
 
 \end{lstlisting}
+\quantnet \href{https://github.com/fractaldust/SPL_DFK/blob/master/submission/quantlets/Data_Cleaning/Data_Cleaning.R}{Data\_Cleaning} 
 
 \begin{figure}
   \begin{minipage}[c]{0.55\textwidth}
@@ -359,6 +364,8 @@ known.u    <- known[item_retrate!="unknown" & user_retrate=="unknown",]
 unknown.u  <- unknown[item_retrate!="unknown" & item_retrate!="new",]
 unknown.u  <- unknown.u[user_retrate=="unknown" | user_retrate=="new",]
 \end{lstlisting}
+\quantnet \href{https://github.com/fractaldust/SPL_DFK/blob/master/submission/quantlets/Decompose_Dataset/Decompose_Dataset.R}{Decompose\_Dataset} 
+
 Therefore the model is trained on this subset without the feature \texttt{user\_retrate} and accordingly predicts the \texttt{unknown.u} subset. Actually for training the model not only the \texttt{known.u} subset can be used, but also the \texttt{known.f} subset, since it is only important that the remaining columns are pure.\\
 \begin{center}
 \begin{figure}[h]
@@ -503,7 +510,8 @@ results.par = foreach(n = 1:nrow(parameters), .combine = cbind,
 stopCluster(cl) # stop parallel computing
 
 \end{lstlisting}
-
+\quantnet \href{https://github.com/fractaldust/SPL_DFK/blob/master/submission/quantlets/00-1-kfold_cv/00-1-kfold_cv.R}{00-1-kfold\_cv} 
+\newline
 Since the performance of the model also depends on the 'quality' of the training data and the training data is determined randomly, it is crucial to change the randomness of the splits. By varying the seed \texttt{set.seed(1234*t)} in the mother script  \texttt{00-2-rep\_cv.R} , the randomness of the training set tr is changed (\texttt{line 11-16}). \\ 
 Further this script \texttt{00-2-rep\_cv.R} splits the dataset according to the six tau-categories (see Table \ref{Table::Tau}). The k-fold cross validation from the previous section is then performed for every of these subsets. The results for each tau-category \texttt{v} are then stored in a list \texttt{tau\_c} (\texttt{line 22}). \\
 The output of the m-times repeated cross validation is a list of m times the same cross validation procedure (only with different randomness). Each element of the m-sized list is a list of the k*n matrix for the six tau-categories v.\\
@@ -530,13 +538,14 @@ for (t in 1:m){
   cv.list[[t]] = tau_c
 }
 \end{lstlisting}
-
+\quantnet \href{https://github.com/fractaldust/SPL_DFK/blob/master/submission/quantlets/00-2-rep_cv/00-2-rep_cv.R}{00-2-rep\_cv} 
+\newline
 
 
 Section \ref{Subsec::4Split} explains the importance of decomposing our dataset into four subsets according to the explanatory power of the features for training. In script \texttt{01-par-tuning.R} the whole tuning-process is performed for the different subsets. The following explains the preparation of the \texttt{.u} subset exemplarily.\\
 The known dataset consists of the subsets where a full model can be trained (\texttt{.f}) and the subset where the model without \texttt{user\_retrate} can be trained (\texttt{.u}). These two subsets are combined to the known data set (\texttt{line 51}). For training a neural network additional data preparation as described in section \ref{Subsec::AddPrep} is necessary (\texttt{line 54}). Then the columns of the feature \texttt{user\_retrate} get removed and the set is named according to the requirements of the script for cross validation (\texttt{lines 55-59}). \\
 After performing the m times repeated k-fold cross validation for the n variations of settings for the model, the results are stored in a the list \texttt{cv.list.u} for further evaluation (\texttt{line 71}).
-\newpage
+%\newpage
 \begin{lstlisting}[language=r]
 known   = rbind(known.f, known.u) # can also use .f for training, variables are pure
 unknown = unknown.u               #
@@ -554,7 +563,7 @@ cv.list.u   = cv.list             # store result of repeated cross validation
 
 \end{lstlisting}
 
-
+\quantnet \href{https://github.com/fractaldust/SPL_DFK/blob/master/submission/quantlets/01-par_tuning/01-par_tuning.R}{01-par\_tuning} 
 %----------------------------------------------------------------
 
 \section{Classification Alogrithms}\label{Sec::Algorit}
@@ -772,9 +781,10 @@ Figure \ref{Figure::FindTau} displays the loss function for the six tau-categori
 
 \begin{figure}
  \includegraphics[width=\textwidth]{pictures/find_tau.pdf}
- \caption{Loss function for the six tau-categories. In each category the loss is calculated for each tau-candidate. The negative loss shows its maximum in the range between $\tau=0.45$ and $\tau = 0.65$.}
+ \caption{Loss function for the six tau-categories. In each category the loss is calculated for each tau-candidate. The negative loss shows its maximum in the range between $\tau=0.45$ and $\tau = 0.65$.}{\quantnet \href{https://github.com/fractaldust/SPL_DFK/blob/master/submission/quantlets/nnet_tuning_graph/nnet_tuning_graph.R}{nnet\_tuning\_graph}}
  \label{Figure::FindTau}
 \end{figure}
+
 
 \subsection{Performance Benchmark}
 
