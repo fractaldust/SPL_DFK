@@ -1,0 +1,60 @@
+\begin{thebibliography}{9}
+\newcommand{\enquote}[1]{``#1''}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+
+\bibitem[\protect\citeauthoryear{Breiman}{Breiman}{2001}]{breiman2001random}
+\textsc{Breiman, L.} (2001): \enquote{Random forests,} \emph{Machine learning},
+  45, 5--32.
+
+\bibitem[\protect\citeauthoryear{Chen and Guestrin}{Chen and
+  Guestrin}{2016}]{chen2016}
+\textsc{Chen, T. and C.~Guestrin} (2016): \enquote{Xgboost: A scalable tree
+  boosting system,} in \emph{Proceedings of the 22nd acm sigkdd international
+  conference on knowledge discovery and data mining}, ACM, 785--794.
+
+\bibitem[\protect\citeauthoryear{Crone, Lessmann, and Stahlbock}{Crone
+  et~al.}{2006}]{crone2006}
+\textsc{Crone, S.~F., S.~Lessmann, and R.~Stahlbock} (2006): \enquote{The
+  impact of preprocessing on data mining: An evaluation of classifier
+  sensitivity in direct marketing,} \emph{European Journal of Operational
+  Research}, 173, 781--800.
+
+\bibitem[\protect\citeauthoryear{LeCun, Bengio, and Hinton}{LeCun
+  et~al.}{2015}]{lecun2015}
+\textsc{LeCun, Y., Y.~Bengio, and G.~Hinton} (2015): \enquote{Deep learning,}
+  \emph{nature}, 521, 436.
+
+\bibitem[\protect\citeauthoryear{Lessmann, Baesens, Seow, and Thomas}{Lessmann
+  et~al.}{2015}]{lessmann2015}
+\textsc{Lessmann, S., B.~Baesens, H.-V. Seow, and L.~C. Thomas} (2015):
+  \enquote{Benchmarking state-of-the-art classification algorithms for credit
+  scoring: An update of research,} \emph{European Journal of Operational
+  Research}, 247, 124--136.
+
+\bibitem[\protect\citeauthoryear{Manyika, Chui, Brown, Bughin, Dobbs, Roxburgh,
+  and Byers}{Manyika et~al.}{2011}]{manyika2011}
+\textsc{Manyika, J., M.~Chui, B.~Brown, J.~Bughin, R.~Dobbs, C.~Roxburgh, and
+  A.~H. Byers} (2011): \enquote{Big data: The next frontier for innovation,
+  competition, and productivity,} .
+
+\bibitem[\protect\citeauthoryear{Moeyersoms and Martens}{Moeyersoms and
+  Martens}{2015}]{moeyersoms2015}
+\textsc{Moeyersoms, J. and D.~Martens} (2015): \enquote{Including
+  high-cardinality attributes in predictive models: A case study in churn
+  prediction in the energy sector,} \emph{Decision support systems}, 72,
+  72--81.
+
+\bibitem[\protect\citeauthoryear{Tibshirani and Tibshirani}{Tibshirani and
+  Tibshirani}{2009}]{tibshirani2009}
+\textsc{Tibshirani, R.~J. and R.~Tibshirani} (2009): \enquote{A bias correction
+  for the minimum error rate in cross-validation,} \emph{The Annals of Applied
+  Statistics}, 822--829.
+
+\bibitem[\protect\citeauthoryear{Yu, Lai, Wang, and Huang}{Yu
+  et~al.}{2006}]{yu2006}
+\textsc{Yu, L., K.~K. Lai, S.~Wang, and W.~Huang} (2006): \enquote{A
+  bias-variance-complexity trade-off framework for complex system modeling,} in
+  \emph{International Conference on Computational Science and Its
+  Applications}, Springer, 518--527.
+
+\end{thebibliography}

@@ -1,0 +1,1087 @@
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.5.29)  29 MAR 2018 19:21
+entering extended mode
+**02_final*version.tex
+
+("C:\Users\Konstantin\Desktop\R\SPL\git\SPL_DFK\submission\latex\02_final versi
+on.tex"
+LaTeX2e <2011/06/27>
+Babel <v3.8m> and hyphenation patterns for english, afrikaans, ancientgreek, ar
+abic, armenian, assamese, basque, bengali, bokmal, bulgarian, catalan, coptic, 
+croatian, czech, danish, dutch, esperanto, estonian, farsi, finnish, french, ga
+lician, german, german-x-2013-05-26, greek, gujarati, hindi, hungarian, iceland
+ic, indonesian, interlingua, irish, italian, kannada, kurmanji, latin, latvian,
+ lithuanian, malayalam, marathi, mongolian, mongolianlmc, monogreek, ngerman, n
+german-x-2013-05-26, nynorsk, oriya, panjabi, pinyin, polish, portuguese, roman
+ian, russian, sanskrit, serbian, slovak, slovenian, spanish, swedish, swissgerm
+an, tamil, telugu, turkish, turkmen, ukenglish, ukrainian, uppersorbian, usengl
+ishmax, welsh, loaded.
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\article.cls"
+Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\size12.clo"
+File: size12.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@section=\count80
+\c@subsection=\count81
+\c@subsubsection=\count82
+\c@paragraph=\count83
+\c@subparagraph=\count84
+\c@figure=\count85
+\c@table=\count86
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsmath\amsmath.sty"
+Package: amsmath 2013/01/14 v2.14 AMS math features
+\@mathmargin=\skip43
+
+For additional information on amsmath, use the `?' option.
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsmath\amstext.sty"
+Package: amstext 2000/06/29 v2.01
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsmath\amsgen.sty"
+File: amsgen.sty 1999/11/30 v2.0
+\@emptytoks=\toks14
+\ex@=\dimen103
+))
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsmath\amsbsy.sty"
+Package: amsbsy 1999/11/29 v1.2d
+\pmbraise@=\dimen104
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsmath\amsopn.sty"
+Package: amsopn 1999/12/14 v2.01 operator names
+)
+\inf@bad=\count87
+LaTeX Info: Redefining \frac on input line 210.
+\uproot@=\count88
+\leftroot@=\count89
+LaTeX Info: Redefining \overline on input line 306.
+\classnum@=\count90
+\DOTSCASE@=\count91
+LaTeX Info: Redefining \ldots on input line 378.
+LaTeX Info: Redefining \dots on input line 381.
+LaTeX Info: Redefining \cdots on input line 466.
+\Mathstrutbox@=\box26
+\strutbox@=\box27
+\big@size=\dimen105
+LaTeX Font Info:    Redeclaring font encoding OML on input line 566.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 567.
+\macc@depth=\count92
+\c@MaxMatrixCols=\count93
+\dotsspace@=\muskip10
+\c@parentequation=\count94
+\dspbrk@lvl=\count95
+\tag@help=\toks15
+\row@=\count96
+\column@=\count97
+\maxfields@=\count98
+\andhelp@=\toks16
+\eqnshift@=\dimen106
+\alignsep@=\dimen107
+\tagshift@=\dimen108
+\tagwidth@=\dimen109
+\totwidth@=\dimen110
+\lineht@=\dimen111
+\@envbody=\toks17
+\multlinegap=\skip44
+\multlinetaggap=\skip45
+\mathdisplay@stack=\toks18
+LaTeX Info: Redefining \[ on input line 2665.
+LaTeX Info: Redefining \] on input line 2666.
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsfonts\amssymb.sty"
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsfonts\amsfonts.sty"
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+))
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amscls\amsthm.sty"
+Package: amsthm 2004/08/06 v2.20
+\thm@style=\toks19
+\thm@bodyfont=\toks20
+\thm@headfont=\toks21
+\thm@notefont=\toks22
+\thm@headpunct=\toks23
+\thm@preskip=\skip46
+\thm@postskip=\skip47
+\thm@headsep=\skip48
+\dth@everypar=\toks24
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\graphicx.sty"
+Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\keyval.sty"
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks25
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\graphics.sty"
+Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\trig.sty"
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\00miktex\graphics.cfg"
+File: graphics.cfg 2007/01/18 v1.5 graphics configuration of teTeX/TeXLive
+)
+Package graphics Info: Driver file: pdftex.def on input line 91.
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\pdftex-def\pdftex.def"
+File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\infwarerr.sty"
+Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\ltxcmds.sty"
+Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
+)
+\Gread@gobject=\count99
+))
+\Gin@req@height=\dimen112
+\Gin@req@width=\dimen113
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\hyperref\hyperref.sty"
+Package: hyperref 2012/11/06 v6.83m Hypertext links for LaTeX
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\hobsub-hyperref.sty"
+Package: hobsub-hyperref 2012/04/25 v1.12 Bundle oberdiek, subset hyperref (HO)
+
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\hobsub-generic.sty"
+Package: hobsub-generic 2012/04/25 v1.12 Bundle oberdiek, subset generic (HO)
+Package: hobsub 2012/04/25 v1.12 Construct package bundles (HO)
+Package hobsub Info: Skipping package `infwarerr' (already loaded).
+Package hobsub Info: Skipping package `ltxcmds' (already loaded).
+Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+Package: ifvtex 2010/03/01 v1.5 Detect VTeX and its facilities (HO)
+Package ifvtex Info: VTeX not detected.
+Package: intcalc 2007/09/27 v1.1 Expandable calculations with integers (HO)
+Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
+Package ifpdf Info: pdfTeX in PDF mode is detected.
+Package: etexcmds 2011/02/16 v1.5 Avoid name clashes with e-TeX commands (HO)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+Package: kvsetkeys 2012/04/25 v1.16 Key value parser (HO)
+Package: kvdefinekeys 2011/04/07 v1.3 Define keys (HO)
+Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+Package: pdfescape 2011/11/25 v1.13 Implements pdfTeX's escape features (HO)
+Package: bigintcalc 2012/04/08 v1.3 Expandable calculations on big integers (HO
+)
+Package: bitset 2011/01/30 v1.1 Handle bit-vector datatype (HO)
+Package: uniquecounter 2011/01/30 v1.2 Provide unlimited unique counter (HO)
+)
+Package hobsub Info: Skipping package `hobsub' (already loaded).
+Package: letltxmacro 2010/09/02 v1.4 Let assignment for LaTeX macros (HO)
+Package: hopatch 2011/06/24 v1.1 Wrapper for package hooks (HO)
+Package: xcolor-patch 2011/01/30 xcolor patch
+Package: atveryend 2011/06/30 v1.8 Hooks at the very end of document (HO)
+Package atveryend Info: \enddocument detected (standard20110627).
+Package: atbegshi 2011/10/05 v1.16 At begin shipout hook (HO)
+Package: refcount 2011/10/16 v3.4 Data extraction from label references (HO)
+Package: hycolor 2011/01/30 v1.7 Color options for hyperref/bookmark (HO)
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\ifxetex\ifxetex.sty"
+Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\oberdiek\auxhook.sty"
+Package: auxhook 2011/03/04 v1.3 Hooks for auxiliary files (HO)
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\oberdiek\kvoptions.sty"
+Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
+)
+\@linkdim=\dimen114
+\Hy@linkcounter=\count100
+\Hy@pagecounter=\count101
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\hyperref\pd1enc.def"
+File: pd1enc.def 2012/11/06 v6.83m Hyperref: PDFDocEncoding definition (HO)
+)
+\Hy@SavedSpaceFactor=\count102
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\00miktex\hyperref.cfg"
+File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive
+)
+Package hyperref Info: Hyper figures OFF on input line 4443.
+Package hyperref Info: Link nesting OFF on input line 4448.
+Package hyperref Info: Hyper index ON on input line 4451.
+Package hyperref Info: Plain pages OFF on input line 4458.
+Package hyperref Info: Backreferencing OFF on input line 4463.
+Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
+Package hyperref Info: Bookmarks ON on input line 4688.
+\c@Hy@tempcnt=\count103
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\url\url.sty"
+\Urlmuskip=\muskip11
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+LaTeX Info: Redefining \url on input line 5041.
+\XeTeXLinkMargin=\dimen115
+\Fld@menulength=\count104
+\Field@Width=\dimen116
+\Fld@charsize=\dimen117
+Package hyperref Info: Hyper figures OFF on input line 6295.
+Package hyperref Info: Link nesting OFF on input line 6300.
+Package hyperref Info: Hyper index ON on input line 6303.
+Package hyperref Info: backreferencing OFF on input line 6310.
+Package hyperref Info: Link coloring OFF on input line 6315.
+Package hyperref Info: Link coloring with OCG OFF on input line 6320.
+Package hyperref Info: PDF/A mode OFF on input line 6325.
+LaTeX Info: Redefining \ref on input line 6365.
+LaTeX Info: Redefining \pageref on input line 6369.
+\Hy@abspage=\count105
+\c@Item=\count106
+\c@Hfootnote=\count107
+)
+
+Package hyperref Message: Driver (autodetected): hpdftex.
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\hyperref\hpdftex.def"
+File: hpdftex.def 2012/11/06 v6.83m Hyperref driver for pdfTeX
+\Fld@listcount=\count108
+\c@bookmark@seq@number=\count109
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\oberdiek\rerunfilecheck.sty"
+Package: rerunfilecheck 2011/04/15 v1.7 Rerun checks for auxiliary files (HO)
+Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
+82.
+)
+\Hy@SectionHShift=\skip49
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\booktabs\booktabs.sty"
+Package: booktabs 2005/04/14 v1.61803 publication quality tables
+\heavyrulewidth=\dimen118
+\lightrulewidth=\dimen119
+\cmidrulewidth=\dimen120
+\belowrulesep=\dimen121
+\belowbottomsep=\dimen122
+\aboverulesep=\dimen123
+\abovetopsep=\dimen124
+\cmidrulesep=\dimen125
+\cmidrulekern=\dimen126
+\defaultaddspace=\dimen127
+\@cmidla=\count110
+\@cmidlb=\count111
+\@aboverulesep=\dimen128
+\@belowrulesep=\dimen129
+\@thisruleclass=\count112
+\@lastruleclass=\count113
+\@thisrulewidth=\dimen130
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\natbib\natbib.sty"
+Package: natbib 2010/09/13 8.31b (PWD, AO)
+\bibhang=\skip50
+\bibsep=\skip51
+LaTeX Info: Redefining \cite on input line 694.
+\c@NAT@ctr=\count114
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\caption\caption2.sty"
+Package: caption2 2013/02/03 v2.2-62 Customising captions (AR)
+
+
+Package caption2 Warning: ****************************************************
+(caption2)                THIS PACKAGE IS OBSOLETE:
+(caption2)                This package attempts to provide an `caption2'
+(caption2)                package v2.0/2.1 author environment so that OLD
+(caption2)                documents can be successfully processed. It should
+(caption2)                NOT be used for NEW documents! New documents should
+(caption2)                use the regular `caption' package v3.x instead.
+(caption2)                ****************************************************
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\caption\caption3.sty"
+Package: caption3 2013/05/02 v1.6-88 caption3 kernel (AR)
+Package caption3 Info: TeX engine: e-TeX on input line 57.
+\captionmargin=\dimen131
+\captionmargin@=\dimen132
+\captionwidth=\dimen133
+\caption@tempdima=\dimen134
+\caption@indent=\dimen135
+\caption@parindent=\dimen136
+\caption@hangindent=\dimen137
+)
+Package caption2 Info: Running in caption2 v2.0 compatibility mode on input lin
+e 215.
+\captionlinewidth=\dimen138
+\realcaptionwidth=\dimen139
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\lscape.sty"
+Package: lscape 2000/10/22 v3.01 Landscape Pages (DPC)
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\footmisc\footmisc.sty"
+Package: footmisc 2011/06/06 v5.5b a miscellany of footnote facilities
+\FN@temptoken=\toks26
+\footnotemargin=\dimen140
+\c@pp@next@reset=\count115
+Package footmisc Info: Declaring symbol style bringhurst on input line 855.
+Package footmisc Info: Declaring symbol style chicago on input line 863.
+Package footmisc Info: Declaring symbol style wiley on input line 872.
+Package footmisc Info: Declaring symbol style lamport-robust on input line 883.
+
+Package footmisc Info: Declaring symbol style lamport* on input line 903.
+Package footmisc Info: Declaring symbol style lamport*-robust on input line 924
+.
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\float\float.sty"
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count116
+\float@exts=\toks27
+\float@box=\box28
+\@float@everytoks=\toks28
+\@floatcapt=\box29
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\koma-script\scrpage2.sty"
+Package: scrpage2 2015/05/06 v3.17a KOMA-Script package (page head and foot)
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\subfigure\subfigure.sty"
+Package: subfigure 2002/07/30 v2.1.4 subfigure package
+\subfigtopskip=\skip52
+\subfigcapskip=\skip53
+\subfigcaptopadj=\dimen141
+\subfigbottomskip=\skip54
+\subfigcapmargin=\dimen142
+\subfiglabelskip=\skip55
+\c@subfigure=\count117
+\c@lofdepth=\count118
+\c@subtable=\count119
+\c@lotdepth=\count120
+
+****************************************
+* Local config file subfigure.cfg used *
+****************************************
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\subfigure\subfigure.cfg")
+\subfig@top=\skip56
+\subfig@bottom=\skip57
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\wrapfig\wrapfig.sty"
+\wrapoverhang=\dimen143
+\WF@size=\dimen144
+\c@WF@wrappedlines=\count121
+\WF@box=\box30
+\WF@everypar=\toks29
+Package: wrapfig 2003/01/31  v 3.6
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\setspace\setspace.sty"
+Package: setspace 2011/12/19 v6.7a set line spacing
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\fontenc.sty"
+Package: fontenc 2005/09/27 v1.99g Standard LaTeX package
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\t1enc.def"
+File: t1enc.def 2005/09/27 v1.99g Standard LaTeX file
+LaTeX Font Info:    Redeclaring font encoding T1 on input line 43.
+))
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\babel\babel.sty"
+Package: babel 2008/07/08 v3.8m The Babel package
+
+*************************************
+* Local config file bblopts.cfg used
+*
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\00miktex\bblopts.cfg"
+File: bblopts.cfg 2006/07/31 v1.0 MiKTeX 'babel' configuration
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\babel\english.ldf"
+Language: english 2005/03/30 v3.3o English support from the babel system
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\babel\babel.def"
+File: babel.def 2008/07/08 v3.8m Babel common definitions
+\babel@savecnt=\count122
+\U@D=\dimen145
+)
+\l@canadian = a dialect from \language\l@american 
+\l@australian = a dialect from \language\l@british 
+\l@newzealand = a dialect from \language\l@british 
+))
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\listings\listings.sty"
+\lst@mode=\count123
+\lst@gtempboxa=\box31
+\lst@token=\toks30
+\lst@length=\count124
+\lst@currlwidth=\dimen146
+\lst@column=\count125
+\lst@pos=\count126
+\lst@lostspace=\dimen147
+\lst@width=\dimen148
+\lst@newlines=\count127
+\lst@lineno=\count128
+\lst@maxwidth=\dimen149
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\listings\lstmisc.sty"
+File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
+\c@lstnumber=\count129
+\lst@skipnumbers=\count130
+\lst@framebox=\box32
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\listings\listings.cfg"
+File: listings.cfg 2015/06/04 1.6 listings configuration
+))
+Package: listings 2015/06/04 1.6 (Carsten Heinz)
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\xcolor\xcolor.sty"
+Package: xcolor 2016/05/11 v2.12 LaTeX color extensions (UK)
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\00miktex\color.cfg"
+File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
+)
+Package xcolor Info: Driver file: pdftex.def on input line 225.
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1348.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1352.
+Package xcolor Info: Model `RGB' extended on input line 1364.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1366.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1367.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1368.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1369.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1370.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\eso-pic\eso-pic.sty"
+Package: eso-pic 2015/07/21 v2.0g eso-pic (RN)
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\jknappen\mathrsfs.sty"
+Package: mathrsfs 1996/01/01 Math RSFS package v1.0 (jk)
+\symrsfs=\mathgroup6
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\multirow\multirow.sty"
+\bigstrutjot=\dimen150
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\cooltooltips\cooltooltips.sty"
+Package: cooltooltips 2006/03/07 v1.0 Cool PDF tooltips
+\ctip@content@box=\box33
+)
+(C:\Users\Konstantin\Desktop\R\SPL\git\SPL_DFK\submission\latex\colordef.sty)
+(C:\Users\Konstantin\Desktop\R\SPL\git\SPL_DFK\submission\latex\lvblisting.sty)
+\c@definition=\count131
+\c@theorem=\count132
+
+("C:\Users\Konstantin\Desktop\R\SPL\git\SPL_DFK\submission\latex\02_final versi
+on.aux")
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 74.
+LaTeX Font Info:    ... okay on input line 74.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 74.
+LaTeX Font Info:    ... okay on input line 74.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 74.
+LaTeX Font Info:    ... okay on input line 74.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 74.
+LaTeX Font Info:    ... okay on input line 74.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 74.
+LaTeX Font Info:    ... okay on input line 74.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 74.
+LaTeX Font Info:    ... okay on input line 74.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 74.
+LaTeX Font Info:    ... okay on input line 74.
+ ("C:\Program Files (x86)\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count133
+\scratchdimen=\dimen151
+\scratchbox=\box34
+\nofMPsegments=\count134
+\nofMParguments=\count135
+\everyMPshowfont=\toks31
+\MPscratchCnt=\count136
+\MPscratchDim=\dimen152
+\MPnumerator=\count137
+\makeMPintoPDFobject=\count138
+\everyMPtoPDFconversion=\toks32
+)
+\AtBeginShipoutBox=\box35
+Package hyperref Info: Link coloring OFF on input line 74.
+ ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\hyperref\nameref.sty"
+Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\gettitlestring.sty"
+Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
+)
+\c@section@level=\count139
+)
+LaTeX Info: Redefining \ref on input line 74.
+LaTeX Info: Redefining \pageref on input line 74.
+LaTeX Info: Redefining \nameref on input line 74.
+
+("C:\Users\Konstantin\Desktop\R\SPL\git\SPL_DFK\submission\latex\02_final versi
+on.out")
+("C:\Users\Konstantin\Desktop\R\SPL\git\SPL_DFK\submission\latex\02_final versi
+on.out")
+\@outlinefile=\write3
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: End \AtBeginDocument code.
+
+
+Package scrpage2 Warning: seems you are using a very small headheight.
+(scrpage2)                If you get overfull \vbox warnings at almost every
+(scrpage2)                page, you should increase headheight e.g. writing
+(scrpage2)                 \setlength{\headheight}{1.1\baselineskip}
+(scrpage2)                into the preamble of your document.
+(scrpage2)                A better solution would be to use typearea package.
+
+\c@lstlisting=\count140
+
+(C:\Users\Konstantin\Desktop\R\SPL\git\SPL_DFK\submission\latex\01_titlepage.te
+x <pictures/logo_hu.png, id=109, 611.28375pt x 602.25pt>
+File: pictures/logo_hu.png Graphic file (type png)
+
+<use pictures/logo_hu.png>
+Package pdftex.def Info: pictures/logo_hu.png used on input line 12.
+(pdftex.def)             Requested size: 122.25458pt x 120.44786pt.
+) [1
+
+{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map} <C:/Users/Konstantin/Deskt
+op/R/SPL/git/SPL_DFK/submission/latex/pictures/logo_hu.png>]
+("C:\Users\Konstantin\Desktop\R\SPL\git\SPL_DFK\submission\latex\02_final versi
+on.toc"
+LaTeX Font Info:    Try loading font information for U+msa on input line 5.
+ ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsfonts\umsa.fd"
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 5.
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+LaTeX Font Info:    Try loading font information for U+rsfs on input line 5.
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\jknappen\ursfs.fd"
+File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
+)
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 6.
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\t1cmtt.fd"
+File: t1cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+))
+\tf@toc=\write4
+
+Overfull \vbox (7.14983pt too high) has occurred while \output is active []
+
+
+[2]
+Underfull \hbox (badness 10000) in paragraph at lines 88--90
+
+ []
+
+
+Overfull \vbox (7.14983pt too high) has occurred while \output is active []
+
+
+[3pdfTeX warning (ext4): destination with the same identifier (name{table.1}) h
+as been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.103 \newpage
+              ]
+Overfull \hbox (30.36365pt too wide) in paragraph at lines 112--131
+ [] 
+ []
+
+
+Overfull \hbox (8.52965pt too wide) in paragraph at lines 142--167
+[][] 
+ []
+
+
+Overfull \vbox (7.14983pt too high) has occurred while \output is active []
+
+
+[4pdfTeX warning (ext4): destination with the same identifier (name{table.2}) h
+as been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.171 
+      ]
+LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <14.4> not available
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 173.
+
+Underfull \hbox (badness 10000) in paragraph at lines 174--179
+
+ []
+
+
+Overfull \vbox (7.14983pt too high) has occurred while \output is active []
+
+
+[5pdfTeX warning (ext4): destination with the same identifier (name{table.3}) h
+as been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.179 \begin{lstlisting}
+                        ]
+Overfull \vbox (7.14983pt too high) has occurred while \output is active []
+
+
+[6]
+Overfull \vbox (7.14983pt too high) has occurred while \output is active []
+
+
+[7]
+Underfull \hbox (badness 2865) in paragraph at lines 242--242
+[]|\T1/cmr/bx/n/10.95 Table 4: []\T1/cmr/m/n/10.95 Classification out-comes for
+
+ []
+
+
+Overfull \hbox (2.61049pt too wide) in paragraph at lines 242--264
+[]$[]$  $[]$ 
+ []
+
+
+Overfull \vbox (7.14983pt too high) has occurred while \output is active []
+
+
+[8pdfTeX warning (ext4): destination with the same identifier (name{table.4}) h
+as been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.274 
+      ]
+Overfull \hbox (37.03706pt too wide) in paragraph at lines 278--284
+[][]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 291--292
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 294--298
+
+ []
+
+<pictures/item_retrate_woe.png, id=243, 406.6392pt x 156.1032pt>
+File: pictures/item_retrate_woe.png Graphic file (type png)
+
+<use pictures/item_retrate_woe.png>
+Package pdftex.def Info: pictures/item_retrate_woe.png used on input line 301.
+(pdftex.def)             Requested size: 305.15292pt x 117.14616pt.
+
+<pictures/item_retrate_r.pdf, id=244, 312.16624pt x 312.16624pt>
+File: pictures/item_retrate_r.pdf Graphic file (type pdf)
+
+<use pictures/item_retrate_r.pdf>
+Package pdftex.def Info: pictures/item_retrate_r.pdf used on input line 314.
+(pdftex.def)             Requested size: 234.73523pt x 234.73857pt.
+
+<pictures/item_retrate_ku.pdf, id=245, 312.16624pt x 312.16624pt>
+File: pictures/item_retrate_ku.pdf Graphic file (type pdf)
+
+<use pictures/item_retrate_ku.pdf>
+Package pdftex.def Info: pictures/item_retrate_ku.pdf used on input line 315.
+(pdftex.def)             Requested size: 234.73523pt x 234.73857pt.
+
+Overfull \hbox (2.61049pt too wide) in paragraph at lines 314--316
+[][] [][]
+ []
+
+
+Overfull \vbox (7.14983pt too high) has occurred while \output is active []
+
+
+[9pdfTeX warning (ext4): destination with the same identifier (name{table.5}) h
+as been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.322 \newpage
+              pdfTeX warning (ext4): destination with the same identifier (name
+{figure.1}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.322 \newpage
+               <C:/Users/Konstantin/Desktop/R/SPL/git/SPL_DFK/submission/latex/
+pictures/item_retrate_woe.png>]
+Overfull \vbox (7.14983pt too high) has occurred while \output is active []
+
+
+[10pdfTeX warning (ext4): destination with the same identifier (name{figure.2})
+ has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.322 \newpage
+               <C:/Users/Konstantin/Desktop/R/SPL/git/SPL_DFK/submission/latex/
+pictures/item_retrate_r.pdf> <C:/Users/Konstantin/Desktop/R/SPL/git/SPL_DFK/sub
+mission/latex/pictures/item_retrate_ku.pdf>]
+<pictures/item_type.pdf, id=283, 312.16624pt x 312.16624pt>
+File: pictures/item_type.pdf Graphic file (type pdf)
+
+<use pictures/item_type.pdf>
+Package pdftex.def Info: pictures/item_type.pdf used on input line 340.
+(pdftex.def)             Requested size: 258.21017pt x 258.2167pt.
+
+Underfull \hbox (badness 1337) in paragraph at lines 343--343
+\T1/cmr/m/n/10.95 train-ing set. blue his-togram:
+ []
+
+
+Overfull \vbox (7.14983pt too high) has occurred while \output is active []
+
+
+[11pdfTeX warning (ext4): destination with the same identifier (name{figure.3})
+ has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.354 \begin{lstlisting}
+                         <C:/Users/Konstantin/Desktop/R/SPL/git/SPL_DFK/submiss
+ion/latex/pictures/item_type.pdf>]
+Underfull \hbox (badness 10000) in paragraph at lines 362--363
+
+ []
+
+
+Overfull \vbox (7.14983pt too high) has occurred while \output is active []
+
+
+[12pdfTeX warning (ext4): destination with the same identifier (name{table.6}) 
+has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.383 \newpage
+              ]
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line 386.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\tau' on input line 386.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line 386.
+
+
+Overfull \vbox (7.14983pt too high) has occurred while \output is active []
+
+
+[13pdfTeX warning (ext4): destination with the same identifier (name{table.7}) 
+has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.414 ...ation \in Split.Train \ | \ \tau = k\}$$ 
+                                                  produces significantly dif...
+]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 421.
+
+ ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\omscmr.fd"
+File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 421.
+
+Overfull \hbox (0.38596pt too wide) in paragraph at lines 438--439
+\T1/cmr/m/n/12 Suppose a train-ing set $\OML/cmm/m/it/12 T$ \T1/cmr/m/n/12 is g
+iven so that ev-ery $\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 v[]; y[]\OT1/cmr/m/n/12 
+) \OMS/cmsy/m/n/12 2 \OML/cmm/m/it/12 T$ \T1/cmr/m/n/12 is of the form $\OT1/cm
+r/m/n/12 (\OML/cmm/m/it/12 v[]; ::; v[]; y[]; ::; y[]\OT1/cmr/m/n/12 )$
+ []
+
+
+Overfull \vbox (7.14983pt too high) has occurred while \output is active []
+
+
+[14]
+
+LaTeX Warning: Reference `@@@' on page 15 undefined on input line 459.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 458--463
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 458--463
+
+ []
+
+
+Overfull \vbox (7.14983pt too high) has occurred while \output is active []
+
+
+[15] ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\listings\lstlang1.sty"
+File: lstlang1.sty 2015/06/04 1.6 listings language file
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\listings\lstlang2.sty"
+File: lstlang2.sty 2015/06/04 1.6 listings language file
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\listings\lstlang3.sty"
+File: lstlang3.sty 2015/06/04 1.6 listings language file
+)
+Overfull \vbox (7.14983pt too high) has occurred while \output is active []
+
+
+[16]
+Underfull \hbox (badness 10000) in paragraph at lines 507--511
+
+ []
+
+
+Overfull \vbox (7.14983pt too high) has occurred while \output is active []
+
+
+[17]
+Overfull \vbox (7.14983pt too high) has occurred while \output is active []
+
+
+[18]
+Overfull \vbox (7.14983pt too high) has occurred while \output is active []
+
+
+[19]
+Underfull \hbox (badness 10000) in paragraph at lines 579--580
+
+ []
+
+
+Overfull \vbox (7.14983pt too high) has occurred while \output is active []
+
+
+[20]
+Underfull \hbox (badness 10000) in paragraph at lines 642--645
+
+ []
+
+
+Overfull \vbox (7.14983pt too high) has occurred while \output is active []
+
+
+[21]
+Overfull \vbox (7.14983pt too high) has occurred while \output is active []
+
+
+[22] <pictures/nnet_1.png, id=481, 791.95876pt x 659.46375pt>
+File: pictures/nnet_1.png Graphic file (type png)
+
+<use pictures/nnet_1.png>
+Package pdftex.def Info: pictures/nnet_1.png used on input line 692.
+(pdftex.def)             Requested size: 305.15292pt x 254.1006pt.
+
+Underfull \hbox (badness 1430) in paragraph at lines 696--696
+\T1/cmr/m/n/10.95 rons re-spec-tively and two
+ []
+
+
+Underfull \hbox (badness 1552) in paragraph at lines 696--696
+\T1/cmr/m/n/10.95 is only one hid-den layer.
+ []
+
+
+Overfull \vbox (7.14983pt too high) has occurred while \output is active []
+
+
+[23pdfTeX warning (ext4): destination with the same identifier (name{figure.4})
+ has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.703 ... \quad f_{2}(t):= \frac{1}{1+ e^{-t}} $$ 
+                                                  the latter being used in t...
+ <C:/Users/Konstantin/Desktop/R/SPL/git/SPL_DFK/submission/latex/pictures/nnet_
+1.png>] <pictures/nnet_2.png, id=496, 837.1275pt x 658.46pt>
+File: pictures/nnet_2.png Graphic file (type png)
+
+<use pictures/nnet_2.png>
+Package pdftex.def Info: pictures/nnet_2.png used on input line 712.
+(pdftex.def)             Requested size: 305.15292pt x 240.01941pt.
+
+Overfull \vbox (7.14983pt too high) has occurred while \output is active []
+
+
+[24]
+Underfull \hbox (badness 10000) in paragraph at lines 731--733
+
+ []
+
+
+Overfull \vbox (7.14983pt too high) has occurred while \output is active []
+
+
+[25pdfTeX warning (ext4): destination with the same identifier (name{figure.5})
+ has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.733 \begin{center}
+                     <C:/Users/Konstantin/Desktop/R/SPL/git/SPL_DFK/submission/
+latex/pictures/nnet_2.png>]
+<pictures/nnet_tuning.png, id=522, 625.8582pt x 312.6882pt>
+File: pictures/nnet_tuning.png Graphic file (type png)
+
+<use pictures/nnet_tuning.png>
+Package pdftex.def Info: pictures/nnet_tuning.png used on input line 753.
+(pdftex.def)             Requested size: 469.47046pt x 234.5585pt.
+
+<pictures/normed_sum.png, id=523, 312.6882pt x 156.1032pt>
+File: pictures/normed_sum.png Graphic file (type png)
+
+<use pictures/normed_sum.png>
+Package pdftex.def Info: pictures/normed_sum.png used on input line 760.
+(pdftex.def)             Requested size: 305.15292pt x 152.356pt.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line 769.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\tau' on input line 769.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line 769.
+
+<pictures/find_tau.pdf, id=530, 625.33624pt x 312.16624pt>
+File: pictures/find_tau.pdf Graphic file (type pdf)
+
+<use pictures/find_tau.pdf>
+Package pdftex.def Info: pictures/find_tau.pdf used on input line 774.
+(pdftex.def)             Requested size: 469.47046pt x 234.36227pt.
+
+Overfull \vbox (7.14983pt too high) has occurred while \output is active []
+
+
+[26]
+Overfull \vbox (7.14983pt too high) has occurred while \output is active []
+
+
+[27pdfTeX warning (ext4): destination with the same identifier (name{figure.6})
+ has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.777 \end{figure}
+                  pdfTeX warning (ext4): destination with the same identifier (
+name{figure.7}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.777 \end{figure}
+                   <C:/Users/Konstantin/Desktop/R/SPL/git/SPL_DFK/submission/la
+tex/pictures/nnet_tuning.png (PNG copy)> <C:/Users/Konstantin/Desktop/R/SPL/git
+/SPL_DFK/submission/latex/pictures/normed_sum.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 804--806
+
+ []
+
+
+Overfull \vbox (7.14983pt too high) has occurred while \output is active []
+
+
+[28pdfTeX warning (ext4): destination with the same identifier (name{figure.8})
+ has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.806 
+      pdfTeX warning (ext4): destination with the same identifier (name{table.8
+}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.806 
+       <C:/Users/Konstantin/Desktop/R/SPL/git/SPL_DFK/submission/latex/pictures
+/find_tau.pdf>]
+Overfull \hbox (29.26062pt too wide) in paragraph at lines 810--812
+\T1/cmr/m/n/12 One (in-)evitable er-ror oc-curred dur-ing the cre-ation of the 
+vari-ables user_retrate and item_retrate:
+ []
+
+
+Overfull \vbox (7.14983pt too high) has occurred while \output is active []
+
+
+[29]
+Overfull \vbox (7.14983pt too high) has occurred while \output is active []
+
+
+[30]
+("C:\Users\Konstantin\Desktop\R\SPL\git\SPL_DFK\submission\latex\02_final versi
+on.bbl")
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 824.
+
+Overfull \vbox (7.14983pt too high) has occurred while \output is active []
+
+
+[31]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 824.
+
+("C:\Users\Konstantin\Desktop\R\SPL\git\SPL_DFK\submission\latex\02_final versi
+on.aux")
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 824.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 824.
+Package rerunfilecheck Info: File `02_final*version.out' has not changed.
+(rerunfilecheck)             Checksum: <no file>.
+
+
+LaTeX Warning: There were undefined references.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 824.
+ ) 
+Here is how much of TeX's memory you used:
+ 12878 strings out of 493921
+ 181776 string characters out of 3144861
+ 504475 words of memory out of 3000000
+ 15738 multiletter control sequences out of 15000+200000
+ 33412 words of font info for 89 fonts, out of 3000000 for 9000
+ 841 hyphenation exceptions out of 8191
+ 36i,13n,42p,15156b,2711s stack positions out of 5000i,500n,10000p,200000b,50000s
+pdfTeX warning (dest): name{Hfootnote.1} has been referenced but does not exi
+st, replaced by a fixed one
+
+ <C:\Users\Konstantin\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi6
+00\eccc1200.pk> <C:\Users\Konstantin\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\j
+knappen\ec\dpi600\ecrm0800.pk> <C:\Users\Konstantin\AppData\Local\MiKTeX\2.9\fo
+nts\pk\ljfour\jknappen\ec\dpi600\ecbi0800.pk> <C:\Users\Konstantin\AppData\Loca
+l\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbi1200.pk> <C:\Users\Konstant
+in\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecit1000.pk> <C:
+\Users\Konstantin\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\e
+ctt1095.pk> <C:\Users\Konstantin\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknap
+pen\ec\dpi600\ectt1000.pk> <C:\Users\Konstantin\AppData\Local\MiKTeX\2.9\fonts\
+pk\ljfour\jknappen\ec\dpi450\ectt0800.pk> <C:\Users\Konstantin\AppData\Local\Mi
+KTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ectt1440.pk> <C:\Users\Konstantin\A
+ppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1440.pk> <C:\Use
+rs\Konstantin\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecti1
+095.pk> <C:\Users\Konstantin\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\
+ec\dpi600\ecrm1000.pk> <C:\Users\Konstantin\AppData\Local\MiKTeX\2.9\fonts\pk\l
+jfour\jknappen\ec\dpi600\ecrm0700.pk> <C:\Users\Konstantin\AppData\Local\MiKTeX
+\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1095.pk> <C:\Users\Konstantin\AppDa
+ta\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1095.pk> <C:\Users\K
+onstantin\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecti1200.
+pk> <C:\Users\Konstantin\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\d
+pi600\ectt1200.pk> <C:\Users\Konstantin\AppData\Local\MiKTeX\2.9\fonts\pk\ljfou
+r\jknappen\ec\dpi600\ecsl1200.pk> <C:\Users\Konstantin\AppData\Local\MiKTeX\2.9
+\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1200.pk> <C:\Users\Konstantin\AppData\L
+ocal\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1200.pk> <C:\Users\Konst
+antin\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1728.pk><
+C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:
+/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/P
+rogram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Pro
+gram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Progra
+m Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program F
+iles (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program File
+s (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files (
+x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files (x86)
+/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files (x86)/M
+iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files (x86)/MiKT
+eX 2.9/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on "02_final version.pdf" (31 pages, 958720 bytes).
+PDF statistics:
+ 1395 PDF objects out of 1440 (max. 8388607)
+ 218 named destinations out of 1000 (max. 500000)
+ 269 words of extra memory for PDF output out of 10000 (max. 10000000)
+

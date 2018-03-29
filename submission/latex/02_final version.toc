@@ -1,0 +1,27 @@
+\select@language {english}
+\contentsline {section}{\numberline {1}Introduction}{3}{section.1}
+\contentsline {section}{\numberline {2}Data}{4}{section.2}
+\contentsline {section}{\numberline {3}Feature Engineering}{5}{section.3}
+\contentsline {subsection}{\numberline {3.1}Definition and explanation of variables }{5}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}The case of \texttt {item\_retrate}}{6}{subsection.3.2}
+\contentsline {subsubsection}{\numberline {3.2.1}Interval boundary choice}{7}{subsubsection.3.2.1}
+\contentsline {subsection}{\numberline {3.3}Weight of Evidence}{9}{subsection.3.3}
+\contentsline {subsection}{\numberline {3.4}semantic grouping: the case of \texttt {item\_type}}{10}{subsection.3.4}
+\contentsline {section}{\numberline {4}Preparation of Data Set for Models}{11}{section.4}
+\contentsline {subsection}{\numberline {4.1}Decomposition due to uncertain categories}{11}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}On multiple $\tau $ thresholds}{13}{subsection.4.2}
+\contentsline {section}{\numberline {5}Cross Validation}{14}{section.5}
+\contentsline {subsection}{\numberline {5.1}Theory}{14}{subsection.5.1}
+\contentsline {subsection}{\numberline {5.2}Implementation}{15}{subsection.5.2}
+\contentsline {section}{\numberline {6}Classification Alogrithms}{19}{section.6}
+\contentsline {subsection}{\numberline {6.1}Extreme Gradient Boosting}{19}{subsection.6.1}
+\contentsline {subsection}{\numberline {6.2}Random Forest}{20}{subsection.6.2}
+\contentsline {subsection}{\numberline {6.3}Neural Network}{23}{subsection.6.3}
+\contentsline {subsubsection}{\numberline {6.3.1}Backpropagation}{24}{subsubsection.6.3.1}
+\contentsline {subsubsection}{\numberline {6.3.2}Additional Data Preparation}{24}{subsubsection.6.3.2}
+\contentsline {section}{\numberline {7}Parameter Tuning}{25}{section.7}
+\contentsline {subsection}{\numberline {7.1}Parameters of Neural Network}{25}{subsection.7.1}
+\contentsline {subsubsection}{\numberline {7.1.1}optimal $\tau $ for loss function}{26}{subsubsection.7.1.1}
+\contentsline {subsection}{\numberline {7.2}Performance Benchmark}{28}{subsection.7.2}
+\contentsline {subsection}{\numberline {7.3}Prediction}{29}{subsection.7.3}
+\contentsline {section}{\numberline {8}Conclusion}{29}{section.8}

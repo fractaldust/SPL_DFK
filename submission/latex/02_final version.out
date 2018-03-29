@@ -1,0 +1,26 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{Data}{}% 2
+\BOOKMARK [1][-]{section.3}{Feature Engineering}{}% 3
+\BOOKMARK [2][-]{subsection.3.1}{Definition and explanation of variables }{section.3}% 4
+\BOOKMARK [2][-]{subsection.3.2}{The case of item\137retrate}{section.3}% 5
+\BOOKMARK [3][-]{subsubsection.3.2.1}{Interval boundary choice}{subsection.3.2}% 6
+\BOOKMARK [2][-]{subsection.3.3}{Weight of Evidence}{section.3}% 7
+\BOOKMARK [2][-]{subsection.3.4}{semantic grouping: the case of item\137type}{section.3}% 8
+\BOOKMARK [1][-]{section.4}{Preparation of Data Set for Models}{}% 9
+\BOOKMARK [2][-]{subsection.4.1}{Decomposition due to uncertain categories}{section.4}% 10
+\BOOKMARK [2][-]{subsection.4.2}{On multiple \040thresholds}{section.4}% 11
+\BOOKMARK [1][-]{section.5}{Cross Validation}{}% 12
+\BOOKMARK [2][-]{subsection.5.1}{Theory}{section.5}% 13
+\BOOKMARK [2][-]{subsection.5.2}{Implementation}{section.5}% 14
+\BOOKMARK [1][-]{section.6}{Classification Alogrithms}{}% 15
+\BOOKMARK [2][-]{subsection.6.1}{Extreme Gradient Boosting}{section.6}% 16
+\BOOKMARK [2][-]{subsection.6.2}{Random Forest}{section.6}% 17
+\BOOKMARK [2][-]{subsection.6.3}{Neural Network}{section.6}% 18
+\BOOKMARK [3][-]{subsubsection.6.3.1}{Backpropagation}{subsection.6.3}% 19
+\BOOKMARK [3][-]{subsubsection.6.3.2}{Additional Data Preparation}{subsection.6.3}% 20
+\BOOKMARK [1][-]{section.7}{Parameter Tuning}{}% 21
+\BOOKMARK [2][-]{subsection.7.1}{Parameters of Neural Network}{section.7}% 22
+\BOOKMARK [3][-]{subsubsection.7.1.1}{optimal \040for loss function}{subsection.7.1}% 23
+\BOOKMARK [2][-]{subsection.7.2}{Performance Benchmark}{section.7}% 24
+\BOOKMARK [2][-]{subsection.7.3}{Prediction}{section.7}% 25
+\BOOKMARK [1][-]{section.8}{Conclusion}{}% 26
